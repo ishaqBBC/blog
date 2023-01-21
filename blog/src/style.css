@@ -58,7 +58,7 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #dfb81d;
-  --color-background: #111; 
+  --color-background: #f5efef; 
 }
 
 /* HTML elements */
@@ -321,7 +321,7 @@ a:focus {
 }
 /* Images */
 img {
-  filter: invert(1) brightness(2.2) contrast(0.8); 
+  filter: invert(1); 
 
 }
 /* Media queries */
