@@ -58,6 +58,7 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #dfb81d;
+  --color-background: #111; 
 }
 
 /* HTML elements */
@@ -73,6 +74,8 @@ html {
   font-size: var(--fontSize-root);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--color-background);
+  filter: invert(1); 
 }
 
 body {
@@ -316,7 +319,11 @@ a:focus {
 .gatsby-highlight {
   margin-bottom: var(--spacing-8);
 }
+/* Images */
+img {
+  filter: invert(1) brightness(2.2) contrast(0.8); 
 
+}
 /* Media queries */
 
 @media (max-width: 42rem) {
