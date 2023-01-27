@@ -20,7 +20,7 @@ Here is what is first displayed when you log into AWS
 
  - 1.) Regions :  Choose a Region that is geographically closer to you, in order to avoid latency. Each Region has an Availability zone 
  - 2.) Services : Here are all the AWS services that are available. Some are global; meaning every service has access, while others are region specific.
- - 3.) Search Bar: Much like Amazons e-commerce search bar. Here you can search for other services.
+ - 3.) Search Bar: Much like Amazons e-commerce search bar. Here you can search for other services, blogs and features of a particular service. 
  - 4.) Guides: Tutorials and pathways to achieving a certificate 
  - 5.) Recently Visited : Shows the last services visited 
 
