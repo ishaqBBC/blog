@@ -17,7 +17,7 @@ This blog post is all about getting started with Amazon Web Services (AWS) and s
 
 ## The history of AWS (Amazon Web Service)
 
-AWS was first launched in 2002 by amazon. 2004 - launched 2qs , 2006 launched sqd, s3 and ec2
+AWS was first launched in 2002 by amazon. 2004 - launched [SQS](https://aws.amazon.com/sqs/features/?trk=a7f57dee-fc58-4084-9037-cb552d58a5d5&sc_channel=ps&s_kwcid=AL!4422!3!637214078377!!!g!!&ef_id=EAIaIQobChMI--PQwvjn_AIVQuztCh0V4wtqEAAYASAAEgI-l_D_BwE:G:s), 2006 re-launched SQS, s3 and ec2
 
 AWS accounts for 47% of the market in 2019, it's the pioneer and leader in AWS Cloud Market for the 9th consecutive year, with over 1,000,000 active users.
 

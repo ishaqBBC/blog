@@ -14,8 +14,9 @@ Following the previous blogs in the series.
 We will go over the console and UI of AWS Console
 
 
+Here is what is first displayed when you log into AWS 
 
-
+![console home](/images/uploads/console-home.png)
 
 
 
