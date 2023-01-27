@@ -37,20 +37,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/images/uploads`,
-        name: `blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/images/uploads`,
-      },
-    },
-    {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
