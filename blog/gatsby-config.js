@@ -12,7 +12,7 @@ module.exports = {
     title: `Tech Blog`,
     author: {
       name: `Ishaq Khan`,
-      summary: `Software Engineer, learing about all things Javascript and React`,
+      summary: `Software Engineer, learning about all things Javascript and React`,
     },
     description: `A tech blog, trying to navigate the eco system of Javascript`,
     siteUrl: `https://magicishaq.com/`,
@@ -34,6 +34,20 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/images/uploads`,
+        name: `blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `images`,
+        path: `${__dirname}/images/uploads`,
       },
     },
     {
