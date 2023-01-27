@@ -35,7 +35,7 @@ A﻿WS is global we have;
 - AWS Regions.(regions are named by the [continent]-[compass-position]-[num] such as a`eu-west-2` europe west 2 - or london , but eu-west-1 is ireland . us-east-2 is Ohio) A cluster of data centers.
 - AWS Edge Locations/ Points of Presence .
 
-![aws regions](/images/uploads/screenshot-2023-01-25-at-11.26.44.png)
+![aws regions](/blog/src/images/screenshot-2023-01-25-at-11.26.44.png)
 
 You can find more about the regions and availability zone here\
 <https://aws.amazon.com/about-aws/global-infrastructure/regions_az/>
@@ -46,7 +46,7 @@ You can find more about the regions and availability zone here\
 
 1). Go to AWS [sign In Page](https://portal.aws.amazon.com/billing/signup?refid=ce1f55b8-6da8-4aa2-af36-3f11e9a449ae&redirect_url=https%3A%2F%2Faws.amazon.com%2Fregistration-confirmation#/start/email) . Create an Account by giving a root user email address and AWS account name.
 
-![aws sign up](/images/uploads/awsSignup.png)
+![aws sign up](/blog/src/images/awsSignup.png)
 
 2.) Enter email address and give yourself AWS account name
 
@@ -54,7 +54,7 @@ You can find more about the regions and availability zone here\
 
 4.) Next time you log into AWS, use the Root account
 
-![root account image](/images/uploads/sign-in-page.png)
+![root account image](/blog/src/images/sign-in-page.png)
 
 **Root accounts can hold multiple instances of IAM (Identify and Access Management) Accounts**
 
