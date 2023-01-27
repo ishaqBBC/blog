@@ -20,15 +20,15 @@ deleteProperty(): called when a property is deleted.
 Here is an example of using a proxy to log every time a property is accessed on an object:
 
 ```
-const handler = {
-    get: function(target, prop) {
-        console.log(`Accessing property ${prop}`);
-        return target[prop];
-    }
-};
+    const handler = {
+        get: function(target, prop) {
+            console.log(`Accessing property ${prop}`);
+            return target[prop];
+        }
+    };
 
-const target = { a: 1, b: 2 };
-const proxy = new Proxy(target, handler);
-console.log(proxy.a); // logs "Accessing property a" and returns 1
+    const target = { a: 1, b: 2 };
+    const proxy = new Proxy(target, handler);
+    console.log(proxy.a); // logs "Accessing property a" and returns 1
 ```
 It's worth noting that Proxies are a relatively new feature in JavaScript, and may not be supported by all browsers or environments. They also have performance overhead as they are intercepting each operation on the object.

@@ -16,8 +16,9 @@
     "gatsby-plugin-manifest": "^5.4.0",
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-sharp": "^5.4.0",
-    "gatsby-remark-images": "^7.4.0",
+    "gatsby-remark-images": "^7.5.0",
     "gatsby-remark-prismjs": "^7.4.0",
+    "gatsby-remark-relative-images": "^0.2.0",
     "gatsby-remark-responsive-iframe": "^6.4.0",
     "gatsby-source-filesystem": "^5.4.0",
     "gatsby-transformer-remark": "^6.4.0",
@@ -39,9 +40,11 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "go" : "netlify deploy --prod", 
+    "go": "netlify deploy --prod",
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "dev": "npm run build && npm run develop",
+    "pub": "npm run build && npm run go",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",

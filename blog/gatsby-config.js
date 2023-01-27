@@ -18,7 +18,7 @@ module.exports = {
     siteUrl: `https://magicishaq.com/`,
     social: {
       twitter: "https://magicishaq.com/",
-    }
+    },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -34,20 +34,6 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/images/uploads`,
-        name: `blog`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/images/uploads`,
       },
     },
     {
@@ -72,6 +58,22 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-relative-images`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              linkImagesToOriginal: false,
+              withWebp: true,
+              quality: 50,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
