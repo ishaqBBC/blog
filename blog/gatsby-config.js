@@ -18,7 +18,7 @@ module.exports = {
     siteUrl: `https://magicishaq.com/`,
     social: {
       twitter: "https://magicishaq.com/",
-    }
+    },
   },
   plugins: [
     `gatsby-plugin-image`,
@@ -58,6 +58,22 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          `gatsby-remark-relative-images`,
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              linkImagesToOriginal: false,
+              withWebP: true,
+              quality: 50,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-feed`,
       options: {
