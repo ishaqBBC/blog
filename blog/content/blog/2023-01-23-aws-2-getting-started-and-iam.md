@@ -3,17 +3,21 @@ layout: blog
 title: "AWS 2: Getting Started , And IAM"
 date: 2023-01-23T10:35:28.085Z
 ---
+
 ## Recap
 
-Welcome back to the ongoing series; known as AWS Book club. 
-your one stop place to get the Developer Associate Certification. 
+Welcome back to the ongoing series; known as AWS Book club.
+your one stop place to get the Developer Associate Certification.
 
-Following from blog post 1 [Click HERE for Introduction](https://magicishaqblog.netlify.app/aws/)\
+Following from blog post 1 [Click HERE for Introduction](https://magicishaqblog.netlify.app/aws/)
+
 ## TLDR
+
 This blog post is all about getting started with Amazon Web Services (AWS) and specifically focusing on the Identity and Access Management (IAM) feature. It's like a quick refresher on the history of AWS, discussing the different use cases and the massive global infrastructure including availability zones, regions, and edge locations. Also, it's a step-by-step guide on how to create your own AWS account, complete with the free tier and all the details on how to utilize the root user account for IAM. Overall, it's your one-stop-shop for all things AWS and getting certified as a developer associate.
+
 ## The history of AWS (Amazon Web Service)
 
-AWS was first launched in 2002 by amazon.  2004 - launched 2qs , 2006 launched sqd, s3 and ec2
+AWS was first launched in 2002 by amazon. 2004 - launched 2qs , 2006 launched sqd, s3 and ec2
 
 AWS accounts for 47% of the market in 2019, it's the pioneer and leader in AWS Cloud Market for the 9th consecutive year, with over 1,000,000 active users.
 
@@ -25,11 +29,11 @@ U﻿se of using AWS include: Enterprise IT; Backups , Big Data analytics, Websit
 
 #﻿# A﻿WSs infrastructure is massive
 
-A﻿WS is global we have;                    
+A﻿WS is global we have;
 
-* AWS Availability Zones.
-* AWS Regions.(regions are named by the [continent]-[compass-position]-[num]  such as a`eu-west-2` europe west 2 - or london , but eu-west-1 is ireland . us-east-2 is Ohio) A cluster of data centers. 
-* AWS Edge Locations/ Points of Presence .
+- AWS Availability Zones.
+- AWS Regions.(regions are named by the [continent]-[compass-position]-[num] such as a`eu-west-2` europe west 2 - or london , but eu-west-1 is ireland . us-east-2 is Ohio) A cluster of data centers.
+- AWS Edge Locations/ Points of Presence .
 
 ![aws regions](/images/uploads/screenshot-2023-01-25-at-11.26.44.png "AWS regions")
 
@@ -46,7 +50,7 @@ Y﻿ou can find more about the regions and availability zone here\
 
 2.) Enter email address and give yourself AWS account name
 
-3.) Once you have confirmed email address. choose the free account 
+3.) Once you have confirmed email address. choose the free account
 
 4.) Next time you log into AWS, use the Root account
 
@@ -54,9 +58,8 @@ Y﻿ou can find more about the regions and availability zone here\
 
 **Root accounts can hold multiple instances of IAM (Identifty and Access Managment) Accounts**
 
-The root user account should not be shared with others 
+The root user account should not be shared with others
 
 **Congrats, you have set up an AWS account**
 
-Stay tuned for the next blog post, where we will be going over the UI of AWS... 
-
+Stay tuned for the next blog post, where we will be going over the UI of AWS...
