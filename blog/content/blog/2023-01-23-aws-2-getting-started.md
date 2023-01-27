@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 2: Getting Started , And IAM"
+title: "AWS 2: Getting Started"
 date: 2023-01-23T10:35:28.085Z
 ---
 
@@ -60,7 +60,7 @@ You can find more about the regions and availability zone here\
 
 **Root accounts can hold multiple instances of IAM (Identify and Access Management) Accounts**
 
-The root user account should not be shared with others
+The root user account should not be shared with others. Later in the series I will go over [IAM](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)
 
 **Congrats, you have set up an AWS account**
 
