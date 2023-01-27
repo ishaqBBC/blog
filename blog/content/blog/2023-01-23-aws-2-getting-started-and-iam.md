@@ -29,11 +29,13 @@ Use of using AWS include: Enterprise IT; Backups , Big Data analytics, Website h
 
 ## AWSs infrastructure is massive
 
-A﻿WS is global we have;
+AWS is global we have;
 
-- AWS Availability Zones.
-- AWS Regions.(regions are named by the [continent]-[compass-position]-[num] such as a`eu-west-2` europe west 2 - or london , but eu-west-1 is ireland . us-east-2 is Ohio) A cluster of data centers.
-- AWS Edge Locations/ Points of Presence .
+- AWS Regions. Each region is split up into Availability zones - the min amount per region is 3, while the max is 6. An example is Sydney. 
+- AWS Availability Zones. (are named by the [continent]-[compass-position]-[num] such as `eu-west-2` europe west 2 - or london , but `eu-west-1` is Ireland while `us-east-2` is Ohio. If Sydney is the region; the availability zones are `ap-southeast-2a`, `ap-southeast-2b` and, `ap-southeast-2c`. Each zone is separate from each other so if one fails, the others still work.
+- AWS Edge Locations/ Points of Presence . We will learn more about Points of presence later in the series - Just know but that AWS has more than 200 points of presence in 84 cities across 42 countries.
+
+And this will be very helpful when we deliver content
 
 ![aws regions](/blog/src/images/screenshot-2023-01-25-at-11.26.44.png)
 

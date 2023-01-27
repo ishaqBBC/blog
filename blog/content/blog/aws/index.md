@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: 1. AWS BookClub Overview
+title: "AWS: 1 BookClub Overview"
 date: 2023-01-20T17:08:34.142Z
 ---
 ## What is this Blog for?
