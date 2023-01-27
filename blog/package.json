@@ -43,6 +43,8 @@
     "go": "netlify deploy --prod",
     "build": "gatsby build",
     "develop": "gatsby develop",
+    "dev": "npm run build && npm run develop",
+    "pub": "npm run build && npm run go",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
