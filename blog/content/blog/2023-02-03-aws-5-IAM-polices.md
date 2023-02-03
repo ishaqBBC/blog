@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 4: IAM Polices"
+title: "AWS 5: IAM Polices"
 date: 2023-02-03T10:35:28.085Z
 ---
 
