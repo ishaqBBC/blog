@@ -18,6 +18,6 @@ Now its quiz time
 
 ## Quiz
 
-Have you been following the series carefully, practice - try your luck out with these quizzes created by Rafeala
+Have you been following the series carefully, practice - try your luck out with these quizzes created by Rafaela
 [Getting Started](https://quizlet.com/gb/770146831/getting-started-with-aws-flash-cards/)
 [IAM and the CLI](https://quizlet.com/gb/770164317/iam-aws-cli-flash-cards/)
