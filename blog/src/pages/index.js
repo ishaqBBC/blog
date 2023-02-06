@@ -4,14 +4,27 @@ import { Link, graphql } from "gatsby"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import SearchBar from "../components/searchbar"; 
 
 const BlogIndex = ({ data, location }) => {
+
+
+  const { search } = window.location;
+  const query = new URLSearchParams(search).get('s')
+  const [searchQuery, setSearchQuery] = React.useState(query || '');
+
+
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
+
 
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
+      <SearchBar
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+            />
         <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -24,6 +37,10 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
+    <SearchBar
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+            />
       <Bio />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
