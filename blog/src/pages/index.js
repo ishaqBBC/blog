@@ -1,30 +1,31 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
+import { useFlexSearch } from "react-use-flexsearch"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import SearchBar from "../components/searchbar"; 
+import SearchBar from "../components/searchbar"
+import { unFlattenResults } from "../helpers/unflatten"
 
 const BlogIndex = ({ data, location }) => {
+  const {
+    localSearchPages: { index, store },
+    allMarkdownRemark: { nodes },
+  } = data
 
-
-  const { search } = window.location;
-  const query = new URLSearchParams(search).get('s')
-  const [searchQuery, setSearchQuery] = React.useState(query || '');
-
+  const { search } = location
+  const query = new URLSearchParams(search).get("s")
+  const [searchQuery, setSearchQuery] = React.useState(query || "")
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
-
+  const results = useFlexSearch(searchQuery, index, store)
+  const posts = searchQuery ? unFlattenResults(results) : nodes; 
 
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-      <SearchBar
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-            />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Bio />
         <p>
           No blog posts found. Add markdown posts to "content/blog" (or the
@@ -37,10 +38,7 @@ const BlogIndex = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-    <SearchBar
-                searchQuery={searchQuery}
-                setSearchQuery={setSearchQuery}
-            />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       <Bio />
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
@@ -89,6 +87,10 @@ export const Head = () => <Seo title="All posts" />
 
 export const pageQuery = graphql`
   {
+    localSearchPages {
+      index
+      store
+    }
     site {
       siteMetadata {
         title
