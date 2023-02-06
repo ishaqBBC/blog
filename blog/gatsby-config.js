@@ -137,5 +137,46 @@ module.exports = {
         icon: `src/images/profile-pic.png`, // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: "gatsby-plugin-local-search",
+      options: {
+        name: "pages",
+        engine: "flexsearch",
+        query: ` {
+          localSearchPages {
+            index
+            store
+          }
+          site {
+            siteMetadata {
+              title
+            }
+          }
+          allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+            nodes {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                description
+              }
+            }
+          }
+        }`,
+        ref: "slug",
+        index: ["title", "excerpt"],
+        store: ["title", "excerpt", "date", "slug"],
+        normalizer: ({ data }) =>
+          data.allMarkdownRemark.nodes.map(node => ({
+            title: node.frontmatter.title,
+            excerpt: node.excerpt,
+            date: node.frontmatter.date,
+            slug: node.fields.slug,
+          })),
+      },
+    },
   ],
 }
