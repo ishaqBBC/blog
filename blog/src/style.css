@@ -58,7 +58,7 @@
   --color-heading: #1a202c;
   --color-heading-black: black;
   --color-accent: #dfb81d;
-  --color-background: #f5efef; 
+  --color-background: #f5efef;
 }
 
 /* HTML elements */
@@ -75,7 +75,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--color-background);
-  filter: invert(1); 
+  filter: invert(1);
 }
 
 body {
@@ -321,8 +321,24 @@ a:focus {
 }
 /* Images */
 img {
-  filter: invert(1); 
-
+  filter: invert(1);
+}
+/*Search bar*/
+.search-bar {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding: 24px 0px;
+}
+/* Screen reader label for search results */
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
 /* Media queries */
 
