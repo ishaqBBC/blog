@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 6: Quiz time"
-date: 2023-03-09T17:08:34.142Z
+date: 2023-02-09T17:08:34.142Z
 ---
 
 ## Recap
