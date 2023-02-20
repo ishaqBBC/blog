@@ -19,6 +19,4 @@ The following CodePen example demonstrates the usage of the visibilitychange eve
 </p>
 <script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
 
-Combined with the  interface to stop unessacry fetch requests or polling if the user is no longer on the page.  
-
 To prevent unnecessary fetch requests or polling when the user is no longer on the page, we can use the [AbortController](https://developer.mozilla.org/en-US/docs/Web/API/AbortController) interface in conjunction with the `visibilitychange` event. This approach can significantly reduce the load on the server and the client.
