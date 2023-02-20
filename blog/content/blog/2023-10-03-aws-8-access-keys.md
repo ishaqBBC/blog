@@ -14,7 +14,7 @@ Following the previous blogs in the series.
 - [AWS 4: IAM Creating Users and Groups](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)
 - [AWS 5: IAM Policies](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices)
 - [AWS 6: Quiz 1 ](https://magicishaqblog.netlify.app/aws-quiz-one)
-- [AWS 7: AWS CLI , How to install the CLI](https://magicishaqblog.netlify.app/2023-10-03-aws-8-access-keys)
+- [AWS 7: AWS CLI , How to install the CLI](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli)
 
 ## Introduction
 Hey there fellow coders! Today I want to show you how to create and use access keys in AWS. Let's dive right in!
