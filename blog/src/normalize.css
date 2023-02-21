@@ -65,10 +65,9 @@ pre {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
   white-space: pre-wrap; /* line wraps code */
-  -webkit-box-shadow: 10px 17px 5px 0px var(--color-background); /* box shadow */
-    -moz-box-shadow: 10px 17px 5px 0px var(--color-background);
-    box-shadow: 10px 17px 5px 0px var(--color-background);
-  
+  -webkit-box-shadow: 10px 17px 5px 0px var(--color-heading); /* box shadow */
+    -moz-box-shadow: 10px 17px 5px 0px var(--color-heading);
+    box-shadow: 10px 17px 5px 0px var(--color-heading);
 }
 
 /* Text-level semantics
