@@ -23,7 +23,7 @@ Following the previous blogs in the series.
 - [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)
 - [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
 
-##Introduction
+## Introduction
 
 Following from the last [blog post](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) where we created our first EC2 instance, this blog post will go over how to view your instance and give an overview of the instance types provided by AWS (Amazon Web Services)
 
