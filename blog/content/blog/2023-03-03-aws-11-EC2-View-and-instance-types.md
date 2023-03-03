@@ -52,7 +52,7 @@ When it comes to working with AWS, it's important to have a good understanding o
 
 General purpose instances are great for a diversity of workloads, such as web servers or code repositories. They have a good balance between compute, memory, and networking. Within the general purpose instance family, there are various instance types, which can be viewed on the AWS website.
 
-Compute Optimised Instances
+## Compute Optimised Instances
 
 Compute optimised instances are optimised for compute-intensive tasks that require a high level of processor. This includes tasks such as batch processing data, media transcoding, high-performance web servers, high-performance computing, machine learning, and dedicated gaming servers. All compute optimised instances in EC2 have names starting with the letter C, such as C5, C6, and so on.
 
