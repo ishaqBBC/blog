@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS: Security Groups"
+title: "AWS 12: Security Groups"
 date: 2023-03-10T17:13:42.596Z
 ---
 
