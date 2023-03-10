@@ -23,7 +23,7 @@ Following the previous blogs in the series.
 - [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)
 - [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
 
-##Introduction
+## Introduction
 
 Following from the last [blog post](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) where we created our first EC2 instance, this blog post will go over how to view your instance and give an overview of the instance types provided by AWS (Amazon Web Services)
 
@@ -52,7 +52,7 @@ When it comes to working with AWS, it's important to have a good understanding o
 
 General purpose instances are great for a diversity of workloads, such as web servers or code repositories. They have a good balance between compute, memory, and networking. Within the general purpose instance family, there are various instance types, which can be viewed on the AWS website.
 
-Compute Optimised Instances
+## Compute Optimised Instances
 
 Compute optimised instances are optimised for compute-intensive tasks that require a high level of processor. This includes tasks such as batch processing data, media transcoding, high-performance web servers, high-performance computing, machine learning, and dedicated gaming servers. All compute optimised instances in EC2 have names starting with the letter C, such as C5, C6, and so on.
 

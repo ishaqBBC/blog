@@ -14,7 +14,7 @@ This can be achieved using the `:has()` pseudo-class
 
 therefore the selector used will be `ul:has( > li)` . This translates to `ul` that `has` `li` as their children (`>`) means child selector.
 
-Its a powerful new class in css and the possibilities are endless. For example, imagine that we only want to target `img` that have a `figcaption` as its sibling. We want images that contain a a caption to be round. we would use the selector: `img:has(+ figcaption)` to apply the the `border-radius : 50%;`
+Its a powerful new class in css and the possibilities are endless. For example, imagine that we only want to target `img` that have a `figcaption` as its sibling. We want images that contain a caption; to have a round border. we would use the selector: `img:has(+ figcaption)` to apply the the `border-radius : 50%;`
 
 below are examples of using the pseudo-class for accessing the `ul` and `img` .
 
