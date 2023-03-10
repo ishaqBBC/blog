@@ -6,7 +6,7 @@ date: 2023-03-10T17:13:42.596Z
 
 ## TLDR
 
-Welcome to the TLDR edition of "AWS: Security Groups." In this exciting blog, we learn about Security Groups, which are like firewalls that can regulate access to ports and authorised IP ranges. Yawn. We also learn about ports, which are communication endpoints that allow networked devices to send and receive data. So, if you're interested in knowing which port to use for SSH, HTTP, or RDP traffic, this is the blog for you! Aren't you excited to learn about Security Groups? I know I am.
+In this exciting blog, we learn about Security Groups, which are like firewalls that can regulate access to ports and authorised IP ranges. Yawn. We also learn about ports, which are communication endpoints that allow networked devices to send and receive data. So, if you're interested in knowing which port to use for SSH, HTTP, or RDP traffic, this is the blog for you! Aren't you excited to learn about Security Groups? I know I am.
 
 ## Recap
 
