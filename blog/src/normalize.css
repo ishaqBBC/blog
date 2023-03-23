@@ -70,11 +70,6 @@ pre {
   box-shadow: 10px 17px 5px 0px var(--color-heading);
 }
 
-/*Code */
-code[class*="language-"] {
-  white-space: pre-wrap;
-}
-
 /* Text-level semantics
    ========================================================================== */
 
