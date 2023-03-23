@@ -352,7 +352,3 @@ img {
     list-style-position: inside;
   }
 }
-/*Code */
-code[class*="language-"] {
-  white-space: pre-wrap;
-}
