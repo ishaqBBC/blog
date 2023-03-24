@@ -37,7 +37,7 @@ In this post, I'll walk you through the step-by-step process of using EC2 Instan
 To get started, navigate to [your instance created on episode 12](https://magicishaqblog.netlify.app/2023-03-17-aws-13-ssh) on your AWS dashboard and click on "Connect." You'll see a range of connection options, including the traditional SSH client. However, the option we want to select is EC2 Instance Connect.
 ![EC2 connect button](/blog/src/images/connect-1.png)
 
-After verifying the public IP address and leaving the default username (EC2 user), click on "Connect." This will open a new tab with your Amazon Linux 2 AMI instance. From here, you can run commands such as "whoami" or "ping google.com."
+After verifying the public IP address and leaving the default username (EC2 user), click on "Connect." This will open a new tab with your Amazon Linux 2 AMI instance. From here, you can run commands such as `whoami` or `ping bbc.co.uk`
 ![EC2 connect interface](/blog/src/images/connect-2.png)
 
 ```bash
