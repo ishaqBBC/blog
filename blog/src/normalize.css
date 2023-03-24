@@ -69,9 +69,7 @@ pre {
   -moz-box-shadow: 10px 17px 5px 0px var(--color-heading);
   box-shadow: 10px 17px 5px 0px var(--color-heading);
 }
-code[class*="language-"],
-code[class*="language-"],
-code[class*="language-"] {
+code.language-javascript {
   white-space: pre-wrap;
 }
 
