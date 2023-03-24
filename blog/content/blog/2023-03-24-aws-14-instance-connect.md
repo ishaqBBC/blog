@@ -8,8 +8,6 @@ date: 2023-03-24T08:38:40.912Z
 
 In this blog post, we will explore an alternative to SSH called EC2 Instance Connect. This tool is easier to use and allows us to do a browser-based SSH session into our EC2 Instance without the need to manage SSH keys. By simply clicking "Connect" in the AWS console, we can establish a connection using a temporary SSH key. This method also eliminates the need for a command line interface like Terminal. We can run commands such as whoami or ping google.com within the browser. However, if we need to use SSH, we can still do so using our own terminal, PowerShell, or EC2 Instance Connect. Finally, we saw how to edit the inbound rules in our security group to allow EC2 Instance Connect to work properly. Overall, EC2 Instance Connect is a useful tool that we will be using frequently in this course.
 
-date
-
 ## Recap
 
 Following the previous blogs in the series.
