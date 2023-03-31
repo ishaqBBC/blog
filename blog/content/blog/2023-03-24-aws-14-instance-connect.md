@@ -65,6 +65,27 @@ Another benefit of EC2 Instance Connect is that it allows you to access your ins
 
 However, it's worth noting that EC2 Instance Connect still relies on SSH behind the scenes. If you're having trouble connecting to your instance, it's possible that you need to open port 22 in your security group. Simply edit the inbound rule and add the SSH rule from anywhere IPV4 (and IPV6, if necessary).
 
+## Using roles with IAM Connect
+
+- Connect to your EC2 Instance using SSH or EC2 Instance Connect.
+
+- Verify that you're in the instance by checking if you see ec2-user@<private-IP> in the terminal.
+
+- Clear the terminal screen by typing `clear`.
+
+- Do not use aws configure to enter your IAM Access Key ID and Secret Access Key directly into the EC2 Instance.
+
+- Go to the AWS Management Console and navigate to IAM Roles. Find the role you want to attach to your instance [Make sure its a Role with the IAMReadOnlyAccess Policy](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/).
+
+- Go to your EC2 Instance in the AWS Management Console. Click on the Actions dropdown, then click on Security and Modify IAM Role.
+
+- Select the IAM role you want to attach to your EC2 Instance (With the IAMReadOnlyAccess Policy) and click Save.
+
+- Verify that the IAM role is attached to your EC2 Instance by going back to the Security tab and checking the IAM Role field.
+
+Test the role by running an AWS CLI command, such as `aws iam list users`. You should see a response with the list of IAM users.
+Remember to only use IAM roles to provide AWS credentials to your EC2 Instances. Do not enter your IAM Access Key ID and Secret Access Key directly into the instance.
+
 ## Conclusion
 
 EC2 Instance Connect is a valuable tool for anyone who wants a simpler, more streamlined way to connect to their EC2 instances on AWS. By following the steps outlined above, you can enjoy a hassle-free SSH experience that saves you time and effort.
