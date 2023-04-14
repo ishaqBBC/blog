@@ -105,5 +105,6 @@ When an instance is terminated, the root volume, which has the delete on termina
 
 ## Conclusion
 EBS volumes are necessary for storing data for EC2 [instances](https://magicishaqblog.netlify.app/2023-03-03-aws-11-EC2-View-and-instance-types). We have explored the different types of EBS volumes available, how to create and attach them to [instances](https://magicishaqblog.netlify.app/2023-03-03-aws-11-EC2-View-and-instance-types), and the behavior of EBS volumes when an instance is terminated. By understanding these concepts, we can effectively manage our AWS resources and optimise our workflows.
+Stay tuned for the next blog, where we learn about Snapshots and how to use them. 
 
 
