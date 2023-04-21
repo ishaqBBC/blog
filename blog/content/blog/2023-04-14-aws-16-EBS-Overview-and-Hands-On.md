@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 16: EBS"
+title: "AWS 16: EBS Overview"
 date: 2023-04-14T08:52:44.843Z 
 ---
 
