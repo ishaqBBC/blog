@@ -1,0 +1,53 @@
+---
+layout: blog
+title: "A practical guide to debugging"
+date: dateT17:08:34.142Z
+---
+
+## TLDR
+
+Sure! Here's an outline for a presentation on debugging:
+
+## Introduction
+In todays blog we will look into the most practical guide to debugging in JavaScript. And by practical I mean in will go over what debugging is, how to use a debugger, a demo, tips and tricks and best practices
+
+### Definition of debugging
+"If debugging is the process of removing bugs. Then programming must be the process of putting them in." ~ Edsger Dijkstra
+
+### What is debugging in JavaScipt
+
+### How to use the debugger in chrome
+### How to use the debugger in node
+
+### Demo code
+
+### Tips and tricks
+"Coding is not about typing. It’s about solving!" `console.log` has been a tried a tested method in debugging but there are other methods of debugging
+#### Destructing
+the console is an object in javascript and therefore we can use the power of destructuring to grab methods out of the console. 
+```
+const {log: print, dir, trace, group} = console;
+print('hello world'); // changed log to print;
+
+```
+#### console.group and console.groupEnd
+A powerful way of splitting logs into groups for ordering and displaying your console messages
+```
+const {group, groupEnd, log } = console;
+
+const label1 = 'group one';
+const label2 = 'group two'; 
+
+group(label1) // start of the group
+log(`message from group: ${label1}`)
+log(`second message from : ${label1}`)
+groupEnd(label1)
+
+group(label2)
+log('hello world')
+groupEnd(label2)
+```
+
+### Conclusion
+
+
