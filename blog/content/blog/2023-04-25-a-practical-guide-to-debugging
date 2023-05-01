@@ -54,13 +54,17 @@ What happens when we press each button in the debug terminal, **refresh the term
 ### How to use the debugger in chrome
 Ok so we've got the basics now, how do we use utilise the power of the debugger for our chosen editor google chrome. 
 
+### Sample project
+this sample project uses 
+
 With your code editor (mine is vs code). run your application.
 Modern javascript projects that use frameworks. transpile the source code into minified javascript. This simply means; transforming code into a minified version that reduces size but makes the code almost unreadable. This is done through a pre-processor, Tools that achieve this are; babel, webpack, parcel and vite to name a few. 
 ### Source maps
 Chrome, uses source maps. A source map is a location to your unreadable transpiled code, and the code used to create it. Using source maps means we can debug the code we wrote and not the minified transpiled version.
 Chrome will actually run your minified code but the Sources panel will show you the code you author. 
 To see this in action, open your dev tools *`cmd + option + c` on mac or `Ctrl + shift + c` on windows. and click to the sources panel
-![sources panel]
+![sources panel](/blog/src/images/debug-3.png)
+
 
 
 
