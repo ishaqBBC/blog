@@ -51,22 +51,33 @@ What happens when we press each button in the debug terminal, **refresh the term
 - Resume **will hit the next debugger, ergo continues to the next breakpoint/debugger**
 - Step Over **since the debugger statement is a keyword, will resume on line `one()` pressing step over a second time will not go into the scope of `one()` but continue to `two()`**. 
 - Step Into **When we hit the line `one()` and press the `step into` button, you will be brought inside the scope of the `one()`.** Notice how you are inside the function, from this pont the **Step out** will take you outside, while **Step in** will take you to `three()`
+
+### Source maps
+While debugging regular javascript is quite straight forward, most companies and projects use libraries that get complied and build differently than the code we write. The code we write gets transpiled into minified javascript. This simply means; transforming code into an optimised and smaller version that reduces size but makes the code almost unreadable. This is done through a pre-processor, Tools that achieve this are; babel, webpack, parcel and vite to name a few. 
+
+Chrome, uses source maps. A source map is a location to your unreadable transpiled code, and the code used to create it. Using source maps means we can debug the code we wrote and not the minified transpiled version.
+Chrome will actually run your minified code but the Sources panel will show you the code you author. 
+To see this in action, open your dev tools *`cmd + option + c` on mac or `Ctrl + shift + c` on windows. and click to the sources panel
+
+![sources panel](/blog/src/images/debug-3.png)
+
 ### How to use the debugger in chrome
 Ok so we've got the basics now, how do we use utilise the power of the debugger for our chosen editor google chrome. 
 
 ### Sample project
-this sample project uses 
+this sample project uses Typescript. 
 
-With your code editor (mine is vs code). run your application.
-Modern javascript projects that use frameworks. transpile the source code into minified javascript. This simply means; transforming code into a minified version that reduces size but makes the code almost unreadable. This is done through a pre-processor, Tools that achieve this are; babel, webpack, parcel and vite to name a few. 
-### Source maps
-Chrome, uses source maps. A source map is a location to your unreadable transpiled code, and the code used to create it. Using source maps means we can debug the code we wrote and not the minified transpiled version.
-Chrome will actually run your minified code but the Sources panel will show you the code you author. 
-To see this in action, open your dev tools *`cmd + option + c` on mac or `Ctrl + shift + c` on windows. and click to the sources panel
-![sources panel](/blog/src/images/debug-3.png)
+- go to [this Github and clone the repository](https://github.com/ishaqBBC/example)
+- run `npm i` to install all the dependencies
+- open the repo in VS code and use the command `npm run start` and open a browser in ` http://localhost:3000 `
 
+This project is a simple app that displays a random dog image along with the name of the dog
+![dog screenshot](/blog/src/image/dog.png)
 
+### using the power of debugging
+Currently there is a problem with the name of the dog being displayed, **we will use our new debugging skills** to find and correct the error.
 
+[On line 18](https://github.com/ishaqBBC/example/blob/main/src/components/Dog.tsx#L18)n of the `src/comoponents/Dog.tsx` file uncomment the code 
 
 ### How to use the debugger in node
 
