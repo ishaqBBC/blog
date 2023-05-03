@@ -5,7 +5,9 @@ date: dateT17:08:34.142Z
 ---
 
 ## TLDR
- A practical guide to debugging in JavaScript. The post starts with an explanation of what debugging is and how to use a debugger in JavaScript. It includes a demo of Chrome's debugger console and introduces source maps. with a tutorial project using TypeScript. We then take a dive into debugging for node as well as tips and tricks to become a debugging wizard. 
+ - Debugging can be achieved using `debugger` or breakpoints. 
+ - You can debug your minified code using *source maps*
+ - `console.log` may not always be your best choice, and other options are available
 
 ## Introduction
 Hey there, I'm excited to share with you a practical guide to debugging in JavaScript! Debugging is a critical process for finding and removing bugs in your code.
@@ -14,11 +16,9 @@ In this blog post, I'll define debugging and explain how you can use a debugger 
 
 But that's not all! I'll also walk you through a sample project using TypeScript and show you how to use debugging to find and correct an error. By the end of this post, you'll have a better understanding of how to improve your debugging skills, and I hope that this will be useful for you in your future coding projects.
 
-So let's dive in and get started!
-
-
 "If debugging is the process of removing bugs. Then programming must be the process of putting them in." ~ Edsger Dijkstra
 
+So let's dive in and get started!
 
 ### What is debugging in JavaScipt
 
