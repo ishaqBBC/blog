@@ -5,15 +5,20 @@ date: dateT17:08:34.142Z
 ---
 
 ## TLDR
-
-Sure! Here's an outline for a presentation on debugging:
+ A practical guide to debugging in JavaScript. The post starts with an explanation of what debugging is and how to use a debugger in JavaScript. It includes a demo of Chrome's debugger console and introduces source maps. with a tutorial project using TypeScript. We then take a dive into debugging for node as well as tips and tricks to become a debugging wizard. 
 
 ## Introduction
-In todays blog we will look into the most practical guide to debugging in JavaScript. And by practical I mean in will go over what debugging is, how to use a debugger, a demo, tips and tricks and best practices
+Hey there, I'm excited to share with you a practical guide to debugging in JavaScript! Debugging is a critical process for finding and removing bugs in your code.
 
-### Definition of debugging
+In this blog post, I'll define debugging and explain how you can use a debugger in JavaScript, with a demo of Chrome's debugger console. Additionally, I'll introduce you to the concept of source maps, which will allow you to debug minified JavaScript code.
+
+But that's not all! I'll also walk you through a sample project using TypeScript and show you how to use debugging to find and correct an error. By the end of this post, you'll have a better understanding of how to improve your debugging skills, and I hope that this will be useful for you in your future coding projects.
+
+So let's dive in and get started!
+
+
 "If debugging is the process of removing bugs. Then programming must be the process of putting them in." ~ Edsger Dijkstra
-Debugging is the process of finding and removing bugs
+
 
 ### What is debugging in JavaScipt
 
@@ -74,16 +79,43 @@ this sample project uses Typescript.
 This project is a simple app that displays a random dog image along with the name of the dog
 ![dog screenshot](/blog/src/image/dog.png)
 
-### using the power of debugging
+### Using the power of debugging
 Currently there is a problem with the name of the dog being displayed, **we will use our new debugging skills** to find and correct the error.
 
-[On line 18](https://github.com/ishaqBBC/example/blob/main/src/components/Dog.tsx#L18)n of the `src/comoponents/Dog.tsx` file uncomment the code 
+- [On line 18](https://github.com/ishaqBBC/example/blob/main/src/components/Dog.tsx#L18)n of the `src/comoponents/Dog.tsx` file , uncomment the code and therefore placing a debugger; 
+- In chrome, with the dev tools opened the `debugger` will create a breakpoint
+- In the console, type in the `pathname` to get access to variable that is now in scope
+- We can see that this pathname contains the correct dog but it returning another part of the string
+- type in `pathname.split('/')` in the console to see the whole array.
+- we can see the array in position `2` contains the dog name.
+- change the position in the return statement of the function `getDogName` to reflect position `2`
+
+![dog console variables](/blog/src/images/dog-2.png)
+
+
 
 ### How to use the debugger in node
+In order to fully access the `debugger` keyword in node processes, you must use the inside the javascript terminal `--inspect-brk` flag. while the `--inspect` flag will hit breakpoints
+like so
+
+```javascript
+node index.js --inspect-brk // breakpoints
+node index.js --inspect // breakpoint
+``` 
+
+Now when you open your chrome dev tools you will be able to take advantage of the debugger
+![node button](/blog/src/images/node.png)
 
 ### Demo code
+In this demo we will use a test file to debug. 
 
 ### Tips and tricks
+Different types of breakpoints
+
+- Log points - will automatically log the expression. (thing of this as a console.log)
+
+- Conditional breakpoints - will only hit a breakpoint if a condition is met. 
+
 
 ### Console
 "Coding is not about typing. It’s about solving!" `console.log` has been a tried a tested method in debugging but there are other methods of debugging
