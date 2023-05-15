@@ -60,6 +60,8 @@ What happens when we press each button in the debug terminal, **refresh the term
 ### Source maps
 While debugging regular javascript is quite straight forward, most companies and projects use libraries that get complied and build differently than the code we write. The code we write gets transpiled into minified javascript. This simply means; transforming code into an optimised and smaller version that reduces size but makes the code almost unreadable. This is done through a pre-processor, Tools that achieve this are; babel, webpack, parcel and vite to name a few. 
 
+Chrome dev tools has recently announced authored code to help visualise code written with the source maps attributed to its creation. : open dev tools > settings > experiments  > check: Group sources in by Authored / and Deployed trees
+
 Chrome, uses source maps. A source map is a location to your unreadable transpiled code, and the code used to create it. Using source maps means we can debug the code we wrote and not the minified transpiled version.
 Chrome will actually run your minified code but the Sources panel will show you the code you author. 
 To see this in action, open your dev tools *`cmd + option + c` on mac or `Ctrl + shift + c` on windows. and click to the sources panel
