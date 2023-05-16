@@ -27,7 +27,7 @@ below is what the debugger debugger console looks like when code is paused.
 ![debugger commands](/blog/src/images/debug-2.png)
 from order of left to right
 - Resume script execution , otherwise known as continue. **pressing this will go to the next breakpoint/debugger**, holding down the button and selecting **force script execution** will result in running the rest of the file without hitting any breakpoints.
-- Step Over next function **When hitting a function, will not go inside the function and instead continue to the next line**
+- Step Over next function **When hitting a function, will not go inside the function and instead continue to the next line** 
 - Step Into function **Enters the function and therefore accesses it's scope**
 - Step Out function **Exits the current function scope**
 - Step **Steps through every line of synchronous code in the order ran**
@@ -60,7 +60,7 @@ What happens when we press each button in the debug terminal, **refresh the term
 ### Source maps
 While debugging regular javascript is quite straight forward, most companies and projects use libraries that get complied and build differently than the code we write. The code we write gets transpiled into minified javascript. This simply means; transforming code into an optimised and smaller version that reduces size but makes the code almost unreadable. This is done through a pre-processor, Tools that achieve this are; babel, webpack, parcel and vite to name a few. 
 
-Chrome dev tools has recently announced authored code to help visualise code written with the source maps attributed to its creation. : open dev tools > settings > experiments  > check: Group sources in by Authored / and Deployed trees
+Chrome dev tools has recently announced authored code to help visualise code written with the source maps attributed to its creation. : open dev tools > settings > experiments  > check: Group sources in by Authored / and Deployed trees.
 
 Chrome, uses source maps. A source map is a location to your unreadable transpiled code, and the code used to create it. Using source maps means we can debug the code we wrote and not the minified transpiled version.
 Chrome will actually run your minified code but the Sources panel will show you the code you author. 
@@ -94,29 +94,14 @@ Currently there is a problem with the name of the dog being displayed, **we will
 
 ![dog console variables](/blog/src/images/dog-2.png)
 
-
-
-### How to use the debugger in node
-In order to fully access the `debugger` keyword in node processes, you must use the inside the javascript terminal `--inspect-brk` flag. while the `--inspect` flag will hit breakpoints
-like so
-
-```javascript
-node index.js --inspect-brk // breakpoints
-node index.js --inspect // breakpoint
-``` 
-
-Now when you open your chrome dev tools you will be able to take advantage of the debugger
-![node button](/blog/src/images/node.png)
-
-### Demo code
-In this demo we will use a test file to debug. 
-
 ### Tips and tricks
 Different types of breakpoints
 
 - Log points - will automatically log the expression. (thing of this as a console.log)
 
 - Conditional breakpoints - will only hit a breakpoint if a condition is met. 
+
+when creating a breakpoint, right click to gain access to different types of breakpoints
 
 
 ### Console
@@ -181,10 +166,13 @@ console.count('Polo')
 `console.table` is for formatting arrays or objects into key/value tables. The key for the array will be the index. 
 `console.dir` lists the methods of an object. treating it slightly differently than `console.log`
 
-
-
-
-
 ### Conclusion
+
+
+As Linus's Law states "Given enough eyeballs, all bugs are shallow." Having a diverse set of tools at our disposal, means we have more 'eyeballs on the bugs' . In addition according to the The Law of the Instrument- "If all you have is a hammer, everything starts looking like a nail". These methods will increase the tools. 
+Debugging is a powerful tool, and one that can be used to find hard to sport bugs, play around and get comfortable in the uncomfortable, break the problem down and work in small steps. These are just tools, ones that can help enhance a coders toolkit. "
+
+I'll leave you with another quote from my one of favorite JS devs Kyle Simpson: "code that you cannot trust is code that you do not understand. The reverse is true also: code that you don’t understand is code you can’t trust." 
+
 
 
