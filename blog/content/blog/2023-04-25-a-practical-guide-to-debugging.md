@@ -173,7 +173,7 @@ console.count('Polo')
 As Linus's Law states "Given enough eyeballs, all bugs are shallow." Having a diverse set of tools at our disposal, means we have more 'eyeballs on the bugs' . In addition according to the The Law of the Instrument- "If all you have is a hammer, everything starts looking like a nail". These methods will increase the tools. 
 Debugging is a powerful tool, and one that can be used to find hard to sport bugs, play around and get comfortable in the uncomfortable, break the problem down and work in small steps. These are just tools, ones that can help enhance a coders toolkit. "
 
-I'll leave you with another quote from my one of favorite JS devs Kyle Simpson: "code that you cannot trust is code that you do not understand. The reverse is true also: code that you don’t understand is code you can’t trust." 
+I'll leave you with another quote from my one of favorite JS devs,  Kyle Simpson: "code that you cannot trust is code that you do not understand. The reverse is true also: code that you don’t understand is code you can’t trust." 
 
 
 
