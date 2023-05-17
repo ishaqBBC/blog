@@ -1,7 +1,7 @@
 ---
 layout: blog
-title: "A practical guide to debugging"
-date: dateT17:08:34.142Z
+title: "Debugging secrets revealed"
+date: 2023-05-17T17:31:47.398Z 
 ---
 
 ## TLDR
