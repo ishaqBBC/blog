@@ -1,0 +1,147 @@
+{
+  "main": {
+    "id": "e3035a165440abd8",
+    "type": "split",
+    "children": [
+      {
+        "id": "b0bf502886ba398d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "325710107ecc2834",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4d781b46a8794d9c",
+    "type": "split",
+    "children": [
+      {
+        "id": "1d5b32b9c953507b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6afe4c419696eccd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "190259bd79e7b0c7",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c6c84b4b82dd85a2",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "983ce485ab061c49",
+    "type": "split",
+    "children": [
+      {
+        "id": "fc8c89f071f0883f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "6fbdd3f0cf647860",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "6bbf688af3c1f8cb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c9e831d13d21ac43",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "610551be8584d439",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "325710107ecc2834",
+  "lastOpenFiles": [
+    "gavin-belson/index.md",
+    "2023-01-23-Javascript-Design-Patterns-module.md",
+    "2023-01-23-aws-2-getting-started.md"
+  ]
+}

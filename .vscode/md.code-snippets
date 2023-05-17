@@ -1,0 +1,43 @@
+{
+  "Creates a template blog post": {
+    "prefix": "blog",
+    "body": [
+      "---",
+      "layout: blog",
+      "title: \"${1:title}\"",
+      "date: ${2:date}T17:08:34.142Z",
+      "---",
+      "",
+      "## TLDR",
+      "${2:TLDR}",
+      "",
+      "",
+      "## Recap",
+      "",
+      "Following the previous blogs in the series.",
+      "",
+      "- [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)",
+      "- [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)",
+      "- [AWS 3: UI Guide and Walk through](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough)",
+      "- [AWS 4: IAM Creating Users and Groups](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)",
+      "- [AWS 5: IAM Policies](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices)",
+      "- [AWS 6: Quiz 1 ](https://magicishaqblog.netlify.app/aws-quiz-one)",
+      "- [AWS 7: AWS CLI , How to install the CLI](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli)",
+      "- [AWS 8: Access keys](https://magicishaqblog.netlify.app/2023-10-03-aws-8-access-keys)",
+      "- [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)",
+      "- [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)",
+      "- [${3:blog name}](${4:blog link})",
+      "",
+      "## Introduction",
+      "",
+      "## ${5: Heading}",
+      "${6:Text}",
+      "",
+      "## Conclusion",
+      "${7:Conclusion}",
+      "",
+      ""
+    ],
+    "description": "Creates a template blog post"
+  }
+}
