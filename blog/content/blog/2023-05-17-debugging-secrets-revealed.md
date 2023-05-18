@@ -85,7 +85,6 @@ This project is a simple app that displays a random dog image along with the nam
 Currently there is a problem with the name of the dog being displayed, **we will use our new debugging skills** to find and correct the error.
 
 - [On line 18](https://github.com/ishaqBBC/example/blob/main/src/components/Dog.tsx#L18) of the `src/comoponents/Dog.tsx` file , uncomment the code and therefore placing a debugger;
-- at the root of the project , run the command `npm start`. 
 - In chrome, with the dev tools opened the `debugger` will create pause execution. 
 - In the console, type in the `pathname` to get access to variable that is now in scope.
 - We can see that this pathname contains the correct dog but it returning another part of the string.
