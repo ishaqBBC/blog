@@ -5,8 +5,8 @@ date: 2023-06-02T10:40:08.282Z
 ---
 
 ## TLDR
-
-
+Practical creating an AMI Amazon Machine Image. 
+Launch an instance, create an image from instance . The image can be used to create further instance at a quicker rate. 
 
 ## Recap
 
@@ -91,22 +91,37 @@ Initially, you may encounter connection errors, but as the instance completes th
 
 To save the current state of our EC2 instance as an AMI for future use, right-click on the instance, navigate to "Image and Templates," and select "Create Image." Provide a name for the AMI, such as "Demo Image," and keep the default settings. Click on "Create Image" to initiate the creation process.
 
+![create image](/blog/src/images/amih-9.png)
 
 6. Launching Instances from the AMI:
 
 Once the AMI creation is complete, you can launch new instances using it. To do this:
 
 - Click on "AMIs" in the left-hand menu.
+![ami left menu](/blog/src/images/amih-11.png)
 - Select the AMI you just created.
-- Scroll down and configure the instance launch settings, such as key pair, network settings, and user data.
-- Launch the instance.
+![selection](/blog/src/images/amih-16.png)
 
-7. Faster Boot-up with AMIs:
+- Scroll down and configure the instance launch settings, such as key pair, network settings, and user data.
+The user data doesn't need to create an apache server like before, and therefore the code is: 
+
+```bash
+#!/bin/bash
+    # Use this for your user data (script from top to bottom)
+    # install httpd (Linux 2 version)
+echo "<h1>Hello World from $(hostname -f)</h1>"> /var/www/html/index.html
+```
+![bash script](/blog/src/images/amih-13.png)
+- Launch the instance.
+![launch instance](/blog/src/images/amih-14.png)
+
+## Faster Boot-up with AMIs:
 
 As the instance launches from the AMI, you'll notice a significant reduction in boot-up time. Since the AMI already contains the Apache web server, there's no need to reinstall it, resulting in a quicker deployment. This highlights the power of AMIs in expediting the setup process.
 
+![completed page](/blog/src/images/amih-17.png)
+
 ## Conclusion
 
- We explored the capabilities of Amazon Machine Images (AMI) in AWS. By utilizing AMIs, we can capture the state of our instances, including software installations and configurations, and reuse them for future deployments. This approach greatly reduces the time required for setting up instances and enables faster boot-up times, making it an invaluable tool for developers and system administrators.
+ We explored the capabilities of Amazon Machine Images (AMI) in AWS. By utilising AMIs, we can capture the state of our instances, including software installations and configurations, and reuse them for future deployments. This approach greatly reduces the time required for setting up instances and enables faster boot-up times, making it an invaluable tool for developers and system administrators.
 
-Stay tuned for our next blog post, where we will continue to explore more AWS features and best practices.
