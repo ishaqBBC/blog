@@ -5,8 +5,8 @@ date: 2023-06-02T10:40:08.282Z
 ---
 
 ## TLDR
-Practical creating an AMI Amazon Machine Image. 
-Launch an instance, create an image from instance . The image can be used to create further instance at a quicker rate. 
+Practical guide on creating an AMI Amazon Machine Image. 
+Launch an instance then create an image from that instance . The image can be used to create further instances at a quicker rate. 
 
 ## Recap
 
