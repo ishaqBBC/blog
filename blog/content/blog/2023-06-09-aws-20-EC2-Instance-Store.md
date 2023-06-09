@@ -34,11 +34,11 @@ Following the previous blogs in the series.
 
 ## Introduction
 
-Welcome back, fellow developers! In our previous instalment,In todays blog post ; we'll explore EC2 Instance Store, a specialized type of storage that offers unparalleled performance for your EC2 Instances.
+Welcome back, fellow developers! In our previous instalment, In today’s blog post ; we'll investigate EC2 Instance Store, a specific  type of storage that offers increased performance for your EC2 Instances.
 
 ## Refresh: What is an EC2 Instance Store
 
-First things first, let's refresh our memory. An EC2 Instance is essentially a virtual machine connected to a real hardware server. Some of these servers have physical disk space directly attached to them, establishing a blazing-fast connection. This physical storage, is known as the EC2 Instance Store.
+Let's refresh our memory. An EC2 Instance isa  a virtual machine connected to a real hardware server. Some of these servers have physical disk space directly attached to them, establishing a blazing-fast connection. This physical storage is known as the EC2 Instance Store.
 
 ## EC2 Instance Stores
 
@@ -46,13 +46,14 @@ The EC2 Instance Store is our go-to choice when we require exceptional I/O perfo
 
 ## Why we use EC2 Instance Storage Stores
 
-"So, what's the purpose of EC2 Instance Store then?" you might wonder. Excellent question! This storage solution is ideal for scenarios where you require a buffer, cache, or temporary content. It shines in handling scratch data. However, long-term storage calls for a different hero. Enter EBS (Elastic Block Store), a perfect match for your long-term storage needs.
+"So, what's the purpose of EC2 Instance Store then?" you might ask. Excellent question! This storage solution is ideal for scenarios where you require a buffer, cache, or temporary content. It shines in handling scratch data. However, long-term storage calls for a different hero. Enter EBS (Elastic Block Store), a perfect match for your long-term storage needs.
 
 ## Caveats of using a Store
 
-But let's address a potential concern: the server hosting your EC2 Instance could fail, causing an unfortunate loss. Alas, dear developers, the hardware attached to the EC2 Instance goes down with it. Should you decide to embark on the EC2 Instance Store journey, remember that you bear the responsibility of backing up and replicating your data correctly. Safety first!
+But let's address a prospective concern: the server hosting your EC2 Instance could fail, causing an unfortunate loss. Alas, dear developers, the hardware attached to the EC2 Instance goes down with it. Should you decide to embark on the EC2 Instance Store journey, remember that you bear the responsibility of backing up and replicating your data correctly. Safety first!
 
 Now, to paint a picture of the performance we're talking about, let's consider an example. The Instance size of I3 (followed by a dot and a number) instances comes equipped with an Instance Store. When we examine the Read IOPS (Input/Output Operations Per Second) and Write IOPS, we witness mind-boggling numbers like 3.3 million and 1.4 million, respectively, for the most high-performing instance type. In comparison, an EBS volume of type BP2 can reach up to a mere thirty-two thousand IOPS. The difference is staggering!
+
 
 ## Local EC2 Instance Store IOPS Table
 
@@ -72,7 +73,6 @@ Remember, this example is simply to illustrate the exceptional performance boost
 
 ## Conclusion
 
-As we conclude this enlightening chapter, always keep in mind that the EC2 Instance Store empowers you with unprecedented speed. But with great power comes great responsibility. Ensure you back up and replicate your data correctly, my friends!
-That wraps up our discussion on EC2 Instance Store. In our next lecture, we'll dive into another exciting topic. Stay tuned and keep exploring the wonders of AWS!
-
+As we conclude this illuminating chapter, always keep in mind that the EC2 Instance Store empowers you with increased speed. Ensure you back up and replicate your data appropriately.
+That wraps up our discussion on EC2 Instance Store. In our next blog, we'll look at another topic. 
 Stay Crisp!
