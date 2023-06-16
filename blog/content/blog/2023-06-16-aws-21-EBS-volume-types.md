@@ -40,7 +40,7 @@ Following the previous blogs in the series.
 
 When it comes to Amazon Elastic Block Store (EBS), understanding the different volume types is crucial for optimizing your workloads in the cloud. In this blog post, we will dive into the six EBS volume types and explore their characteristics, use cases, and key differentiators. Whether you're preparing for an exam or looking to enhance your knowledge of EBS, this instructional guide will provide you with the essential information you need. So let's get started!
 
-## 1. General Purpose SSD (gp2/gp3):
+## 1 and 2.  General Purpose SSD (gp2/gp3):
 
 The general purpose SSD volume type strikes a balance between price and performance, making it suitable for a wide range of workloads. Key points to remember:
 
@@ -49,7 +49,7 @@ The general purpose SSD volume type strikes a balance between price and performa
 - gp3 volumes provide independent control over IOPS and throughput.
 - gp2 volumes have burstable IOPS linked to the volume size.
 
-## 2. Provisioned IOPS SSD (io1/io2):
+## 3 and 4. Provisioned IOPS SSD (io1/io2):
 
 Provisioned IOPS SSD volumes deliver high performance for mission-critical workloads that demand low latency and high throughput. Key points to remember:
 
@@ -57,7 +57,7 @@ Provisioned IOPS SSD volumes deliver high performance for mission-critical workl
 - io2 is the newer generation with enhanced durability and IOPS per gigabyte.
 - Maximum IOPS depends on whether you have a Nitro EC2 instance or not.
 
-## 3. Throughput Optimized HDD (st1):
+## 5. Throughput Optimized HDD (st1):
 
 Designed for throughput-intensive workloads, throughput optimized HDD volumes offer cost-effective storage. Key points to remember:
 
@@ -65,7 +65,7 @@ Designed for throughput-intensive workloads, throughput optimized HDD volumes of
 - Maximum throughput is 500 MB/s, and the maximum IOPS is 500.
 - Sizes can range up to 16 TB.
 
-## 4. Cold HDD (sc1):
+## 6. Cold HDD (sc1):
 
 Cold HDD volumes are the go-to choice for infrequently accessed, cost-effective storage. Key points to remember:
 
@@ -86,8 +86,4 @@ Mastering the knowledge of EBS volume types is essential for effectively utilizi
 | Throughput Optimized HDD (st1) | Big data processing, data warehousing, etc. | 500 GB - 16 TB | 500 MB/s           | 500 IOPS     |
 | Cold HDD (sc1)                 | Archived data with minimal access           | 500 GB - 16 TB | 250 MB/s           | 250 IOPS     |
 
-I hope this format meets your requirements. Let me know if there's anything else I can assist you with!
 
-Stay tuned for our next blog post, where we will delve into more advanced concepts related to EBS volume types. Thank you for reading, and see you soon!
-
-[Reference: Screenshot - EBS Volume Types Summary]
