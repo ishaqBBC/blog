@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 10: EBS Volume types"
+title: "AWS 21: EBS Volume types"
 date: 2023-06-16T09:10:34.098Z
 ---
 
