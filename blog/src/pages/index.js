@@ -65,7 +65,7 @@ const BlogIndex = ({ data, location }) => {
                     itemProp="description"
                   />
                 </section>
-              </article>
+              </article>3
             </li>
           )
         })}
