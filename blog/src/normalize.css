@@ -73,7 +73,7 @@ code.language-javascript {
   white-space: pre-wrap;
 }
 code[class*="language-"] {
-  white-space: pre-wrap; /* fit content for bash*/
+  white-space: pre-wrap !important; /* fit content for bash*/
 }
 
 /* Text-level semantics
