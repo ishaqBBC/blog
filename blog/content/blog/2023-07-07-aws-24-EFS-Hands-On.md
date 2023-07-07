@@ -117,20 +117,20 @@ Within the EC2 console, under the file system settings, we can add an EFS file s
 After launching the instances, we can verify that each instance has successfully mounted the EFS file system. We connect to the instances using EC2 Instance Connect, allowing us to access the terminal remotely. By navigating to the mount point `ls /mnt/efs/fs1`, we can confirm that the EFS file system is accessible from both instances.
 ![picture](/blog/src/images/24/17.png)
 
-To demonstrate the file system's functionality, we create a file named "hello.txt" containing the text "hello world" using the bash commands:
+To demonstrate the file system's functionality, we create a file named `"hello.txt"` containing the text `"hello world"` using the bash commands:
 
 create the file in the first instance
 
 ```bash
-sudo su
-echo "hello world" > /mnt/efs/fs1/hello.txt
-cat /mnt/efs/fs1/hello.txt
+sudo su     # grants admin privileges
+echo "hello world" > /mnt/efs/fs1/hello.txt #   creates hello world string and attaches to folder location hello.txt
+cat /mnt/efs/fs1/hello.txt  #reads the contents of the file hello.txt
 ```
 
 check the creation of the file in the second instance
 
 ```bash
-cat /mnt/efs/fs1/hello.txt
+cat /mnt/efs/fs1/hello.txt      #reads location of file, therefore instance share the same network
 ```
 
 within the EFS file system from Instance A. We then switch to Instance B and verify that the same file is accessible from this instance as well. This confirms the successful sharing of the EFS file system across multiple EC2 instances.
@@ -140,7 +140,7 @@ within the EFS file system from Instance A. We then switch to Instance B and ver
 
 ### Terminating resources
 
-terminate instances and delete the EFS once finished to avoid any costs by amazon
+terminate instances and delete the EFS once finished to avoid any costs by amazon. This is done through the EFS and EC2 areas.
 
 ## Conclusion
 
