@@ -4,7 +4,6 @@ title: Proxy Objects In Javascript!
 date: "2015-05-06T23:46:37.121Z"
 ---
 
-
 In JavaScript, the Proxy API allows you to create a "proxy" object that can intercept and modify operations on another object. This allows you to add custom behavior to operations such as property access, assignment, and method invocation, or to implement additional functionality such as logging or data validation.
 
 A proxy object is created using the Proxy constructor, which takes two arguments: the target object and a handler object. The target object is the object that the proxy will be "proxying" for, and the handler object contains the methods that will be called to intercept and modify operations on the target object.
@@ -31,4 +30,5 @@ Here is an example of using a proxy to log every time a property is accessed on 
     const proxy = new Proxy(target, handler);
     console.log(proxy.a); // logs "Accessing property a" and returns 1
 ```
+
 It's worth noting that Proxies are a relatively new feature in JavaScript, and may not be supported by all browsers or environments. They also have performance overhead as they are intercepting each operation on the object.

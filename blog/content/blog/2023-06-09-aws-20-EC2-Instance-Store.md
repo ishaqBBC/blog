@@ -34,11 +34,11 @@ Following the previous blogs in the series.
 
 ## Introduction
 
-Welcome back, fellow developers! In our previous instalment, In today’s blog post ; we'll investigate EC2 Instance Store, a specific  type of storage that offers increased performance for your EC2 Instances.
+Welcome back, fellow developers! In our previous instalment, In today’s blog post ; we'll investigate EC2 Instance Store, a specific type of storage that offers increased performance for your EC2 Instances.
 
 ## Refresh: What is an EC2 Instance Store
 
-Let's refresh our memory. An EC2 Instance isa  a virtual machine connected to a real hardware server. Some of these servers have physical disk space directly attached to them, establishing a blazing-fast connection. This physical storage is known as the EC2 Instance Store.
+Let's refresh our memory. An EC2 Instance isa a virtual machine connected to a real hardware server. Some of these servers have physical disk space directly attached to them, establishing a blazing-fast connection. This physical storage is known as the EC2 Instance Store.
 
 ## EC2 Instance Stores
 
@@ -54,7 +54,6 @@ But let's address a prospective concern: the server hosting your EC2 Instance co
 
 Now, to paint a picture of the performance we're talking about, let's consider an example. The Instance size of I3 (followed by a dot and a number) instances comes equipped with an Instance Store. When we examine the Read IOPS (Input/Output Operations Per Second) and Write IOPS, we witness mind-boggling numbers like 3.3 million and 1.4 million, respectively, for the most high-performing instance type. In comparison, an EBS volume of type BP2 can reach up to a mere thirty-two thousand IOPS. The difference is staggering!
 
-
 ## Local EC2 Instance Store IOPS Table
 
 | Instance Size | 100% Random Read IOPS | IOPS      |
@@ -67,12 +66,10 @@ Now, to paint a picture of the performance we're talking about, let's consider a
 | i3.16xlarge   | 3,300,000             | 1,400,000 |
 | i3.metal      | 3,300,000             | 1,400,000 |
 
-
 Remember, this example is simply to illustrate the exceptional performance boost provided by the local EC2 Instance Store. Whenever you encounter an EC2 Instance with an attached high-performance hardware volume, you know where to look.
-
 
 ## Conclusion
 
 As we conclude this illuminating chapter, always keep in mind that the EC2 Instance Store empowers you with increased speed. Ensure you back up and replicate your data appropriately.
-That wraps up our discussion on EC2 Instance Store. In our next blog, we'll look at another topic. 
+That wraps up our discussion on EC2 Instance Store. In our next blog, we'll look at another topic.
 Stay Crisp!

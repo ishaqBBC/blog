@@ -8,7 +8,6 @@ date: 2023-06-23T11:58:16.389Z
 
 Multi-Attach feature of EBS volumes in AWS. This feature allows a single EBS volume to be attached to multiple EC2 instances within the same availability zone, enabling simultaneous read and write operations. It enhances application availability and simplifies managing concurrent write operations. However, Multi-Attach is limited to the io1 and io2 families of EBS volumes, supports up to 16 instances at a time (remember this for the exam), and requires a cluster-aware file system.
 
-
 ## Recap
 
 Following the previous blogs in the series.
@@ -32,7 +31,7 @@ Following the previous blogs in the series.
 - [AWS 17: EBS Snapshots](https://magicishaqblog.netlify.app/2023-04-21-aws-17-ebs-snapshots)
 - [AWS 18: AMI Overview](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami)
 - [AWS 19: AMI Hands On](https://magicishaqblog.netlify.app/2023-06-02-aws-19-AMI-Hands-On)
-- [AWS 20: EC2 Instance Stores](https://magicishaqblog.netlify.app/2023-06-09-aws-20-EC2-Instance-Store) 
+- [AWS 20: EC2 Instance Stores](https://magicishaqblog.netlify.app/2023-06-09-aws-20-EC2-Instance-Store)
 - [AWS 21: EBS Volume types](https://magicishaqblog.netlify.app/2023-06-16-aws-21-EBS-volume-types)
 
 ## Introduction
@@ -52,6 +51,7 @@ It's important to note that the Multi-Attach feature is confined to a specific a
 To ensure the Multi-Attach feature works seamlessly, you must utilize a cluster-aware file system. This requirement means that file systems such as XFS or EX4 won't fit the bill. By opting for a compatible file system, you enable efficient coordination and communication among the instances, thereby maximizing the benefits of Multi-Attach.
 
 ## Conclusion
+
 the Multi-Attach feature of EBS volumes opens up new possibilities for managing and optimizing your EC2 instances. By providing concurrent access to shared storage, this functionality empowers you to achieve higher application availability and streamline concurrent write operations. Remember to keep in mind the restrictions and prerequisites associated with Multi-Attach, and choose a suitable cluster-aware file system for the best results.
 
-Stay Crisp ! 
+Stay Crisp !

@@ -1,12 +1,13 @@
 ---
 layout: blog
 title: "AMI - Hands On"
-date: 2023-06-02T10:40:08.282Z 
+date: 2023-06-02T10:40:08.282Z
 ---
 
 ## TLDR
-Practical guide on creating an AMI Amazon Machine Image. 
-Launch an instance then create an image from that instance . The image can be used to create further instances at a quicker rate. 
+
+Practical guide on creating an AMI Amazon Machine Image.
+Launch an instance then create an image from that instance . The image can be used to create further instances at a quicker rate.
 
 ## Recap
 
@@ -31,35 +32,34 @@ Following the previous blogs in the series.
 - [AWS 17: EBS Snapshots](https://magicishaqblog.netlify.app/2023-04-21-aws-17-ebs-snapshots)
 - [AWS 18: AMI Overview](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami)
 
-
-
 ## Introduction
+
 Following from the [previous](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami) post in the series, we covered what an AMI (Amazon Machine Image) is. In this post, today we will be getting a hands on approach to using an AMI
 AMIs allow us to save the state of our EC2 instances, including the installed software and configurations, and reuse them for future deployments. By leveraging AMIs, we can significantly reduce the time required for setting up new instances, making it a powerful tool in our AWS toolkit.
 
 Let's get started:
 
 ## Launching an Instance
-Inside the `EC2` service of AWS click on the instance you want to turn into an AMI and then on `launch instance`. Below the image has red circles, click in order from left to right. 
+
+Inside the `EC2` service of AWS click on the instance you want to turn into an AMI and then on `launch instance`. Below the image has red circles, click in order from left to right.
 
 ![Instance launch](/blog/src/images/amih-1.png)
 
 To begin, we'll launch an instance on AWS using the AMI feature. Follow the steps below:
 
-- Scroll down and select "Amazon Linux 2" as the operating system. 
-![amazon linux 2](/blog/src/images/amih-2.png)
+- Scroll down and select "Amazon Linux 2" as the operating system.
+  ![amazon linux 2](/blog/src/images/amih-2.png)
 - Choose an appropriate instance type, such as "G2 micro."
 - Select your preferred key pair for SSH access. such as the [EC2 created in the previous blogs](https://magicishaqblog.netlify.app/2023-03-03-aws-11-EC2-View-and-instance-types)
-![key pair for SSH](/blog/src/images/amih-3.png)
+  ![key pair for SSH](/blog/src/images/amih-3.png)
 - Edit the network settings and choose an existing security group.
-![network settings](/blog/src/images/amih-4.png)
+  ![network settings](/blog/src/images/amih-4.png)
 - Keep the storage settings as per your requirements.
 - Scroll down to the `Advanced Details` section and focus on the `User Data` field.
 
-
 ## Configuring User Data:
 
-In the "User Data" field, we will include the necessary commands to install the Apache web server (HTTPD). Below is the code you need to copy inside the `Advanced Details` section. 
+In the "User Data" field, we will include the necessary commands to install the Apache web server (HTTPD). Below is the code you need to copy inside the `Advanced Details` section.
 
 ```bash
 #!/bin/bash
@@ -70,6 +70,7 @@ In the "User Data" field, we will include the necessary commands to install the 
     systemctl start httpd
     systemctl enable httpd
 ```
+
 ![user data](/blog/src/images/amih-5.png)
 
 ## Launching the Instance:
@@ -79,13 +80,12 @@ Click on the launch button to initiate the instance creation process. It may tak
 
 ## Verifying the Installation:
 
-After a couple of minutes, refresh the page and access the public IPv4 address of the instance. Ensure you're using the HTTP protocol by changing the web address to `http://`. 
+After a couple of minutes, refresh the page and access the public IPv4 address of the instance. Ensure you're using the HTTP protocol by changing the web address to `http://`.
 
 ![ami running](/blog/src/images/amih-7.png)
 
 Initially, you may encounter connection errors, but as the instance completes the setup, you will see the basic Apache test page. This confirms that the web server has been installed successfully.
 ![confirmation it works](/blog/src/images/amih-8.png)
-
 
 ## Creating an AMI
 
@@ -98,12 +98,12 @@ To save the current state of our EC2 instance as an AMI for future use, right-cl
 Once the AMI creation is complete, you can launch new instances using it. To do this:
 
 - Click on "AMIs" in the left-hand menu.
-![ami left menu](/blog/src/images/amih-11.png)
+  ![ami left menu](/blog/src/images/amih-11.png)
 - Select the AMI you just created.
-![selection](/blog/src/images/amih-16.png)
+  ![selection](/blog/src/images/amih-16.png)
 
 - Scroll down and configure the instance launch settings, such as key pair, network settings, and user data.
-The user data doesn't need to create an apache server like before, and therefore the code is: 
+  The user data doesn't need to create an apache server like before, and therefore the code is:
 
 ```bash
 #!/bin/bash
@@ -111,9 +111,11 @@ The user data doesn't need to create an apache server like before, and therefore
     # install httpd (Linux 2 version)
 echo "<h1>Hello World from $(hostname -f)</h1>"> /var/www/html/index.html
 ```
+
 ![bash script](/blog/src/images/amih-13.png)
+
 - Launch the instance.
-![launch instance](/blog/src/images/amih-14.png)
+  ![launch instance](/blog/src/images/amih-14.png)
 
 ## Faster Boot-up with AMIs:
 
@@ -123,5 +125,4 @@ As the instance launches from the AMI, you'll notice a significant reduction in 
 
 ## Conclusion
 
- We explored the capabilities of Amazon Machine Images (AMI) in AWS. By utilising AMIs, we can capture the state of our instances, including software installations and configurations, and reuse them for future deployments. This approach greatly reduces the time required for setting up instances and enables faster boot-up times, making it an invaluable tool for developers and system administrators.
-
+We explored the capabilities of Amazon Machine Images (AMI) in AWS. By utilising AMIs, we can capture the state of our instances, including software installations and configurations, and reuse them for future deployments. This approach greatly reduces the time required for setting up instances and enables faster boot-up times, making it an invaluable tool for developers and system administrators.

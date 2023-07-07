@@ -40,7 +40,7 @@ Following the previous blogs in the series.
 
 When it comes to Amazon Elastic Block Store (EBS), understanding the different volume types is crucial for optimizing your workloads in the cloud. In this blog post, we will dive into the six EBS volume types and explore their characteristics, use cases, and key differentiators. Whether you're preparing for an exam or looking to enhance your knowledge of EBS, this instructional guide will provide you with the essential information you need. So let's get started!
 
-## 1 and 2.  General Purpose SSD (gp2/gp3):
+## 1 and 2. General Purpose SSD (gp2/gp3):
 
 The general purpose SSD volume type strikes a balance between price and performance, making it suitable for a wide range of workloads. Key points to remember:
 
@@ -85,5 +85,3 @@ Mastering the knowledge of EBS volume types is essential for effectively utilizi
 | Provisioned IOPS SSD (io2)     | Mission-critical workloads                  | 4 GB - 64 TB   | Varies             | Varies       |
 | Throughput Optimized HDD (st1) | Big data processing, data warehousing, etc. | 500 GB - 16 TB | 500 MB/s           | 500 IOPS     |
 | Cold HDD (sc1)                 | Archived data with minimal access           | 500 GB - 16 TB | 250 MB/s           | 250 IOPS     |
-
-

@@ -14,7 +14,6 @@ Following the previous blogs in the series.
 
 - [AWS 4: IAM Creating Users and Groups](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)
 
-
 In todays blog; IAM Policies
 
 ## IAM Policies in AWS: Understanding the Basics
@@ -29,10 +28,9 @@ IAM policies can be attached to groups, users, and roles. When a policy is attac
 
 ## Inline Policies:
 
-Inline policies are policies that are attached directly to a user. In other words, they're not attached to a group or role. This means that a user can have its own unique policy, which is different from the policies attached to the groups they belong to. For example, if Peter is a user, he can have an inline policy that's not attached to any group. 
+Inline policies are policies that are attached directly to a user. In other words, they're not attached to a group or role. This means that a user can have its own unique policy, which is different from the policies attached to the groups they belong to. For example, if Peter is a user, he can have an inline policy that's not attached to any group.
 
 ![Inline Policy](/blog/src/images/iam-13.png)
-
 
 ## Policy Inheritance from Multiple Sources:
 
@@ -47,22 +45,21 @@ IAM policies have a specific structure in a JSON format, and it's crucial to und
 
 Following the [previous blog](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM) Where we created a user. We already gave them the policy of "AdministratorAccess"
 
-### Adding A Policy:  
+### Adding A Policy:
 
-Click on the group in the IAM section of AWS, and navigate over to the permissions tab. 
+Click on the group in the IAM section of AWS, and navigate over to the permissions tab.
 ![Group section](/blog/src/images/iam-16.png)
 Here you can see the policy attached. Clicking on Users or Roles and doing the same steps can be used to add or remove policies.
 
 ## Viewing/Creating A Policy
-As you might of noticed AWS comes with allot of built in policies already, Don't worry we will explain more of them in the series. But for now we will create a new one. 
+
+As you might of noticed AWS comes with allot of built in policies already, Don't worry we will explain more of them in the series. But for now we will create a new one.
 
 Click in the `Polices` section of the IAM dashboard, then `Create Policy`
 ![IAM Policies](/blog/src/images/iam-17.png)
 
 Policies are JSON documents, but AWS has a wizard that helps build one. Called the visual editor. The visual editor is handy because it provides a drop down list of all the services and their actions. Building in this view will change the JSON
 ![visual editor](/blog/src/images/iam-18.png)
-
-
 
 If we go back to the polices tab, we can click into `AdministratorAccess` polices and view the JSON.
 
@@ -78,9 +75,9 @@ If we go back to the polices tab, we can click into `AdministratorAccess` police
     ]
 }
 ```
-The Effect is `Allow` on All actions (the `*` selects everything)
-The Resource is also on all. 
 
+The Effect is `Allow` on All actions (the `*` selects everything)
+The Resource is also on all.
 
 ## Conclusion
 

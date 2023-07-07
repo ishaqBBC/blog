@@ -4,11 +4,12 @@ date: "2021-05-28T22:40:32.169Z"
 description: What we can learn from Gavin Belson
 ---
 
-## Have you heard of Hooli and Gavin Belson? 
+## Have you heard of Hooli and Gavin Belson?
 
 Gavin Belson is a fictional character from the HBO television series "Silicon Valley." The character is portrayed by actor Matt Ross and serves as the CEO of the fictional technology company Hooli. Gavin Belson is portrayed as a wealthy and successful tech executive, but also as a ruthless and egotistical individual, who will stop at nothing to achieve success and protect his company's interests. He is often portrayed as a rival to the main character Richard Hendricks and his startup Pied Piper. Gavin is one of the main antagonists of the series, and his actions and decisions drive much of the show's plot and conflicts.
 
 ## What Can we learn from Gavin?
+
 In the HBO series "Silicon Valley," the character of Gavin Belson is portrayed as a highly successful tech executive who is also highly egotistical and ruthless in his business practices. Throughout the series, Gavin's actions and decisions are driven by his desire to protect his company's interests and maintain his own position of power, rather than any sense of ethics or moral responsibility. He is willing to engage in unethical and illegal activities to gain an advantage over his rivals, such as stealing trade secrets and using insider information to undermine competitors.
 
 In addition to his unethical business practices, Gavin is also depicted as being out of touch with the social and ethical implications of the technology his company creates. He is more interested in making a profit and gaining an edge over his competitors than in considering the impact his technology might have on society.

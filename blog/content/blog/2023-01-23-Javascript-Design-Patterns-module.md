@@ -4,8 +4,7 @@ title: "Design Patterns: Module"
 date: 2023-02-03T10:35:28.085Z
 ---
 
-
-## What is a Design Pattern 
+## What is a Design Pattern
 
 Design patterns are concepts that we can use to solve or at least improve commonly recurring issues in software architecture. It's important to note that these patterns aren't a checklist to make your app performant, but rather a way to raise awareness of common problems that might negatively impact the performance of your app. In the future, if you run into an issue with your software architecture, you may be able to use a design pattern to solve the problem.
 

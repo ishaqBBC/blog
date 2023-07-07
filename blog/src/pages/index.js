@@ -20,16 +20,14 @@ const BlogIndex = ({ data, location }) => {
 
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const results = useFlexSearch(searchQuery, index, store)
-  const posts = searchQuery ? unFlattenResults(results) : nodes; 
+  const posts = searchQuery ? unFlattenResults(results) : nodes
 
   if (posts.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         <Bio />
-        <p>
-          No blog posts found. 
-        </p>
+        <p>No blog posts found.</p>
       </Layout>
     )
   }
