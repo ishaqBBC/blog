@@ -74,11 +74,18 @@ Before we conclude our exploration, it's essential to touch upon the instant sto
 Running EBS's or EFSs cost money, even in the free tier section and therefore it important to terminate them.
 
 To clean up EFS resources, head over to the Actions menu of your file system and select the option to delete it. You'll need to enter the file system ID, so copy and paste it for convenience. With a click, your file system will be gone, and you'll have a fresh slate for future projects.
+![file system](/blog/src/images/25/1.png)
 
-Next, let's handle EC2 instances. Make sure to terminate any running instances, ensuring a clean environment. Additionally, don't forget to clear up any associated volumes. Simply right-click on each volume and select the delete option. With this step complete, you're one step closer to a pristine setup.
+Next, let's handle EC2 instances. Make sure to terminate any running instances, ensuring a clean environment.
+![instances](/blog/src/images/25/2.png)
+
+Additionally, don't forget to clear up any associated volumes. Simply right-click on each volume and select the delete option. With this step complete, you're one step closer to a pristine setup.
+![volumes](/blog/src/images/25/1.png)
 
 Snapshots are another item to address. Go back to your snapshot repository and delete each snapshot you've created. This ensures you won't be paying for any unnecessary storage going forward.
+![snapshots](/blog/src/images/25/1.png)
 
 Lastly, security groups. Unless they are essential to your infrastructure, go ahead and delete any unnecessary security groups. Remember to keep the default security group intact, as it serves as a baseline for your setup. Note that security groups associated with running EC2 instances may not be deleted immediately, so be patient and try again until all instances are terminated.
+![security groups](/blog/src/images/25/5.png)
 
-And voila! With everything cleaned up, you're now ready for the next exciting section of your journey.
+With everything cleaned up, you're now ready for the next exciting section of your journey.
