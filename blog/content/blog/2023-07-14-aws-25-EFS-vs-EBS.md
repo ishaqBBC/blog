@@ -80,10 +80,10 @@ Next, let's handle EC2 instances. Make sure to terminate any running instances, 
 ![instances](/blog/src/images/25/2.png)
 
 Additionally, don't forget to clear up any associated volumes. Simply right-click on each volume and select the delete option. With this step complete, you're one step closer to a pristine setup.
-![volumes](/blog/src/images/25/1.png)
+![volumes](/blog/src/images/25/4.png)
 
 Snapshots are another item to address. Go back to your snapshot repository and delete each snapshot you've created. This ensures you won't be paying for any unnecessary storage going forward.
-![snapshots](/blog/src/images/25/1.png)
+![snapshots](/blog/src/images/25/4.png)
 
 Lastly, security groups. Unless they are essential to your infrastructure, go ahead and delete any unnecessary security groups. Remember to keep the default security group intact, as it serves as a baseline for your setup. Note that security groups associated with running EC2 instances may not be deleted immediately, so be patient and try again until all instances are terminated.
 ![security groups](/blog/src/images/25/5.png)
