@@ -71,7 +71,7 @@ Before we conclude our exploration, it's essential to touch upon the instant sto
 
 ## Time for Cleanup
 
-Running EBS's or EFSs cost money, even in the free tier section and therefore it important to terminate them.
+Running EBS's or EFSs cost money, even in the free tier section and therefore it's important to terminate them.
 
 To clean up EFS resources, head over to the Actions menu of your file system and select the option to delete it. You'll need to enter the file system ID, so copy and paste it for convenience. With a click, your file system will be gone, and you'll have a fresh slate for future projects.
 ![file system](/blog/src/images/25/1.png)
