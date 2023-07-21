@@ -80,7 +80,7 @@ Next, let's handle EC2 instances. Make sure to terminate any running instances, 
 ![instances](/blog/src/images/25/2.png)
 
 Additionally, don't forget to clear up any associated volumes. Simply right-click on each volume and select the delete option. With this step complete, you're one step closer to a pristine setup.
-![volumes](/blog/src/images/25/4.png)
+![volumes](/blog/src/images/25/3.png)
 
 Snapshots are another item to address. Go back to your snapshot repository and delete each snapshot you've created. This ensures you won't be paying for any unnecessary storage going forward.
 ![snapshots](/blog/src/images/25/4.png)
