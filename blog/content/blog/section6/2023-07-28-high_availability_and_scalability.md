@@ -12,7 +12,6 @@ Scalability in software engineering refers to an application's ability to handle
 
 In todays blog post we will go over the fundamentals of High Availability and Scalability, for some of you reading - this might feel beginner level, however its always important to master the fundamentals before we go over the load balancing features of AWS. This blog will answer the questions of their differences and how they are linked and used within AWS.
 To make these concepts more relatable, we'll use a call center as a fun example to illustrate how these principles work in practice.
-Title: Understanding Scalability and High Availability: A Senior Software Engineer's Guide
 
 ## What is Scalability?
 
