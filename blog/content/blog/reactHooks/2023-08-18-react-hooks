@@ -1,0 +1,68 @@
+---
+layout: blog
+title: "Cool React Hooks"
+date: dateT17:08:34.142Z
+---
+
+## TLDR
+date
+
+
+### Use media query hook
+What us it?  useMediaQuery is a custom hook that listens for media query changes and returns whether the query currently matches. (It is a wrapper around the matchMedia API.). The `query` string passed in is a `media query` 
+
+useMediaQuery.jsx
+```Javascript
+import * as React from "react";
+
+function useMediaQuery(query) {
+  const [match, setMatch] = React.useState();
+  const onChange = (event) => {
+    let mql = window.matchMedia(query);
+      if(mql.matches){
+        setMatch(mql.matches)
+      }else{
+        setMatch(mql.matches)
+      }
+  } 
+  React.useEffect(() => {
+    window.addEventListener('resize', onChange )
+    return () => {document.removeEventListener('resize', onChange)}
+  },[])
+
+  return match
+}
+
+export default useMediaQuery;
+```
+
+use in application... 
+App.jsx
+```javascript
+import {useMediaQuery} from '../useMediaQuery';
+import 'style.css'
+
+const App = () => {
+const isSmallDevice = useMediaQuery("only screen and (max-width : 768px)");
+  const isMediumDevice = useMediaQuery(
+    "only screen and (min-width : 769px) and (max-width : 992px)"
+  );
+  const isLargeDevice = useMediaQuery(
+    "only screen and (min-width : 993px) and (max-width : 1200px)"
+  );
+  const isExtraLargeDevice = useMediaQuery(
+    "only screen and (min-width : 1201px)"
+  );
+
+  return (
+      <h1 className={isSmallDevice ? "active" : ""}> Mobile </h2>
+  )
+```
+style.css
+```css
+.active {
+    border: 2px solid red;
+}
+```
+
+##
