@@ -15,7 +15,7 @@ Welcome back to our aws blog. Last time, we talked about load balancers and how 
 
 Imagine you're in charge of a big parade with lots of different floats. Each float represents a different website or app. Now, you need a way to make sure the parade goes smoothly, with each float getting its turn in the spotlight. That's where an ALB comes in. It's like a super-smart parade director that makes sure all the floats (websites and apps) get seen by the crowd (internet users).
 
-![application load balancer](/blog/src/images/29/alb.svg)
+![application load balancer](/blog/src/images/29/alb.png)
 
 ## Meet the Target Groups: (The Float Categories)
 
