@@ -5,7 +5,7 @@ date: 2023-08-18T08:34:27.473Z
 ---
 
 ## TLDR
-date
+
 
 
 Welcome back to our aws blog. Last time, we talked about load balancers and how they help spread out internet traffic. Now, get ready to dive into the world of "application load balancers" (ALBs), which are like traffic directors for websites and apps.
@@ -14,17 +14,48 @@ Welcome back to our aws blog. Last time, we talked about load balancers and how 
 
 Imagine you're in charge of a big parade with lots of different floats. Each float represents a different website or app. Now, you need a way to make sure the parade goes smoothly, with each float getting its turn in the spotlight. That's where an ALB comes in. It's like a super-smart parade director that makes sure all the floats (websites and apps) get seen by the crowd (internet users).
 
+![application load balancer](/blog/src/images/29/alb.svg)
+
 ## Meet the Target Groups: (The Float Categories)
 
 Think of a parade where you have different categories of floats: funny ones, cool ones, and even some with animals. These categories are like "target groups" for ALBs. Each target group holds a bunch of floats (websites or apps) that belong together. The ALB knows which float should go where, just like it knows which website or app should get the internet traffic.
+ 
+ the types of target groups are:
+
+- **EC2 Instances**: These are virtual servers in Amazon's Elastic Compute Cloud (EC2) service. ALBs can route traffic to target groups made up of EC2 instances, allowing you to balance load among different instances to ensure efficient handling of requests.
+
+- **Auto Scaling Groups**: Auto Scaling is a feature that automatically adjusts the number of EC2 instances based on demand. ALBs can manage target groups of EC2 instances within Auto Scaling Groups, dynamically scaling resources up or down as needed.
+
+- **Amazon ECS Tasks**: Amazon Elastic Container Service (ECS) allows you to run applications in containers. ALBs can route traffic to target groups of ECS tasks, providing load balancing for containerized applications.
+
+- **Lambda Functions**: AWS Lambda enables you to run code without provisioning or managing servers. Surprisingly, ALBs can also be used in front of Lambda functions, allowing you to distribute incoming traffic to different functions. (we will do a deep drive later in the series regarding lambdas) but essentially it turns a HTTP request into a JSON object.  
+
+- **Private IP Addresses**: ALBs can route traffic to target groups consisting of private IP addresses. This is useful for scenarios where you want to route traffic to resources in your own data center or private network.
+
+Each of these target group types serves a specific purpose and allows ALBs to efficiently manage and distribute traffic to different types of resources based on your application architecture and requirements.
+
 
 ## Smart Routing: (Directing the Floats)
 
-Now, let's talk about how ALBs route or direct the floats. Picture this: you have a map of the parade route, and you can decide which float goes which way. ALBs do something similar with internet traffic. They can route traffic based on different things, like the name of the float (domain name), the type of float (URL path), and even what people are looking for (query strings).
+Now, let's talk about how ALBs route or direct the floats. Picture this: you have a map of the parade route, and you can decide which float goes which way. ALBs do something similar with internet traffic. They can route traffic based on different things, like the name of the float (domain name)
+```
+ (https://magicishaqblog.netlify.app/) 2023-01-23-aws-2-getting-started/, 
+ ```
+ the type of float (URL path), and even what people are looking for (query strings)
+ ```
+  https://magicishaqblog.netlify.app/ (2023-01-23-aws-2-getting-started/) .
+  ```
+  or event the query string
+  ```
+  https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started?(id=ishaq)
+  ```
+  ![diagram of ALB](/blog/src/images/29/1.png)
 
 ## ALBs and the their Microservices
 
 Imagine you're building a city with lots of superheroes, each with their own special powers. ALBs are like superhero organizers. They know which superhero (microservice) should handle different tasks. So, when someone asks for help with saving a cat from a tree (a request), the ALB knows which superhero (microservice) to call.
+
+For example a site may have a search route in their url and also an about us page.  each hosted on a different EC2 instance, the ALB is smart enough to route the user to the target route. 
 
 ## ALBs: The Friendly Intermediaries
 
@@ -32,9 +63,7 @@ When someone wants to see a float in the parade (visit a website or app), they t
 
 ## Conclusion
 
-Hold onto your hats, young tech adventurers! In our next chapter, we'll roll up our sleeves and create our very own application load balancer. You'll get to see how ALBs work their magic, making sure all the floats (websites and apps) get their time to shine.
-
-So, keep your curious minds ready and your coding capes on. We're about to take a step into the exciting world of application load balancers!
+ In our next chapter, we'll roll up our sleeves and create our very own application load balancer. You'll get to see how ALBs work their magic, making sure all the floats (websites and apps) get their time to shine.
 
 ## Recap
 
