@@ -5,6 +5,7 @@ date: 2023-08-18T08:34:27.473Z
 ---
 
 ## TLDR
+Application Load Balancers (ALB) control traffic to the correct target group, therefore balancing the load coming into an application. 
 
 
 
@@ -50,12 +51,7 @@ Now, let's talk about how ALBs route or direct the floats. Picture this: you hav
   https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started?(id=ishaq)
   ```
   ![diagram of ALB](/blog/src/images/29/1.png)
-
-## ALBs and the their Microservices
-
-Imagine you're building a city with lots of superheroes, each with their own special powers. ALBs are like superhero organizers. They know which superhero (microservice) should handle different tasks. So, when someone asks for help with saving a cat from a tree (a request), the ALB knows which superhero (microservice) to call.
-
-For example a site may have a search route in their url and also an about us page.  each hosted on a different EC2 instance, the ALB is smart enough to route the user to the target route. 
+ 
 
 ## ALBs: The Friendly Intermediaries
 
