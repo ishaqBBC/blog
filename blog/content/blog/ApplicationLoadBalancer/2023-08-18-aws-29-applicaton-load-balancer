@@ -7,13 +7,34 @@ date: 2023-08-18T08:34:27.473Z
 ## TLDR
 date
 
-## Introduction
 
-##  Heading
-Text
+Welcome back to our aws blog. Last time, we talked about load balancers and how they help spread out internet traffic. Now, get ready to dive into the world of "application load balancers" (ALBs), which are like traffic directors for websites and apps.
+
+## ALBs: The Traffic Directors
+
+Imagine you're in charge of a big parade with lots of different floats. Each float represents a different website or app. Now, you need a way to make sure the parade goes smoothly, with each float getting its turn in the spotlight. That's where an ALB comes in. It's like a super-smart parade director that makes sure all the floats (websites and apps) get seen by the crowd (internet users).
+
+## Meet the Target Groups: (The Float Categories)
+
+Think of a parade where you have different categories of floats: funny ones, cool ones, and even some with animals. These categories are like "target groups" for ALBs. Each target group holds a bunch of floats (websites or apps) that belong together. The ALB knows which float should go where, just like it knows which website or app should get the internet traffic.
+
+## Smart Routing: (Directing the Floats)
+
+Now, let's talk about how ALBs route or direct the floats. Picture this: you have a map of the parade route, and you can decide which float goes which way. ALBs do something similar with internet traffic. They can route traffic based on different things, like the name of the float (domain name), the type of float (URL path), and even what people are looking for (query strings).
+
+## ALBs and the their Microservices
+
+Imagine you're building a city with lots of superheroes, each with their own special powers. ALBs are like superhero organizers. They know which superhero (microservice) should handle different tasks. So, when someone asks for help with saving a cat from a tree (a request), the ALB knows which superhero (microservice) to call.
+
+## ALBs: The Friendly Intermediaries
+
+When someone wants to see a float in the parade (visit a website or app), they talk to the ALB first. The ALB is like the gatekeeper. It takes notes about who wants to see the float (the client's IP address), what kind of float they want to see (the URL), and even the best way to get there (the protocol).
 
 ## Conclusion
-Conclusion
+
+Hold onto your hats, young tech adventurers! In our next chapter, we'll roll up our sleeves and create our very own application load balancer. You'll get to see how ALBs work their magic, making sure all the floats (websites and apps) get their time to shine.
+
+So, keep your curious minds ready and your coding capes on. We're about to take a step into the exciting world of application load balancers!
 
 ## Recap
 
