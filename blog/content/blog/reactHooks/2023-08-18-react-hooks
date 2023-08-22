@@ -13,24 +13,31 @@ What us it?  useMediaQuery is a custom hook that listens for media query changes
 
 useMediaQuery.jsx
 ```Javascript
+
 import * as React from "react";
 
 function useMediaQuery(query) {
-  const [match, setMatch] = React.useState();
-  const onChange = (event) => {
-    let mql = window.matchMedia(query);
-      if(mql.matches){
-        setMatch(mql.matches)
-      }else{
-        setMatch(mql.matches)
-      }
-  } 
-  React.useEffect(() => {
-    window.addEventListener('resize', onChange )
-    return () => {document.removeEventListener('resize', onChange)}
-  },[])
+  const subscribe = React.useCallback(
+    (callback) => {
+      const matchMedia = window.matchMedia(query);
 
-  return match
+      matchMedia.addEventListener("change", callback);
+      return () => {
+        matchMedia.removeEventListener("change", callback);
+      };
+    },
+    [query]
+  );
+
+  const getSnapshot = () => {
+    return window.matchMedia(query).matches;
+  };
+
+  const getServerSnapshot = () => {
+    throw Error("useMediaQuery is a client-only hook");
+  };
+
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
 
 export default useMediaQuery;
@@ -65,4 +72,41 @@ style.css
 }
 ```
 
-##
+## Visibility Change hook
+
+```javascript
+import React, {useSyncExternalStore} from 'react';
+
+function subcribe () {
+  function onVisChange (event) {
+    if(document.visibilityState === 'visible'){
+      document.title = 'Here'
+    }else if(document.visibilityState === 'hidden') {
+      document.title = 'Get back here'
+    }
+  }
+  document.addEventListener('visibilitychange', onVisChange); 
+  return () => document.removeEventListener('visibilitychange', onVisChange); 
+}
+
+function getSnapShot () {
+  return document.visibilityState;
+}
+const useVisChange = () => {
+  const visChange = useSyncExternalStore(subcribe, getSnapShot); 
+  return visChange; 
+
+}
+```
+In use calling the hook
+```javascript
+export function App(props) {
+  const visChange = useVisChange();
+  return (
+    <div className='App'>
+      {visChange}
+    </div>
+  );
+}
+
+```
