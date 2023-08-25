@@ -1,31 +1,47 @@
 ---
 layout: blog
 title: "AWS 30: Application Load Balancer Hands On"
-date: dateT17:08:34.142Z
+date: 2023-08-25T13:27:36.370Z 
 ---
 
 ## TLDR
-date
+Create Instances, create security groups, create ALB and configure all to distribute traffic among your EC2 instances. 
 
 ## Introduction
+We will be having a hands on look on how to create an [**Application Load Balancer**](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
 
 
 ## Launch EC2 Instances:
-1.
-   - Go to your AWS Management Console.
+1. **Creating your Instance**   
+    - Go to your AWS Management Console.
    - Navigate to the EC2 Dashboard.
-   - Click on "Launch Instances" to create two EC2 instances.
+   - Click on "Launch Instances" to create two EC2 instances. 
+   [How to create your instance refresher](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/#instance)
+![lauching an instance](/blog/src/images/30/1.png)
 
 2. **Configure EC2 Instances:**
    - In the instance launch wizard, select "Amazon Linux 2" as the Amazon Machine Image (AMI).
    - Choose the instance type as "t2.micro."
    - Skip the key pair selection since SSH access isn't needed.
    - For network settings, select the existing security group "Launch Wizard 1" that allows HTTP and SSH traffic.
+   ![key pair](/blog/src/images/30/2.png)
 
 3. **Add EC2 User Data:**
    - In advanced details, scroll down and find the user data section.
-   - Copy and paste the provided EC2 user data script to configure instances.
+   ![advanced details](/blog/src/images/30/3.png)
+   - Copy and paste the provided EC2 user data script below to configure instances.
+   ```bash
+   #!/bin/bash
+    # Use this for your user data (script from top to bottom)
+    # install httpd (Linux 2 version)
+    yum update -y
+    yum install -y httpd
+    systemctl start httpd
+    systemctl enable httpd
+    echo "<h1>Hello World from $(hostname -f)</h1>"> /var/www/html/index.html
+   ```
    - Launch both instances with these settings.
+   ![renaming instances](/blog/src/images/30/5.png)
 
 4. **Rename Instances:**
    - Once instances are running, go to the EC2 Dashboard.
@@ -74,6 +90,10 @@ date
     - Restart the stopped instance and verify it becomes healthy again in the target group.
 
 Congratulations! You've successfully created an Application Load Balancer and configured it to distribute traffic among your EC2 instances. This setup provides improved availability and scalability for your blog application.
+
+## Clean up
+Instances cost money when they run, so please remember to terminate all instance to avoid extra costs. 
+
 
 ## Recap
 
