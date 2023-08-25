@@ -1,0 +1,114 @@
+---
+layout: blog
+title: "AWS 30: Application Load Balancer Hands On"
+date: dateT17:08:34.142Z
+---
+
+## TLDR
+date
+
+## Introduction
+
+
+## Launch EC2 Instances:
+1.
+   - Go to your AWS Management Console.
+   - Navigate to the EC2 Dashboard.
+   - Click on "Launch Instances" to create two EC2 instances.
+
+2. **Configure EC2 Instances:**
+   - In the instance launch wizard, select "Amazon Linux 2" as the Amazon Machine Image (AMI).
+   - Choose the instance type as "t2.micro."
+   - Skip the key pair selection since SSH access isn't needed.
+   - For network settings, select the existing security group "Launch Wizard 1" that allows HTTP and SSH traffic.
+
+3. **Add EC2 User Data:**
+   - In advanced details, scroll down and find the user data section.
+   - Copy and paste the provided EC2 user data script to configure instances.
+   - Launch both instances with these settings.
+
+4. **Rename Instances:**
+   - Once instances are running, go to the EC2 Dashboard.
+   - Rename the instances: "My First Instance" and "My Second Instance."
+
+5. **Access Instances:**
+   - Copy the IPv4 address of the first instance.
+   - Paste it in a browser to verify you get a "hello world" message.
+   - Repeat for the second instance.
+
+## Application Load Balancer
+
+6. **Create an Application Load Balancer (ALB):**
+   - In the EC2 Dashboard, scroll down to "Load Balancers" and click "Create Load Balancer."
+   - Choose "Application Load Balancer."
+   - Name your ALB (e.g., "DemoALB").
+   - Select "Internet-facing" and choose "IPv4" as the address type.
+   - For availability zones, deploy the ALB in all available zones.
+
+7. **Configure Security Group for ALB:**
+   - Create a new security group for the ALB (e.g., "demo-sg-load-balancer").
+   - Configure inbound rules to allow HTTP traffic from anywhere.
+
+8. **Configure Listener and Target Group:**
+   - Under listeners and routing, configure a listener for port 80 (HTTP).
+   - Create a new target group (e.g., "demo-tg-alb") for HTTP on port 80.
+   - Configure health checks for the target group.
+
+9. **Register Targets:**
+   - Register both EC2 instances with the created target group on port 80.
+
+10. **Complete ALB Setup:**
+    - Once registered, go back to the ALB configuration page.
+    - Your ALB should now be provisioned and active.
+    - Find the DNS name associated with the ALB and copy it.
+
+11. **Test Load Balancing:**
+    - Paste the ALB's DNS name in a browser.
+    - Refresh the page multiple times to observe load balancing between instances.
+    - Verify that the ALB is distributing traffic between instances.
+
+12. **Testing Unhealthy Instances:**
+    - In the EC2 Dashboard, stop one of the instances.
+    - Wait for the instance to become unhealthy in the target group.
+    - Refresh the ALB's DNS name to observe load balancing with only the healthy instance.
+    - Restart the stopped instance and verify it becomes healthy again in the target group.
+
+Congratulations! You've successfully created an Application Load Balancer and configured it to distribute traffic among your EC2 instances. This setup provides improved availability and scalability for your blog application.
+
+## Recap
+
+Following the previous blogs in the series.
+
+## Recap
+
+- [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
+- [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
+- [AWS 3: UI Guide and Walk through](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough)
+- [AWS 4: IAM Creating Users and Groups](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)
+- [AWS 5: IAM Policies](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices)
+- [AWS 6: Quiz 1 ](https://magicishaqblog.netlify.app/aws-quiz-one)
+- [AWS 7: AWS CLI , How to install the CLI](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli)
+- [AWS 8: Access keys](https://magicishaqblog.netlify.app/2023-10-03-aws-8-access-keys)
+- [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)
+- [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
+- [AWS 11: EC2 View and Instance Types](https://magicishaqblog.netlify.app/2023-03-03-aws-11-EC2-View-and-instance-types)
+- [AWS 12: Security Groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups)
+- [AWS 13: EC2 SSH-ing into an instance](https://magicishaqblog.netlify.app/2023-03-17-aws-13-ssh)
+- [AWS 14: Instance Connect](https://magicishaqblog.netlify.app/2023-03-24-aws-14-instance-connect)
+- [AWS 15: EC2 Purchasing Options](https://magicishaqblog.netlify.app/2023-03-31-aws-15-EC2-purchasing-options)
+- [AWS 16: EBS Overview and Hands on](https://magicishaqblog.netlify.app/2023-04-14-aws-16-EBS-Overview-and-Hands-On)
+- [AWS 17: EBS Snapshots](https://magicishaqblog.netlify.app/2023-04-21-aws-17-ebs-snapshots)
+- [AWS 18: AMI Overview](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami)
+- [AWS 19: AMI Hands On](https://magicishaqblog.netlify.app/2023-06-02-aws-19-AMI-Hands-On)
+- [AWS 20: EC2 Instance Stores](https://magicishaqblog.netlify.app/2023-06-09-aws-20-EC2-Instance-Store)
+- [AWS 21: EBS Volume types](https://magicishaqblog.netlify.app/2023-06-16-aws-21-EBS-volume-types)
+- [AWS: 22: EBS Multi Attach](https://magicishaqblog.netlify.app/2023-06-23-aws-22-EBS-Multi-Attach)
+- [AWS: 23: EFS Elastic File System](https://magicishaqblog.netlify.app/2023-06-30-aws-23-EFS-Elastic-File-System)
+- [AWS 24: EFS Hands On](https://magicishasblog.netlify.app/2023-07-07-aws-24-EFS-Hands-On)
+- [AWS 25: EFS vs EBS](https://magicishasblog.netlify.app/2023-07-14-aws-25-EFS-vs-EBS)
+- [AWS 26: Quiz 2](https://magicishaqblog.netlify.app/quiz-2/2023-07-21-aws-26-quiz-2/)
+- [AWS 27: High Availability and Scalability ](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)
+- [AWS 28: Elastic Load Balancer](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-11-aws-28-elastic-load-balancing/)
+- [AWS 30: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
+
+
