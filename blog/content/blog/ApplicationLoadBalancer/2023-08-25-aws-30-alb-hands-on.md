@@ -17,18 +17,18 @@ We will be having a hands on look on how to create an [**Application Load Balanc
    - Navigate to the EC2 Dashboard.
    - Click on "Launch Instances" to create two EC2 instances. 
    [How to create your instance refresher](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/#instance)
-![lauching an instance](/blog/src/images/30/1.png)
+![lauching an instance](/blog/src/images/30/alb1.png)
 
 2. **Configure EC2 Instances:**
    - In the instance launch wizard, select "Amazon Linux 2" as the Amazon Machine Image (AMI).
    - Choose the instance type as "t2.micro."
    - Skip the key pair selection since SSH access isn't needed.
    - For network settings, select the existing security group "Launch Wizard 1" that allows HTTP and SSH traffic.
-   ![key pair](/blog/src/images/30/2.png)
+   ![key pair](/blog/src/images/30/alb2.png)
 
 3. **Add EC2 User Data:**
    - In advanced details, scroll down and find the user data section.
-   ![advanced details](/blog/src/images/30/3.png)
+   ![advanced details](/blog/src/images/30/alb3.png)
    - Copy and paste the provided EC2 user data script below to configure instances.
    ```bash
    #!/bin/bash
