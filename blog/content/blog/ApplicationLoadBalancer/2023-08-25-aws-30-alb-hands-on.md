@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 30: Application Load Balancer Hands On"
-date: 2023-08-25T13:27:36.370Z
+date: 2023-08-25T08:34:27.473Z
 ---
 
 ## TLDR
