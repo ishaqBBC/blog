@@ -90,7 +90,7 @@ We will be having a hands on look on how to create an [**Application Load Balanc
     - Find the DNS name associated with the ALB and copy it.
 11. **Test Load Balancing:**
     - Paste the ALB's DNS name in a browser.
-![dns name](/blog/src/images/30/20.png)
+![dns name](/blog/src/images/30/alb20.png)
     - Refresh the page multiple times to observe load balancing between instances.
     - Verify that the ALB is distributing traffic between instances.
 
