@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 30: Application Load Balancer Hands On"
+title: "AWS 30: Application Load Balancer Hands On (part 1)" 
 date: 2023-08-25T08:34:27.473Z
 ---
 
@@ -149,4 +149,4 @@ Following the previous blogs in the series.
 - [AWS 26: Quiz 2](https://magicishaqblog.netlify.app/quiz-2/2023-07-21-aws-26-quiz-2/)
 - [AWS 27: High Availability and Scalability ](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)
 - [AWS 28: Elastic Load Balancer](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-11-aws-28-elastic-load-balancing/)
-- [AWS 30: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
+- [AWS 29: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
