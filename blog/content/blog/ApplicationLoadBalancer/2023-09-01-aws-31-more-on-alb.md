@@ -24,6 +24,7 @@ To restrict access to the EC2 instances, we can edit the inbound rules of the EC
 
 To change this, we first delete the existing rule and then add a new one. Instead of specifying a CIDR block (range of IP addresses), we can select a security group as the source. In this case, we want to allow traffic only from the security group of the [load balancer created in the previous blog](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-25-aws-30-alb-hands-on/).
 ![security groups with load balancer](/blog/src/images/31/31-3.png)
+![save rules button](/blog/src/images/31/31-4.png)
 
 By saving this rule, we effectively restrict direct access to the EC2 instances. If we try to access the instances directly, we will encounter a timeout error. However, the load balancer can still access the instances because we have allowed inbound traffic from the load balancer's security group.
 
@@ -34,14 +35,22 @@ With this simple configuration change, we have significantly tightened network s
 Load balancers not only distribute traffic but also allow for advanced routing based on specific conditions. Let's explore how we can configure these rules using an application load balancer.
 
 Within the load balancer settings, we can define listener rules. These rules determine how incoming requests are handled. By default, the listener forwards requests to a specific target group. However, we can add custom rules to make the routing more complex.
+![load balancer settings ](/blog/src/images/31/31-5.png)
 
 For example, let's say we want to create a rule that handles requests with a specific path. We can add a condition based on the path value, such as "/error". This means that if the request path matches "/error", this rule will be triggered.
+
 
 Conditions can also be based on host headers, HTTP request methods, source IP addresses, query strings, or HTTP headers. This provides flexibility in defining routing rules based on different criteria.
 
 Once we have defined the condition, we need to specify the action to take when the condition is met. This can include forwarding to specific target groups, redirecting to a different URL, or returning a fixed response.
 
 In our example, we choose to return a fixed response of "404 Not Found" when the request path is "/error". This allows us to handle specific error scenarios with a customized response.
+
+![load balancer listener rules ](/blog/src/images/31/31-6.png)
+![conditions ](/blog/src/images/31/31-7.png)
+![path ](/blog/src/images/31/31-9.png)
+![actions](/blog/src/images/31/31-8.png)
+![overview](/blog/src/images/31/31-10.png)
 
 It's worth noting that rules have priorities, allowing us to define the order in which they are evaluated. The rule with the highest priority will take precedence if multiple rules match the condition. This gives us fine-grained control over the routing logic.
 
@@ -52,7 +61,7 @@ By utilizing these advanced routing capabilities, we can create complex routing 
 To ensure our configuration works as expected, let's test it out. We can obtain the DNS name of the load balancer and append "/error" to the URL. This should trigger our custom rule and return the "404 Not Found" response.
 
 By following these steps, we have successfully implemented advanced security measures and routing capabilities in our load balancer setup.
-
+![testing error path](/blog/src/images/31/31-11.png)
 ## Conclusion
 
  load balancers are powerful tools that go beyond simple traffic distribution. By leveraging advanced concepts like network security settings and custom routing rules, we can enhance the performance, reliability, and security of our applications. Stay tuned for more exciting topics in our AWS series!
