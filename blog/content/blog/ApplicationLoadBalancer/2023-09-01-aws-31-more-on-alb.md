@@ -1,10 +1,10 @@
 ---
 layout: blog
-title: "AWS 31: Application Load balancer hands On - part 2"
+title: "AWS 31: Application Load balancer hands On (part 2)"
 date: 2023-09-01T10:01:19.482Z
 ---
 
-## TL;DR 
+## TLDR 
 In this advanced concepts discussion about load balancers, we explore two key areas: network security and application load balancer rules.
 we explore advanced concepts for load balancers, focusing on network security and custom routing rules. By restricting direct access to EC2 instances and configuring rules based on specific conditions, we can enhance security and have more control over application routing. Load balancers are essential components in modern infrastructure setups, providing efficient traffic distribution and advanced functionality.
 
