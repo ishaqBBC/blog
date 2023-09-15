@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 32: Network Load Balancer"
+title: "AWS 33: Network Load Balancer (Hands On)"
 date: 2023-09-15T10:01:19.482Z
 ---
 
