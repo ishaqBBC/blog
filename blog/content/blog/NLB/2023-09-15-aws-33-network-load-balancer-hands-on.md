@@ -6,7 +6,7 @@ date: 2023-09-15T10:01:19.482Z
 
 
 
-## TLDR 
+# TLDR 
 
 In this tutorial, we will guide you through the process of creating a [Network Load Balancer (NLB)](https://magicishaqblog.netlify.app/NLB/2023-09-09-aws-32-network-load-balancer/) on AWS. We will cover setting up a security group, defining listeners and routing rules, creating a target group, and troubleshooting common issues.
 
