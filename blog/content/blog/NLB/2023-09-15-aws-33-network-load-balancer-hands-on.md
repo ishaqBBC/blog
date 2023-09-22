@@ -4,9 +4,7 @@ title: "AWS 33: Network Load Balancer (Hands On)"
 date: 2023-09-15T10:01:19.482Z
 ---
 
-
-
-# TLDR 
+# TLDR
 
 In this tutorial, we will guide you through the process of creating a [Network Load Balancer (NLB)](https://magicishaqblog.netlify.app/NLB/2023-09-09-aws-32-network-load-balancer/) on AWS. We will cover setting up a security group, defining listeners and routing rules, creating a target group, and troubleshooting common issues.
 
@@ -20,28 +18,28 @@ Load balancing is a crucial part of modern web applications, ensuring high avail
 
 Okay, so let's go ahead and practice creating a network load balancer. Follow these steps:
 
-1. **Navigate to the NLB Creation Page:** Sign in to your AWS Management Console, go to the EC2 dashboard, and select "Load balancers." Click the "Create Load Balancer" button. and then on "Network load Balancer" create button. 
-![NLB create button](/blog/src/images/32/32-1.png)
+1. **Navigate to the NLB Creation Page:** Sign in to your AWS Management Console, go to the EC2 dashboard, and select "Load balancers." Click the "Create Load Balancer" button. and then on "Network load Balancer" create button.
+   ![NLB create button](/blog/src/images/32/32-1.png)
 
 2. **Configure Basic Settings:** Enter a name for your NLB, e.g., "DemoNLB." Choose an internet-facing load balancer for IPv4.
-![NLB create button](/blog/src/images/32/32-2.png)
+   ![NLB create button](/blog/src/images/32/32-2.png)
 
 3. **Network Mapping:** Select your Virtual Private Cloud (VPC) and enable all the availability zones (AZs) you want to use. Each AZ will have a fixed IPv4 address assigned by AWS.
-![NLB create button](/blog/src/images/32/32-3.png)
+   ![NLB create button](/blog/src/images/32/32-3.png)
 
 ## Step 2: Attaching a Security Group
 
 It is recommended to attach a security group to your NLB to control traffic. Follow these steps:
 
 1. **Create a Security Group:** In the EC2 dashboard, navigate to "Security Groups" and create a new security group, e.g., "demo-sg-nlb."
-![NLB create button](/blog/src/images/32/32-4.png)
+   ![NLB create button](/blog/src/images/32/32-4.png)
 
 2. **Define Inbound Rules:** Allow incoming traffic on port 80 (HTTP) from anywhere. Leave the outbound rules as default.
-![NLB create button](/blog/src/images/32/32-6.png)
+   ![NLB create button](/blog/src/images/32/32-6.png)
 
 3. **Associate Security Group:** In your NLB settings, refresh the page, and select "demo-sg-nlb" as the security group, removing the default one. This ensures that traffic is properly controlled.
-![NLB create button](/blog/src/images/32/32-7.png)
-![NLB create button](/blog/src/images/32/32-8.png)
+   ![NLB create button](/blog/src/images/32/32-7.png)
+   ![NLB create button](/blog/src/images/32/32-8.png)
 
 ## Step 3: Configuring Listeners and Routing
 
@@ -50,7 +48,7 @@ In this step, you will set up the protocol and routing rules for your NLB:
 1. **Define Listeners:** Choose the protocol (TCP, TCP_UDP, TLS, or UDP) and port (e.g., TCP on port 80).
 
 2. **Create a Target Group:** Configure a target group specifically for your NLB. Name it, set the protocol (TCP on port 80), and choose the VPC.
-![NLB create button](/blog/src/images/32/32-9.png)
+   ![NLB create button](/blog/src/images/32/32-9.png)
 
 3. **Configure Health Checks:** Use HTTP for health checks if you have an HTTP application running on your EC2 instances. Set the healthy threshold to 2, timeout to 2 seconds, and interval to 5 seconds.
 
@@ -65,14 +63,14 @@ After creating your NLB, you might face issues with your instances being marked 
 1. **Check Security Group Rules:** Make sure your EC2 instances [(these where the one created in the Application Load Balancer)](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/#instance)' security group allows HTTP traffic from both your NLB security group and your Application Load Balancer (ALB) security group if applicable.
 
 2. **Update Security Group Rules:** If needed, modify your EC2 security group to allow traffic from the NLB.
-![NLB create button](/blog/src/images/32/32-16.png)
-![NLB create button](/blog/src/images/32/32-12.png)
+   ![NLB create button](/blog/src/images/32/32-16.png)
+   ![NLB create button](/blog/src/images/32/32-12.png)
 3. **Wait and Refresh:** After making these adjustments, wait for the instances to become healthy. You should see your instances responding to health checks.
-![NLB create button](/blog/src/images/32/32-17.png)
+   ![NLB create button](/blog/src/images/32/32-17.png)
 
 4. **Test the NLB:** Access your NLB's URL in your web browser. You should see your application distributed across instances.
-![NLB create button](/blog/src/images/32/32-15.png)
-![NLB create button](/blog/src/images/32/32-18.png)
+   ![NLB create button](/blog/src/images/32/32-15.png)
+   ![NLB create button](/blog/src/images/32/32-18.png)
 
 ## Conclusion and Cleanup
 
@@ -115,3 +113,4 @@ Following the previous blogs in the series.
 - [AWS 29: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
 - [AWS 30: Alb hands on (part 1)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-25-aws-30-alb-hands-on/)
 - [AWS 31: Alb hands on (part 2)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-09-01-aws-31-more-on-alb/)
+- [AWS 32: Network load balancer](https://magicishaqblog.netlify.app/NLB/2023-09-09-aws-32-network-load-balancer/)
