@@ -41,9 +41,18 @@ It's important to note that certain cookie names, like `AWSALB`, `AWSALBAPP`, an
 
 ## Enabling Sticky Sessions
 
-Enabling sticky sessions on your load balancer is relatively straightforward. You can configure it at the target group level. There are two options for stickiness: load balancer-generated cookies (duration-based) or application-based cookies.
+Enabling sticky sessions on your load balancer is relatively straightforward. You can configure it at the [target group level](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/#target-group). There are two options for stickiness: load balancer-generated cookies (duration-based) or application-based cookies.
 
 Once sticky sessions are enabled, your load balancer will handle the routing of requests accordingly, ensuring a consistent user experience.
+
+## How To Set Stickiness
+
+- 1. Go to your target group in the load balancer section of EC2.
+     ![Step 1 of 3: Screenshot showing the target groups ](/blog/src/images/35/35-2.png)
+- 2. Select the target group and `Edit target group attributes`.
+     ![Step 2 of 3: The actions panel screenshot ](/blog/src/images/35/35-3.png)
+- 3. Scroll to the bottom and switch the stickiness tab to `on`.
+     ![Step 3 of 3: Stickiness section of the group attributes ](/blog/src/images/35/35-4.png)
 
 ## Conclusion
 
