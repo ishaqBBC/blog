@@ -6,11 +6,11 @@ date: 2023-09-29T10:01:19.482Z
 
 ## TLDR
 
-Sticky sessions, also known as session affinity, can be enabled on your AWS Elastic Load Balancer (ALB), Classic Load Balancer (CLB), or Network Load Balancer (NLB) to ensure that client requests are consistently directed to the same backend instance. This blog explores the concept of stickiness, its use cases, and the two types of cookies involved (application-based and duration-based). We'll also walk you through enabling and disabling sticky sessions on your load balancer.
+Sticky sessions, also known as _session affinity_, can be enabled on your AWS Elastic Load Balancer (ALB), Classic Load Balancer (CLB), or Network Load Balancer (NLB) to ensure that client requests are consistently directed to the same backend instance. This blog explores the concept of stickiness, its use cases, and the two types of cookies involved (application-based and duration-based). We'll also walk you through enabling and disabling sticky sessions on your load balancer.
 
 When it comes to managing web applications hosted on AWS, ensuring a smooth and consistent user experience is paramount. One key feature that can help achieve this is sticky sessions, also referred to as session affinity. In this blog post, we will delve into the world of sticky sessions, explaining what they are, how they work, and why they might be essential in certain scenarios.
 
-## Sticky Sessions Explained
+## Introduction
 
 Imagine a scenario where you have an [Application Load Balancer (ALB)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/) distributing incoming traffic to multiple [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/). Ordinarily, the ALB evenly distributes requests across all instances. However, in some cases, you might want a user who initiated a session to always be directed to the same backend instance. This is where sticky sessions come into play.
 
