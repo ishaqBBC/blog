@@ -12,7 +12,7 @@ When it comes to managing web applications hosted on AWS, ensuring a smooth and 
 
 ## Introduction
 
-Imagine a scenario where you have an [Application Load Balancer (ALB)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/) distributing incoming traffic to multiple [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/). Ordinarily, the ALB evenly distributes requests across all instances. However, in some cases, you might want a user who initiated a session to always be directed to the same backend instance. This is where sticky sessions come into play.
+If you have an [Application Load Balancer (ALB)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/) distributing incoming traffic to multiple [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/). Ordinarily, the ALB evenly distributes requests across all instances. However, in some cases, you might want a user who initiated a session to always be directed to the same backend instance. This is where sticky sessions come into play.
 
 With sticky sessions enabled, a client making multiple requests to the load balancer will consistently connect to the same backend instance. For instance, if User 1's first request is directed to EC2 Instance 1, all subsequent requests from User 1 will also be sent to Instance 1. This behavior ensures that important session data, such as user logins, remains intact.
 
