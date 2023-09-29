@@ -12,7 +12,7 @@ module.exports = {
     title: `Tech Blog`,
     author: {
       name: `Ishaq Khan`,
-      summary: `Software Engineer, learning about all things Javascript and React`,
+      summary: `Software Engineer, learning about all things Javascript and React with AWS weekly posts`,
     },
     description: `A tech blog, trying to navigate the eco system of Javascript`,
     siteUrl: `https://magicishaq.com/`,
