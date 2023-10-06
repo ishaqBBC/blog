@@ -6,7 +6,7 @@ date: 2023-10-07T10:01:19.482Z
 
 ## TLDR
 
-Cross-zone load balancing in AWS evenly distributes traffic across all registered instances in all [availability zones](TODO), ensuring [high availability](TODO) and fault tolerance. You can enable or disable it based on your use case, and the behavior varies among different types of [load balancers](TODO).
+Cross-zone load balancing in AWS evenly distributes traffic across all registered instances in all [availability zones](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#az), ensuring [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and fault tolerance. You can enable or disable it based on your use case, and the behavior varies among different types of [load balancers](https://magicishaqblog.netlify.app/?s=load+balancer).
 
 ## Introduction
 
@@ -14,13 +14,13 @@ Amazon Web Services (AWS) offers a wide range of services and features, and one 
 
 ## Cross-Zone Load Balancing Explained
 
-Imagine a scenario where you have two [availability zones (AZs)](TODO) in AWS. In the first AZ, there's a load balancer with **2** [EC2 instances](TODO), and in the second AZ, there's another load balancer with **8** EC2 instances. These load balancers serve as part of the same overarching load balancing system. When clients access these load balancers, cross-zone load balancing ensures even distribution of traffic across all instances in all availability zones.
+Imagine a scenario where you have two [availability zones (AZs)](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#az) in AWS. In the first AZ, there's a load balancer with **2** [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), and in the second AZ, there's another load balancer with **8** EC2 instances. These load balancers serve as part of the same overarching load balancing system. When clients access these load balancers, cross-zone load balancing ensures even distribution of traffic across all instances in all availability zones.
 
 ## With cross-zone load balancing:
 
 - Each load balancer instance sends **50%** of the traffic it receives to the first AZ and **50%** to the second AZ.
 - Both load balancers redirect traffic to all **10** (2+8) EC2 instances, regardless of their availability zone.
-- Traffic is evenly distributed across all EC2 instances, promoting [high availability](TODO).
+- Traffic is evenly distributed across all EC2 instances, promoting [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/).
 
 ![Diagram showing a cross zone load balancing of ten instances in 2 zones. because there is 10 instances , the traffic is split evenly 10% each](/blog/src/images/36/36-1.png)
 
@@ -34,12 +34,12 @@ Imagine a scenario where you have two [availability zones (AZs)](TODO) in AWS. I
 
 ## Configuring Cross-Zone Load Balancing
 
-- [Application Load Balancer (ALB)](TODO): Cross-zone load balancing is enabled by default, but you can disable it at the target group level. No charges apply for inter-AZ data transfers.
-- [Network Load Balancer (NLB)](TODO) and [Gateway Load Balancer](TODO): Cross-zone load balancing is disabled by default, and enabling it may incur regional data charges.
+- [Application Load Balancer (ALB)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/): Cross-zone load balancing is enabled by default, but you can disable it at the target group level. No charges apply for inter-AZ data transfers.
+- [Network Load Balancer (NLB)](https://magicishaqblog.netlify.app/NLB/2023-09-09-aws-32-network-load-balancer/) and [Gateway Load Balancer](https://magicishaqblog.netlify.app/GatewayLoadBalancer/2023-09-22-aws-34-gateway-load-balancer/): Cross-zone load balancing is disabled by default, and enabling it may incur regional data charges.
 
 ## Conclusion
 
-Cross-zone load balancing is a crucial feature in AWS for ensuring [high availability](TODO) and even distribution of traffic across multiple instances and availability zones. Understanding how to configure it for different load balancer types is essential for optimizing your AWS infrastructure.
+Cross-zone load balancing is a crucial feature in AWS for ensuring [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/). and even distribution of traffic across multiple instances and availability zones. Understanding how to configure it for different load balancer types is essential for optimizing your AWS infrastructure.
 
 By leveraging cross-zone load balancing effectively, you can build robust and fault-tolerant applications on AWS that can handle varying workloads and maintain high availability even in the face of imbalanced resource distribution.
 
@@ -81,3 +81,4 @@ Following the previous blogs in the series.
 - [AWS 32: Network load balancer](https://magicishaqblog.netlify.app/NLB/2023-09-09-aws-32-network-load-balancer/)
 - [AWS 33: Network load balancer (hands on)](https://magicishaqblog.netlify.app/NLB/2023-09-15-aws-33-network-load-balancer-hands-on/)
 - [AWS 34: Gateway load balancer](https://magicishaqblog.netlify.app/GatewayLoadBalancer/2023-09-22-aws-34-gateway-load-balancer/)
+- [AWS 35: ELB Sticky Sessions](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2022-09-29-aws-35-ELB-Sticky-sessions/)
