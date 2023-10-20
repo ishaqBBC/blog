@@ -1,0 +1,100 @@
+---
+layout: blog
+title: "title"
+date: dateT17:08:34.142Z
+---
+
+## TLDR
+
+Enabling SSL/TLS certificates on AWS load balancers ([ALB](TODO) and [NLB](TODO)) is crucial for securing data in transit. Here's a quick summary of the steps:
+
+1. **ALB SSL Configuration**:
+
+   - Add an HTTPS listener on port 443.
+   - Forward requests to a specific target group.
+   - Configure SSL security policies for negotiation.
+   - Specify the certificate source (ACM, IAM, or import).
+
+2. **NLB SSL Configuration**:
+   - Add a TLS listener.
+   - Forward requests to the desired target group.
+   - Set a security policy for certificate negotiation.
+   - Choose the certificate source (ACM, IAM, or import).
+
+Ensure your SSL/TLS certificates are properly configured for enhanced security.
+
+## Introduction
+
+Load balancers play a crucial role in ensuring the availability and reliability of web applications and services. However, to ensure the security of data in transit, it's essential to enable SSL (Secure Sockets Layer) or TLS (Transport Layer Security) certificates on your AWS load balancers. In this tutorial, we will walk through the process of enabling SSL/TLS certificates on both the Application Load Balancer (ALB) and the Network Load Balancer (NLB).
+
+### Enabling SSL on the Application Load Balancer (ALB)
+
+Let's begin with the Application Load Balancer (ALB). Enabling SSL on your ALB is a straightforward process. Follow these steps:
+
+1. **Add a Listener**: First, you need to add a listener for HTTPS. This can be done in the AWS Management Console. Specify the protocol as HTTPS, and the default port is 443.
+
+   ![ALB Listener](placeholder-image-link-1)
+
+2. **Forward to a Target Group**: Configure the listener to forward requests to a specific target group based on client requests to port 443 for HTTPS.
+
+   ![Target Group](placeholder-image-link-2)
+
+3. **Secure Listener Settings**: You can further enhance the security by configuring SSL security policies. This setting determines how certificates are negotiated and is particularly useful for ensuring compatibility with older versions of SSL or TLS. You can choose a predefined policy or customize your own.
+
+   ![Security Policy](placeholder-image-link-3)
+
+4. **Specify Certificate Location**: You need to specify where your SSL/TLS certificate is located. It can be in Amazon Certificate Manager (ACM), IAM, or imported directly. If you have your certificate in ACM, it's the recommended choice for easy management.
+
+   ![Certificate Location](placeholder-image-link-4)
+
+5. **Import Certificate (if needed)**: If you don't have your certificate in ACM or IAM, you can import it by pasting the private key, the body, and the certificate chain. This process will import the certificate directly into ACM.
+
+   ![Import Certificate](placeholder-image-link-5)
+
+### Enabling SSL on the Network Load Balancer (NLB)
+
+The process for enabling SSL on the Network Load Balancer (NLB) is similar. Here's what you need to do:
+
+1. **Add a Listener**: In the AWS Management Console for NLB, add a listener for TLS. Specify the protocol as TLS.
+
+   ![NLB Listener](placeholder-image-link-6)
+
+2. **Forward to a Target Group**: Configure the listener to forward incoming requests to the desired target group.
+
+   ![Target Group](placeholder-image-link-2) (_Image reused for consistency_)
+
+3. **Security Policy**: Set your preferred security policy. This defines how SSL/TLS certificates are negotiated.
+
+   ![Security Policy](placeholder-image-link-7)
+
+4. **Certificate Source**: Choose where your SSL/TLS certificate is located. Options include ACM, IAM, or direct import.
+
+   ![Certificate Location](placeholder-image-link-4) (_Image reused for consistency_)
+
+5. **Advanced Settings**: You can also configure advanced settings for Application Layer Protocol Negotiation (ALPN) if needed. This is an advanced feature for TLS that may not be necessary for all setups.
+
+   ![ALPN](placeholder-image-link-8)
+
+### Conclusion
+
+Enabling SSL/TLS certificates on your AWS load balancers is a critical step in ensuring the security of your applications and services. By following the steps outlined above, you can establish a secure connection for data in transit. Whether you are using an Application Load Balancer (ALB) or a Network Load Balancer (NLB), the process is clear and well-documented.
+
+We hope you found this tutorial helpful in securing your AWS load balancers. If you have any questions or need further assistance, feel free to reach out. Stay tuned for more informative tutorials, and we'll see you in the next lecture.
+
+![Thank You](placeholder-image-link-9)
+
+## Recap
+
+Following the previous blogs in the series.
+
+- [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
+- [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
+- [AWS 3: UI Guide and Walk through](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough)
+- [AWS 4: IAM Creating Users and Groups](https://magicishaqblog.netlify.app/2023-01-28-aws-4-IAM)
+- [AWS 5: IAM Policies](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices)
+- [AWS 6: Quiz 1 ](https://magicishaqblog.netlify.app/aws-quiz-one)
+- [AWS 7: AWS CLI , How to install the CLI](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli)
+- [AWS 8: Access keys](https://magicishaqblog.netlify.app/2023-10-03-aws-8-access-keys)
+- [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)
+- [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
+- [blog name](blog link)
