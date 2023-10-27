@@ -6,35 +6,37 @@ date: 2023-10-27T10:35:28.085Z
 
 ## TLDR
 
-Connection Draining and Deregistration Delay are essential features in AWS, ensuring graceful handling of connections during instance deregistration. They are used for [high availability](TODO) and seamless user experiences. Connection Draining parameters can be configured based on the nature of your application, making them a key aspect to understand for _AWS exams_ and real-world AWS architecture design.
+Connection Draining and Deregistration Delay are essential features in AWS, ensuring graceful handling of connections during instance deregistration. They are used for [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and seamless user experiences. Connection Draining parameters can be configured based on the nature of your application, making them a key aspect to understand for _AWS exams_ and real-world AWS architecture design.
 
 ## Introduction
 
-In preparation for the _AWS developer certificate exam_ we will talk about **Connection Draining** for [Classic Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-getting-started.html) and Deregistration Delay for [Application and Network Load Balancers](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-12-aws-28-ELB/). Understanding these concepts is needed for ensuring [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and seamless user experiences in your AWS environment. In this blog post, we will explore the intricacies of Connection Draining and Deregistration Delay and how to configure them effectively to enhance the performance and reliability of your Elastic Load Balancers (ELB).
+In preparation for the _AWS developer certificate exam_ we will talk about **Connection Draining** for [Classic Load Balancers](https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-getting-started.html) and Deregistration Delay for [Application and Network Load Balancers](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-12-aws-28-ELB/). Understanding these concepts is needed for ensuring [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and seamless user experiences in your AWS environment. In this blog post, we will explore the intricacies of Connection Draining and Deregistration Delay and how to configure them effectively to enhance the performance and reliability of your **Elastic Load Balancers** (ELB).
 
-## Connection Draining and Deregistration Delay: What Are They?
+## Connection Draining and Deregistration Delay
 
 So now let's talk about a feature that can come up in the _exam_, which is called **Connection Draining**. So it has two names, actually. If you're using a Classic Load Balancer, it is called **Connection Draining**, but if you're using an Application Balancer or a Network Load Balancer, this is called a **Deregistration Delay**. The idea behind this concept is that it will give some time for your instances to complete the inflight request or the active request while the instance is being deregistered or marked unhealthy.
 
-In simple terms, when a connection is being drained, it means that the [ELB](TODO) will stop sending requests to the [EC2 instance](TODO) that is being deregistered, allowing existing connections to complete.
+In simple terms, when a connection is being drained, it means that the [ELB](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-12-aws-28-ELB/) will stop sending requests to the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) that is being deregistered, allowing existing connections to complete.
 
 ## Visualizing Connection Draining and Deregistration Delay
 
 Let's take a closer look at how this works with a diagram. Imagine you have three EC2 instances, and one of them is set in draining mode. Users who are already connected to that specific EC2 instance will be given enough time, which is the draining period, to complete their existing connections and requests. Once everything's done, all connections to the draining instance will be shut down.
 
+![connection draining diagram](/blog/src/images/39/39-1.png)
+
 Now, if new users try to connect to your ELB, it will intelligently route their connections to other healthy EC2 instances, ensuring uninterrupted service.
 
 ## Configuring Connection Draining Parameters
 
-You have the flexibility to set Connection Draining parameters based on your specific needs. The values can be adjusted within the range of 1 to 3,600 seconds. By default, the draining period is set to 300 seconds (five minutes), but you can also disable it altogether by setting the value to zero.
+You have the flexibility to set Connection Draining parameters based on your specific needs. The values can be adjusted within the range of **1 to 3,600 seconds**. By default, the draining period is set to **300 seconds (five minutes)**, but you can also disable it altogether by setting the value to zero.
 
-If your requests are short, such as those lasting less than one second, setting a low draining connection parameter (e.g., 30 seconds) is advisable. This allows for a quick draining of the instance, making it ready for replacement or maintenance. On the other hand, if your requests are long-lived, like file uploads or lengthy processes, a higher value should be chosen. However, bear in mind that this will extend the time your EC2 instance remains active.
+If your requests are short, such as those lasting less than **one second,** setting a low draining connection parameter (e.g., 30 seconds) is advisable. This allows for a quick draining of the instance, making it ready for replacement or maintenance. On the other hand, if your requests are long-lived, like file uploads or lengthy processes, a higher value should be chosen. However, bear in mind that this will extend the time your EC2 instance remains active.
 
-## In Conclusion
+## Conclusion
 
-Understanding Connection Draining and Deregistration Delay is pivotal for ensuring a seamless user experience and high availability in your AWS environment. These features enable graceful handling of connections during the deregistration of instances. Knowing how to configure these parameters according to your application's characteristics is essential for optimizing the performance and resilience of your infrastructure.
+Connection Draining and Deregistration Delay allows for a smooth user experience and maximum uptime in your AWS setup. These tools help manage connections gracefully when taking instances offline. Setting them right for your application is vital to boost performance and reliability in your infrastructure.
 
-In your AWS exam, these concepts might appear as potential questions, so make sure you grasp the fundamental principles discussed here. Mastering these features will not only benefit your examination but also enhance your ability to design robust and scalable AWS architectures. Best of luck with your AWS certification journey!
+In your AWS exam this topic might appear so make sure you grasp the fundamental principles discussed here. Mastering these features will not only benefit your examination but also enhance your ability to design robust and scalable AWS architectures. See you next time.
 
 ## Recap
 
