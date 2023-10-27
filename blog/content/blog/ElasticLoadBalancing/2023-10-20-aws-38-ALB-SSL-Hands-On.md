@@ -53,7 +53,7 @@ The process for enabling SSL on the Network Load Balancer (NLB) is similar. Here
 
 3. **Security Policy**: Set your preferred security policy. This defines how SSL/TLS certificates are negotiated.
 
-   ![Security Policy](placeholder-image-link-7)
+   ![Security Policy](/blog/src/images/38/38-4.png)
 
 4. **Certificate Source**: Choose where your SSL/TLS certificate is located. Options include ACM, IAM, or direct import.
 
