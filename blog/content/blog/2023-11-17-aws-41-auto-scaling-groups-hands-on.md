@@ -1,43 +1,85 @@
 ---
 layout: blog
-title: "AWS 40: Auto Scaling Groups"
-date: 2023-11-10T15:29:49.006Z
+title: "AWS 41: Auto Scaling Group - Hands On"
+date: 2023-11-17T17:06:05.564Z
 ---
 
 ## TLDR
 
-Auto Scaling Groups (ASGs) in AWS offer a dynamic solution for adjusting the number of EC2 instances based on changing workloads. Key features include load balancer integration, health monitoring, and cost efficiency. Configuring ASGs involves defining minimum, desired, and maximum capacities, along with a launch template. The synergy with load balancers and the automation capabilities provided by CloudWatch alarms make ASGs a powerful tool for building scalable and resilient applications in the cloud.
+Terminate Instances: Ensure all EC2 instances are terminated.
+Create Launch Template: Generate a launch template with specifications.
+Configure Auto Scaling Group: Set up the Auto Scaling group, linking it to the launch template.
+Adjust Group Size: Experience scaling by updating desired capacity.
+Now, let's dive into the details.
 
 ## Introduction
 
-In the dynamic landscape of web applications, adapting to varying workloads is crucial. Enter Auto Scaling Groups (ASG) in Amazon Web Services (AWS), a powerful tool that allows you to seamlessly adjust the number of Elastic Compute Cloud (EC2) instances in response to changing demand. In this blog post, we will explore the intricacies of ASGs, understanding their functionality, integration with load balancers, and the pivotal role of CloudWatch alarms in automating the scaling process.
+Following from our previous blog post [Auto Scaling Groups (ASGs)](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/) in Amazon Web Services (AWS) provide a way to automatically adjust the number of [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) in your application based on demand. In this blog post, we'll give you a **hands on** in creating and configuring an Auto Scaling group from scratch.
 
-## What Is Auto Scaling Groups
+### Step 1: Terminate Instances
 
-Deploying a website or application involves dealing with fluctuating user loads. AWS enables rapid creation and termination of servers through the EC2 instance creation API call. To automate this process, Auto Scaling Groups come into play. The primary goal of an ASG is to either scale out, adding EC2 instances during increased loads, or scale in, removing instances during decreased loads. This dynamic adjustment ensures optimal resource utilization.
+- Before we start, make sure all EC2 instances are terminated in your EC2 dashboard to ensure a clean slate.
 
-## Features of Auto Scaling Groups
+### Step 2: Create Launch Template
 
-1. _Variable Size:_ The size of an ASG changes over time based on workload, with defined minimum and maximum instance counts.
-2. _Load Balancer Integration:_ ASGs can be paired with a load balancer, distributing traffic evenly among instances and enhancing application availability.
-3. _Health Monitoring:_ ASGs monitor the health of instances. If an instance is deemed unhealthy, it is terminated and replaced automatically.
-4. _Cost Efficiency:_ ASGs are free, with charges only for the underlying resources like EC2 instances.
+- Navigate to the EC2 Dashboard.
 
-## Configuring Auto Scaling Groups
+- Click on "Auto Scaling groups" in the left sidebar.
+  ![Auto Scaling Groups](/blog/src/images/41/41-1.png)
+- Create a new launch template (e.g., MyDemoTemplate).
 
-Setting up an ASG involves defining three capacities: minimum, desired, and maximum. These parameters determine how the ASG scales in response to demand. Integrating a launch template, containing information on instance launch details, is essential. Attributes such as AMI, instance type, security groups, and more are specified in the launch template.
+- Configure template options, including Amazon Machine Image (Amamzon Linux 2), Instance Type (t2.micro), Key Pair (Ec2 tutorial), Security Groups,
+  for the advanced details in user data use this script :
 
-## Load Balancer Integration
+  ```bash
+    #!/bin/bash
+        # Use this for your user data (script from top to bottom)
+        # install httpd (Linux 2 version)
+        yum update -y
+        yum install -y httpd
+        systemctl start httpd
+        systemctl enable httpd
+        echo "<h1>Hello World from $(hostname -f)</h1>"> /var/www/html/index.html
+  ```
 
-The connections between ASGs and load balancers enhances application availability and performance. Instances registered in an ASG are automatically linked to a load balancer, allowing seamless traffic distribution.
+  \*\*Hint, this is very similar to the previous blog posts where we created an EC2 [Tutorial Here](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
 
-## CloudWatch Alarms and Auto Scaling
+### Step 3: Configure Auto Scaling Group
 
-CloudWatch plays a pivotal role in automating ASG scaling activities. By setting up alarms based on metrics like average CPU usage, you can trigger scale-out or scale-in activities. This ensures that your application dynamically adapts to changing workloads without manual intervention. (later in the series we will touch more on cloudwatch)
+- In the EC2 Dashboard, click on "Auto Scaling Groups."
+  ![Auto Scaling Groups](/blog/src/images/41/41-1.png)
+  Create a new Auto Scaling group.
+- Name your group (e.g., DemoASG).
+  ![Name of group](/blog/src/images/41/41-2.png)
+  Choose the launch template created in Step 2.
+  ![launch template](/blog/src/images/41/41-3.png)
+  and click on next
+
+- Set up instance launch options, VPC, subnets, health checks, and advanced options. such as adding an additional load balancer.
+  ![Advanced Options Configuration](/blog/src/images/41/41-4.png)
+  \*\*Hint : you can attach an [ALB](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-25-aws-30-alb-hands-on/)
+
+- Define Auto Scaling group size (desired, minimum, and maximum capacity).
+  ![Group Size Configuration](/blog/src/images/41/41-5.png)
+  Configure scaling policies, notifications, and tags as needed.
+  ![Scaling Policies Configuration](/blog/src/images/41/41-6.png)
+  Review settings and create the Auto Scaling group.
+
+Here the ASG will create an instance for us
+
+### Step 4: Adjust Group Size
+
+- Observe the activity in the "Activity" tab of your Auto Scaling group.
+  ![Activity History](/blog/src/images/41/41-7.png)
+- Update desired capacity to experience scaling. if you want to increase the number of instances
+
+Don't forget to delete after as to not incur any charges.
 
 ## Conclusion
 
-Mastering Auto Scaling Groups in AWS empowers you to build robust, scalable, and cost-efficient applications. The combination of ASGs, load balancers, and CloudWatch alarms creates a resilient infrastructure capable of handling varying workloads seamlessly. By understanding these concepts, you pave the way for efficient resource utilization, improved application performance, and a hassle-free scaling experience.
+Congratulations! You've successfully created and configured an Auto Scaling group, allowing your application to dynamically adjust to changing demands. In the next lecture, we'll delve into automatic scaling for even more advanced configurations.
+
+Stay tuned for more AWS tutorials!
 
 ## Recap
 
@@ -82,3 +124,4 @@ Following the previous blogs in the series.
 - [AWS 37: ALB SSL Cert](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-10-13-aws-37-ALB-SSL-Cert/)
 - [AWS 38: ALB SSL Hands On](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-10-20-aws-38-ALB-SSL-Hands-On/)
 - [AWS 39: Connection Draining](https://magicishaqblog.netlify.app/2023-27-10-aws-39-connection-draining/)
+- [AWS 40: Auto Scaling Groups](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/)
