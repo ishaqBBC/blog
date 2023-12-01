@@ -4,24 +4,24 @@ title: "AWS 43: Auto Scaling Groups Policy Hands One"
 date: 2023-12-01T14:30:52.175Z
 ---
 
-## TL;DR
+## TLDR
 
-In this comprehensive guide, we'll delve into the intricate world of Automatic Scaling for your AWS Auto Scaling Groups (ASG). We'll explore three key categories: scheduled actions, predictive scaling policies, and dynamic scaling policies. Our focus will be on the dynamic scaling policies, specifically target tracking, step scaling, and simple scaling.
+In todays blog post we'll look at Automatic Scaling Policies for your [AWS Auto Scaling Groups (ASG)](https://magicishaqblog.netlify.app/2023-11-24-aws-42-Auto-Scaling-Groups-Policy/). There are three categories: scheduled actions, predictive scaling policies, and dynamic scaling policies. Our focus will be on the dynamic scaling policies, specifically target tracking, step scaling, and simple scaling.
 
 ## Understanding Scheduled Actions
 
 Scheduled actions allow you to proactively plan for future scaling events. You can define parameters such as desired capacity, minimum and maximum instances, recurrence schedules, and start and end times. This is particularly useful for events you can predict, like scheduled promotions or anticipated spikes in usage.
-![Scheduled Actions](path/to/scheduled_actions.png)
+![Scheduled Actions](/blog/src/images/43/43-1.png)
 
-## Predictive Scaling Policies: The Power of Machine Learning
+## Predictive Scaling Policies
 
 Predictive scaling policies leverage machine learning to forecast scaling needs based on historical metrics. By setting a target utilization, such as CPU utilization, you enable AWS to dynamically adjust your ASG to meet predicted demands. While a demonstration requires extensive data and usage, the setup is straightforward, involving metric specification and target utilization.
-![Predictive Scaling Policies](path/to/predictive_scaling.png)
+![Predictive Scaling Policies](/blog/src/images/43/43-2.png)
 
 ## Dynamic Scaling Policies in Action
 
 Dynamic scaling policies respond to real-time changes in demand. We'll focus on simple scaling and step scaling, but our primary demonstration will be on target tracking. Target tracking policies dynamically adjust your ASG to maintain a specified metric at a target value. In our case, we'll aim for a CPU utilization of 40%.
-![Dynamic Scaling Policies](path/to/dynamic_scaling.png)
+![Dynamic Scaling Policies](/blog/src/images/43/43-3.png)
 
 ### Simple Scaling
 
@@ -33,21 +33,58 @@ Step scaling allows you to set up multiple alarms with different scaling steps b
 
 ### Target Tracking
 
-We'll create a target tracking policy to maintain a CPU utilization of 40%. This policy automates the creation of CloudWatch alarms and adjusts capacity based on real-time metrics.
-![Target Tracking in Action](path/to/target_tracking_action.png)
+We'll create a target tracking policy to maintain a CPU utilisation of 40%. This policy automates the creation of [CloudWatch alarms](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/AlarmThatSendsEmail.html) and adjusts capacity based on real-time metrics.
+![Target Tracking in Action](/blog/src/images/43/43-4.png)
 
 ## Putting Target Tracking into Action
 
-Follow along as we simulate increased CPU utilization on an EC2 instance, triggering the target tracking policy to add instances dynamically. We'll explore the CloudWatch alarms generated and demonstrate the power of the ASG in responding to varying workloads.
+We need to increase CPU utilisation on an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), triggering the target tracking policy to add instances dynamically. We'll explore the CloudWatch alarms generated and demonstrate the power of the ASG in responding to varying workloads.
 
-## Testing the Limits: Scaling In and Cleanup
+## Scaling In
 
-After observing the scaling out action, we'll intentionally stress the system to trigger a scale-in event. Witness the ASG intelligently scaling down as the CPU utilization decreases. Finally, learn the importance of cleaning up resources to ensure the efficient operation of your AWS environment.
-![Scaling In and Cleanup](path/to/scaling_in_cleanup.png)
+After observing the scaling out action, we'll intentionally stress the system to trigger a scale-in event. Witness the ASG intelligently scaling down as the CPU utilisation decreases. Finally, learn the importance of cleaning up resources to ensure the operation of your AWS environment.
+
+## How to
+
+You can mock a stress test by installing `stress.sh` on Amazon linux 2
+use these bash commands on you EC2 instance using [instance connect](https://magicishaqblog.netlify.app/2023-03-24-aws-14-instance-connect)
+
+```bash
+sudo amazon-linux-extras install epel -y
+sudo yum install stress -y
+```
+
+once installed use the command
+
+```bash
+stress -C 4
+```
+
+and this is going to make the CPU go to 100%
+by leveraging four CPU units by making four VCPUs
+being used at a time.
+
+When you check the monitoring, you will notice an increase in CPU utilistaion
+![monitoring](/blog/src/images/43/43-7.png)
+
+We then edit the details to increase the maximum capacity so our ASG can scale after being stressed.
+
+we can view this in the Cloudwatch (go into search bar and type in cloudwatch), then navigate to to alarms
+![cloudwatch alarms](/blog/src/images/43/43-8.png)
+
+Click and the alarm thats in `in alarm` state to see where the cpu triggered the auto scaling group policy.
+![viewing alarm](/blog/src/images/43/43-9.png)
+
+To scale in, quit the stress test in the terminal of your instance and `reboot` your instances, you should see the amount of cpu decrease and therefore the amount of instances will be decreased.
+
+## Cleanup
+
+Close the terminal of you instance connect to stop the stress test
+and terminate and instances as to not incur any charges
 
 ## Conclusion
 
-AWS Auto Scaling Groups provide a robust solution for dynamic resource management. Understanding the intricacies of scheduling, predictive scaling, and dynamic scaling policies empowers you to optimize your infrastructure for varying workloads. As you embark on your scaling journey, always remember to clean up resources to maintain a well-organized and efficient AWS environment.
+AWS Auto Scaling Groups help manage resources effectively. Learn about scheduling, predictive scaling, and dynamic scaling policies to optimise your infrastructure for different workloads. As you scale, ensure to clean up resources for a well-organised AWS environment.
 
 ## Recap
 
