@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 43: Auto Scaling Groups Policy Hands One"
+title: "AWS 43: Auto Scaling Groups Policy Hands On"
 date: 2023-12-01T14:30:52.175Z
 ---
 
