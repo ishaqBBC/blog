@@ -16,7 +16,7 @@ So this is the last auto scaling group post, thank you for making it this far. t
 
 ### Why use Instance Refresh
 
-Picture this; updates to an [Auto Scaling group](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/) are necessitated, driven by the creation of a [AMI](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami/) launch template. Achieving this would involve terminating individual [instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), waiting for replacements, and meticulously managing the transition. However, with **Instance Refresh**, this is streamlined.
+Picture this; updates to an [Auto Scaling group](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/) are necessitated, driven by the creation of a [AMI](https://magicishaqblog.netlify.app/2023-04-28-aws-18-ami/) launch template. Achieving this would involve terminating individual [instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), waiting for replacements, and meticulously managing the transition. However, with **Instance Refresh**, this is streamlined and thus automatically.
 
 ### How Instance Refresh Works
 
