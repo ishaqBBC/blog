@@ -24,7 +24,7 @@ Picture this; updates to an [Auto Scaling group](https://magicishaqblog.netlify.
 
 2. **Initiate Instance Refresh:** Rather than terminating instances individually, the **Instance Refresh** is employed. This signals the [Auto Scaling group](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/) to refresh the process.
 
-3. **Set Minimum Healthy Percentage:** Users can specify a minimum healthy percentage, dictating the proportion of instances that can be safely terminated over time. This ensures a gradual transition without compromising availability.
+3. **Set Minimum Healthy Percentage:** Users can specify a minimum healthy percentage, dictating the proportion of instances that can be safely terminated over time. This ensures a gradual transition without compromising [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/).
 
 4. **Dynamic Termination and Launch:** Instances with the outdated launch template are systematically terminated, making way for new instances that align with the updated configuration.
 
