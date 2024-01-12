@@ -1,54 +1,55 @@
 ---
 layout: blog
 title: "AWS 49: Amazon Aurora"
-date: dateT17:08:34.142Z
+date: 2024-01-12T20:18:11.734Z
 ---
 
 ## TLDR
 
+Amazon Aurora, a **proprietary** AWS technology compatible with Postgres and MySQL, delivers high-performance cloud-optimised databases with **5x improvement over MySQL** and **3x over Postgres on RDS**. Its **storage grows automatically** up to 128TB, eliminating manual monitoring. **Aurora supports up to 15 read replicas** with sub-10 ms replica lag and offers instantaneous failover for enhanced **high availability**. The database's design involves storing six copies of data across three Availability Zones, ensuring **reliability through self-healing mechanisms**. With a single <s>master</s> main for writes, up to 15 read replicas, and cross-region replication support, **Aurora simplifies scaling**. The cluster interface includes a writer endpoint for writes and a reader endpoint for **load-balanced read replicas**, both supporting auto scaling.
+
 ## Introduction
 
-Ladies and Gentlemen, let us delve into the intricacies of Amazon Aurora, a subject that has become increasingly pertinent in recent examinations. While a deep understanding may not be imperative, a high-level overview is indispensable for comprehending its functioning. This lecture aims to furnish you with precisely that.
+Aurora is a type of database. Its proprietary and not open-sourced, it boasts compatibility with Postgres and MySQL, complete with compatible drivers. This means that connecting to your Aurora database as if it were a Postgres or MySQL database is seamlessly achieved.
 
-## Overview of Amazon Aurora
+What sets Aurora apart is its cloud optimisation. Through a series of optimisations and ingenious strategies, it achieves remarkable performance gains—5 times faster than MySQL on RDS and 3 times faster than Postgres on RDS, among other improvements. The intricacies of these optimizations, while intriguing, will not be delved into at present.
 
-To commence, it is crucial to acknowledge that Aurora stands as a proprietary technology meticulously crafted by AWS. Although not open-sourced, it boasts compatibility with Postgres and MySQL, complete with compatible drivers. This means that connecting to your Aurora database as if it were a Postgres or MySQL database is seamlessly achieved.
+[More information can found here](https://www.youtube.com/watch?v=FzxqIdIZ9wc)
 
-What sets Aurora apart is its cloud optimization. Through a series of optimizations and ingenious strategies, it achieves remarkable performance gains—5 times faster than MySQL on RDS and 3 times faster than Postgres on RDS, among other improvements. The intricacies of these optimizations, while intriguing, will not be delved into at present.
+## Storage
 
-## Storage Marvels
-
-Aurora's storage is a marvel in itself, automatically expanding from an initial 10GB to a capacious 128TB as more data is infused. This negates the need for manual monitoring, offering a boon to Database Administrators and System Operators.
+Aurora's storage is a marvel in itself, automatically expanding from an initial **10GB** to a capacious **128TB** as more data is infused. This negates the need for manual monitoring.
 
 ## Replication and Failover
 
-When it comes to replication, Aurora outpaces MySQL with sub-10ms replica lag, and failovers occur instantaneously. Its cloud-native nature ensures high availability by default, despite the marginal 20% increase in cost compared to RDS. At scale, the efficiency of Aurora translates into significant savings.
+When it comes to [replication](https://magicishaqblog.netlify.app/2023-29-12-aws-47-RDS-read-replica-Multi-Az/), Aurora outpaces MySQL with sub-10ms replica lag, and failovers occur instantaneously. Its cloud-native nature ensures high availability by default, despite the marginal 20% increase in cost compared to Relational Database Service [RDS](https://magicishaqblog.netlify.app/2023-12-22-aws-46-RDS/). At scale, the efficiency of Aurora translates into significant savings according to AWS.
 
 ## High Availability and Read Scaling
 
-Now, let us focus on the pivotal aspects of high availability and read scaling. Aurora stands out by storing six copies of data across three Availability Zones (AZs). For write operations, it requires only four out of six copies, ensuring continued functionality even if one AZ faces an outage. Similarly, for reads, three out of six copies suffice, enhancing availability.
+Now, let us focus on the pivotal aspects of [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and read scaling. Aurora stands out by storing six copies of data across three [Availability Zones](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions) (AZs). For write operations, it requires only four out of six copies, ensuring continued functionality even if one AZ faces an outage. Similarly, for reads, three out of six copies suffice, enhancing availability.
 
-A self-healing process comes into play, rectifying corrupted or faulty data through peer-to-peer replication. The reliance on hundreds of volumes, coupled with automatic expansion and replication, substantially mitigates risks.
+A self-healing process comes into play, rectifying corrupted or faulty data through peer-to-peer replication (provides a scale-out and high-availability solution by maintaining copies of data across multiple server instances). The reliance on hundreds of volumes (An Amazon EBS volume is a durable, block-level storage device that you can attach to your instances. After you attach a volume to an instance, you can use it as you would use a physical hard drive), coupled with automatic expansion and replication, substantially mitigates risks.
+
+![diagram of the shared volumes in Amazon Aurora](/blog/src/images/49/49-1.png)
 
 From a diagrammatic perspective, envision three AZs, a shared storage volume, and logical volumes handling replication, self-healing, and auto-expanding. Each write operation results in six copies distributed across different AZs, ensuring robustness.
 
-## Architectural Insights
+## Architecture
 
-In terms of architecture, Aurora resembles multi-AZ for RDS. A single instance, the master, handles write operations, with failovers occurring swiftly. Up to 15 read replicas serve read requests, and any of these replicas can seamlessly take over as the master in case of a failure.
+In terms of architecture, Aurora resembles multi-AZ for RDS. A single [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), the <s> master </s> main, handles write operations, with failovers occurring swiftly. Up to 15 [read replicas](https://magicishaqblog.netlify.app/2023-29-12-aws-47-RDS-read-replica-Multi-Az/) serve read requests, and any of these replicas can seamlessly take over as the <s> master </s> main in case of a failure.
 
 Cross-region replication is supported by read replicas, further enhancing flexibility. The storage infrastructure, with its self-healing and auto-expanding characteristics, is a crucial element managed in the background, reducing the administrative burden.
 
-## Client Interactions
+## Aurora DB Cluster
 
-Considering client interactions, a shared storage volume, ranging from 10GB to 128GB, is exclusively written to by the master. A writer endpoint, a DNS name, consistently points to the master, even during failovers. Read replicas, supported by auto-scaling, introduce a reader endpoint to handle connection load balancing and automatic redirection to the appropriate replica.
+Considering client interactions, a shared storage volume, ranging from 10GB to 128GB, is exclusively written to by the <s> master </s> main. A writer endpoint, a DNS name, consistently points to the <s> master </s> main, even during failovers. Read replicas, supported by auto-scaling, introduce a reader endpoint to handle connection [load balancing](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-12-aws-28-ELB/) and automatic redirection to the appropriate replica.
+
+Below is a diagram showing how one <s> master </s> main database is used to write to the reads, where load balancing is used.
+![diagram](/blog/src/images/49/49-2.png)
 
 ## Conclusion
 
-In conclusion, Amazon Aurora is a cluster of instances orchestrated for optimal performance. Its features, such as auto-expanding storage, seamless failovers, and read scaling through read replicas, make it a formidable choice. The writer endpoint ensures consistent connectivity to the master, while the reader endpoint facilitates load balancing for read replicas. Remember this architecture, and you shall master the intricacies of Aurora.
-
-As we conclude this lecture, ponder upon the comprehensive features Aurora brings to the table: automatic failover, backup and recovery, isolation and security, industry compliance, push-button scaling via auto-scaling, automated patching with zero downtime, advanced monitoring, and routine maintenance. Additionally, the unique backtrack feature empowers users to restore data to any point in time, showcasing the prowess of this AWS gem.
-
-Until our next lecture, may your understanding of Amazon Aurora be as robust as its architecture.
+Amazon Aurora is a cluster of instances orchestrated for optimal performance. Its features, such as auto-expanding storage, seamless failovers, and read scaling through read replicas, make it a formidable choice. The writer endpoint ensures consistent connectivity to the <s> master </s> main, while the reader endpoint facilitates load balancing for read replicas.
 
 ## Recap
 
