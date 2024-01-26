@@ -8,6 +8,9 @@ date: 2024-01-26T06:45:01.387Z
 
 Explores the security features of [RDS](https://magicishaqblog.netlify.app/2023-12-22-aws-46-RDS/) and [Aurora](https://magicishaqblog.netlify.app/2023-01-12-aws-49-Amazon-Aurora/) databases on AWS. It covers encryption at rest using [Key Management Service (KMS)](https://aws.amazon.com/kms/), in-flight encryption between clients and databases, authentication options including [IAM roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/), network access control through security groups, limited [SSH access](https://www.techradar.com/news/what-is-ssh-access-everything-you-need-to-know) through the RDS custom service, and the use of Audit Logs to monitor database activity. The goal is to simplify the understanding of complex database security measures.
 
+![RDS icon](/blog/src/images/51/51-1.png)
+![Amazon Aurora icon](/blog/src/images/51/51-2.png)
+
 ## Encryption at Rest
 
 Let's talk about encrypting your data when it's at rest on Relational Database Service [RDS](https://magicishaqblog.netlify.app/2023-12-22-aws-46-RDS/) and [Aurora](https://magicishaqblog.netlify.app/2023-01-12-aws-49-Amazon-Aurora/) databases. This involves encrypting data on the [volumes](https://magicishaqblog.netlify.app/2023-06-16-aws-21-EBS-volume-types/). During the initial launch of your database, you can define encryption settings. The master database and any replicas can be encrypted using [Key Management Service (KMS)](https://aws.amazon.com/kms/). If the master isn't encrypted, read replicas can't be either. If you need to encrypt an existing unencrypted database, take a snapshot, and then restore it as an encrypted one. It's a snapshot and restore operation.
