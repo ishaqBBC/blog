@@ -56,8 +56,11 @@ After creation, explore the features like read and write endpoints, regional clu
 
 Once you've completed your hands-on experience, remember to delete your Aurora database. Start by deleting any read replicas, followed by the writer instance. Finally, delete the entire cluster.
 
-Conclusion:
+## Conclusion
+
 Congratulations! You've successfully created and explored the capabilities of an Amazon Aurora database. This versatile and scalable solution offers a range of features, including global databases and serverless options. Always be mindful of costs and remember to clean up after your hands-on exploration. If you have any questions or want to learn more about AWS services, stay tuned for future blog posts. Happy cloud computing!
+
+## Recap
 
 Following the previous blogs in the series.
 
@@ -109,4 +112,4 @@ Following the previous blogs in the series.
 - [AWS 46: RDS Relational Database Service](https://magicishaqblog.netlify.app/2023-12-22-aws-46-RDS/)
 - [AWS 47: RDS Read Replica Multi Az](https://magicishaqblog.netlify.app/2023-29-12-aws-47-RDS-read-replica-Multi-Az/)
 - [AWS 48: RDS Hands On](https://magicishaqblog.netlify.app/2023-05-01-aws-48-RDS-Hands-On/)
-- [AWS 49: Amazon Aurora](TODO)
+- [AWS 49: Amazon Aurora](https://magicishaqblog.netlify.app/2023-01-12-aws-49-Amazon-Aurora/)
