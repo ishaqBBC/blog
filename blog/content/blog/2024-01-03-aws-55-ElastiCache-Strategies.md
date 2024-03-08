@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 55: ElastiCache Statregies"
-date: 2024-03-01T15:35:04.724Z
+date: 2024-03-08T15:35:04.724Z
 ---
 
 ## TLDR
