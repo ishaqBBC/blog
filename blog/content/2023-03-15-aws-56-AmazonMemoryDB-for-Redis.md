@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 56"
+title: "AWS 56: Amazon MemoryDB for Redis"
 date: 2024-03-15T10:03:40.786Z
 ---
 
