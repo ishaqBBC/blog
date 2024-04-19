@@ -6,11 +6,11 @@ date: 2024-04-18T12:49:01.744Z
 
 ## TLDR
 
-date
+Amazon route 53 is a DNS , transforming human readable donmain names into IP addresses. Its highly scalable and avialable. Used to route traffic to difference instances. You can either host on a private or pubic zone.
 
 ## Introduction
 
-Welcome to our comprehensive guide to Amazon Route 53. In this post, we will delve into the core concepts of Route 53, Its a [DNS](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/). And knowing it is essential for the exam.
+Welcome to our guide to Amazon Route 53. In this post, we will delve into the core concepts of Route 53, Its a [DNS](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/). And knowing it is essential for the exam.
 
 ![route 53 icon](/blog/src/images/59/59-1.svg)
 
@@ -48,7 +48,7 @@ DNS records serve as the building blocks of Route 53 configurations, defining ho
 
 ### Essential Record Types
 
-From an exam perspective, it's crucial to grasp the following DNS record types:
+From an exam perspective, it's important to grasp the following DNS record types:
 
 1. **A Record**: Maps a hostname to an [IPv4](https://en.wikipedia.org/wiki/Internet_Protocol_version_4) address.
 2. **AAAA Record**: Similar to A records but for [IPv6](https://en.wikipedia.org/wiki/Internet_Protocol_version_6) addresses.
