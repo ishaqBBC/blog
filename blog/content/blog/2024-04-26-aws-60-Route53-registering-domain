@@ -4,6 +4,39 @@ title: "AWS 60: Route 53 - Registering a Domain Name"
 date: 2024-04-26T09:32:14.143Z
 ---
 
+## TLDR
+
+- **Selecting a Domain**: Navigate to "Register Domains" in Route 53, choose a unique domain name, and add it to your cart for a yearly fee of around $12.
+- **Checkout Process**: Review your domain selection, choose registration duration and auto-renewal options, then proceed to checkout to confirm your order.
+- **Contact Information**: Ensure accurate admin and tech contact details, enable privacy protection, and submit your order after reviewing all information.
+
+![Route 53 icon](/blog/src/images/59/59-1.png)
+
+## Introduction
+
+Following on our previous post where we introduced what [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) is. Today will will go over how to regisar our own domain. (Its important to note, this service costs money). So follow along or jot down notes for the exam.
+
+First things first, let's ensure you're in the right place. Navigate to Route 53 in your AWS console. If you don't have a hosted zone or domain registered yet, don't worry; we'll take care of that shortly.
+![route 53 in the console](/blog/src/images/60/60-1.png)
+
+1. **Selecting a Domain**: On the left-hand side of the console, locate and click on "Register Domains." You may notice a new console experience; feel free to use it as it represents the future interface. Here, you'll be prompted to enter your desired domain name. Choose something unique that aligns with your brand or purpose. Keep in mind that this will incur a yearly cost, typically around $12. Once you've found an available domain, proceed to add it to your cart.
+   ![selecting a domain](/blog/src/images/60/60-2.png)
+
+2. **Checkout Process**: Review your selected domain and proceed to checkout. During this step, you'll have the option to select the duration of registration, typically one year, and decide whether to enable auto-renewal. We highly recommend keeping auto-renewal enabled to avoid losing your domain in the future.
+   ![checkout process](/blog/src/images/60/60-3.png)
+
+3. **Contact Information**: Your account details will be pre-populated, but you can edit them if needed. Ensure that the admin and tech contact information matches the registrant's details. Additionally, enable privacy protection to safeguard your personal information from being publicly visible.
+   ![review and submit](/blog/src/images/60/60-5.png)
+   ![contact information](/blog/src/images/60/60-4.png)
+
+4. **Review and Submit**: Double-check all the information provided, agree to the terms and conditions, and submit your order. Please be aware that by doing so, you'll be committing to paying the registration fee.
+   ![review and submit pt2](/blog/src/images/60/60-6.png)
+
+5. **Confirmation**: Once your domain registration is complete, it may take a few minutes to propagate. You can confirm its status by navigating to the "Hosted Zones" section and selecting your newly registered domain. Here, you should see essential DNS records such as NS (Name Server) and SOA (Start of Authority). These records indicate that AWS Route 53 is now the source of truth for your domain's DNS configuration.
+   ![confirmation](/blog/src/images/60/60-7.png)
+
+And thats it, your domain name is registered.
+
 ## Recap
 
 Following the previous blogs in the series.
