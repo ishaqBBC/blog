@@ -14,7 +14,7 @@ date: 2024-04-26T09:32:14.143Z
 
 ## Introduction
 
-Following on our previous post where we introduced what [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) is. Today will will go over how to regisar our own domain. (Its important to note, this service costs money). So follow along or jot down notes for the exam.
+Following on our previous post where we introduced what [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) is. Today will will go over how to register our own domain. (Its important to note, this service costs money). So follow along or jot down notes for the exam.
 
 First things first, let's ensure you're in the right place. Navigate to Route 53 in your AWS console. If you don't have a hosted zone or domain registered yet, don't worry; we'll take care of that shortly.
 ![route 53 in the console](/blog/src/images/60/60-1.png)
