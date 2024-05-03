@@ -10,7 +10,7 @@ This tutorial walks through creating [Route 53](https://magicishaqblog.netlify.a
 
 ## Introduction
 
-Following out [previous blog](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) Route 53 records provide information about a domain including what IP address is associated with that domain and how to handle requests for that domain.
+Following our [previous blog](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) Route 53 records provide information about a domain including what IP address is associated with that domain and how to handle requests for that domain.
 
 ## How to Create Records
 
