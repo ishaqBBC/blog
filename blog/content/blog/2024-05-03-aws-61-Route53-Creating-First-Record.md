@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 61: Route 53 Creating First Record"
-date: dateT17:08:34.142Z
+date: 2024-05-0T13:17:25.674Z
 ---
 
 ## TLDR
