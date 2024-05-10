@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "Setting Up EC2 Instances and ALB with Route 53"
+title: "AWS 62 : Setting Up EC2 Instances and ALB with Route 53"
 date: 2024-05-10T13:17:25.674Z
 ---
 
