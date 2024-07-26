@@ -1,91 +1,99 @@
 ---
 layout: blog
-title: "AWS 65: Route 53 - Weighted Routing"
-date: 2024-07-19T13:06:34.517Z
+title: "AWS 67: Route 53 Latency Routing"
+date: 2024-07-26T10:19:15.262Z
 ---
 
 ## TLDR
 
-Blog post goes over what is weighted routing in Route 53
-Which is DNS requests spread out to multiple instances by using wieghts
+Latency-based routing is an effective way to direct users to the nearest resource based on network speed. By assessing and measuring latency, AWS Route 53 ensures users are connected to the closest AWS region, thereby minimising delays for websites and applications. This policy can be combined with health checks to enhance performance. Implementing this in AWS involves creating records with latency routing policies for various regions and testing them using tools such as VPNs and the dig command. This approach helps improve user experience by reducing access times.
 
 ## Introduction
 
-In today's post, we delve into the weighted routing policy within [Amazon Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/). This policy allows you to control the distribution of DNS requests across multiple resources by assigning weights. This flexibility can be particularly useful for various purposes such as load balancing, regional distribution, or testing new application versions.
+Latency-based routing is a method used to direct users to the closest resource in terms of network latency. This is particularly useful when minimizing delay is crucial for your websites or applications.
+Latency is measured by the speed at which users can connect to the nearest AWS region identified for that resource. For example, if a user in Germany experiences the lowest latency when connecting to a resource in the US, they will be directed to that US-based resource.
 
-### How Weighted Routing Works
+This policy can also be combined with [health checks](https://aws.amazon.com/builders-library/implementing-health-checks/)
 
-Weighted routing involves assigning a weight to each resource (such as EC2 instances). These weights dictate the proportion of traffic directed to each resource. For example, consider the following setup:
+## Visualising Latency-Based Routing
 
-- **Resource 1:** Weight 70
-- **Resource 2:** Weight 20
-- **Resource 3:** Weight 10
+Imagine deploying your application in two different [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/): us-east-1 (North America) and ap-southeast-1 (Asia Pacific). Users from around the globe will experience different latencies. [AWS Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) evaluates these latencies and directs users to the region with the lowest latency.
 
-These weights sum up to 100, but in practice, they don't have to. The traffic distribution is based on the relative weights of the resources. Here, Resource 1 will receive 70% of the traffic, Resource 2 will receive 20%, and Resource 3 will receive 10%.
+For example:
 
-### Implementing Weighted Routing in Route 53
+- Users closest to us-east-1 will be routed there.
+- Users closer to ap-southeast-1 will be directed to that region.
+  ![diagram of latency](/blog/src/images/67/67-1.png);
 
-To implement a weighted routing policy, follow these steps:
+## Implementing Latency-Based Routing in AWS
 
-1. **Create DNS Records:** Each resource you want to route traffic to needs its own DNS record. For instance, if you're routing to three EC2 instances, create three records. [FIND OUT MORE HERE](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/)
-2. **Assign Weights:** Assign a weight to each record. The traffic percentage directed to each resource is calculated by dividing the weight of the resource by the total sum of weights.
+Let's put this into practice using the AWS Management Console.
 
-3. **Configure TTL (Time to Live):** Although the TTL can be set to any value, for demonstration purposes, you might set it to a low value like three seconds to observe changes quickly. In production, a higher TTL is typically used.
+### Guide
 
-### Example Setup
+Go to the Route 53 in AWS
 
-Let's walk through a practical example using three EC2 instances in different regions:
+1. **Create New Records**:
 
-1. **Record for ap-southeast-1:**
+   - **Record Name**: `latency.magicishaq.com`
+   - **Value**: IP address for ap-southeast-1
+   - **Routing Policy**: Latency
+   - **Region**: ap-southeast-1 (Singapore)
 
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of ap-southeast-1 instance]
-   - **Weight:** 10
-   - **TTL:** 3 seconds
+   The IP address must be linked to the Singapore region as the Alias isn't capable of identifying the region from the IP alone.
 
-2. **Record for us-east-1:**
+2. **Adding More Records**:
+   - Repeat the process for us-east-1 (North America) and eu-central-1 (Europe).
 
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of us-east-1 instance]
-   - **Weight:** 70
-   - **TTL:** 3 seconds
+### Example:
 
-3. **Record for eu-central-1:**
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of eu-central-1 instance]
-   - **Weight:** 20
-   - **TTL:** 3 seconds
+- **Record Name**: `latency.magicishaq.com`
+- **Value**: IP address for us-east-1
+- **Routing Policy**: Latency
+- **Region**: us-east-1 (North America)
 
-### Testing the Setup
+- **Record Name**: `latency.magicishaq.com`
+- **Value**: IP address for eu-central-1
+- **Routing Policy**: Latency
+- **Region**: eu-central-1 (Europe)
 
-After configuring the records, you can test the setup by accessing the URL `weighted.magicishaq.com`. Initially, you should see responses from the us-east-1 instance (due to its higher weight). However, over time and with multiple refreshes, you will observe responses from the other instances as well, demonstrating the weighted distribution.
+## Testing Latency-Based Routing
 
-Using the `dig` command, you can verify the DNS responses:
+Now that we've created the records, let's test them.
 
-```sh
-dig weighted.magicishaq.com
+1. **In Europe**:
+
+   - Access the URL: `latency.magicishaq.com`
+   - Expect a response from the instance in Europe (eu-central-1).
+
+2. **Using VPN for Testing**:
+
+   - Change your location to Canada.
+   - Refresh the URL.
+   - Expect a response from the US instance (us-east-1).
+
+3. **Testing from Asia**:
+   - Change your location to Hong Kong.
+   - Refresh the URL.
+   - Expect a response from the Singapore instance (ap-southeast-1).
+
+### Verifying with Command Line
+
+Using the `dig` command, you can verify the IP address returned by the DNS query: [HOW TO INSTALL DIG]
+
+```shell
+dig latency.magicishaq.com
 ```
 
-This command will show the IP address of the instance that responded, aligning with the weights assigned.
+This command should reflect the region with the lowest latency from your current location.
 
-### Use Cases for Weighted Routing
+## Conclusion
 
-Weighted routing is versatile and can be used for various scenarios:
-
-- **Load Balancing:** Distribute traffic among multiple servers to balance the load.
-- **Regional Distribution:** Direct traffic based on the geographical location of resources.
-- **Testing New Versions:** Gradually direct a small percentage of traffic to a new application version to monitor its performance before a full rollout.
-
-### Conclusion
-
-Weighted routing in Amazon Route 53 offers powerful control over traffic distribution to your resources. By assigning weights, you can efficiently manage load, test new applications, and handle regional traffic distribution. This functionality ensures that you can maintain optimal performance and reliability for your applications.
+Latency-based routing is a powerful and commonly used method to ensure users experience the least delay when accessing your resources. By following the steps outlined above, you can implement and test this policy effectively.
 
 ## Recap
 
-Following the previous blogs in the series.
+from the previous entries in the series
 
 - [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
 - [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
@@ -152,3 +160,4 @@ Following the previous blogs in the series.
 - [AWS 63: Route 53 TTL (Time to Live)](https://magicishaqblog.netlify.app/2024-05-17-aws-63-Route53-TTL/)
 - [AWS 64: Route 53 CNAME and alias records](https://magicishaqblog.netlify.app/2024-05-07-aws-64-CNAME-alias-records/)
 - [AWS 65: Route 53 simple routing](https://magicishaqblog.netlify.app/2024-12-07-aws-65-Route53-simple-routing/)
+- [AWS 66: Route 53 weighted routing](https://magicishaqblog.netlify.app/2024-19-07-aws-route53-weighted-routing/)
