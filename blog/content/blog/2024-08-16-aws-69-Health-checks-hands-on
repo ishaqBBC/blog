@@ -1,91 +1,91 @@
 ---
 layout: blog
-title: "AWS 66: Route 53 - Weighted Routing"
-date: 2024-07-19T13:06:34.517Z
+title: "AWS 69: Route 53 Health Checks : Hands On"
+date: 2024-08-16T12:03:42.641Z
 ---
 
 ## TLDR
 
-Blog post goes over what is weighted routing in Route 53
-Which is DNS requests spread out to multiple instances by using wieghts
+Following our previous [post](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) This is a hands on, for how to create a health check for your instances. In addition how to make a health check to check a group of health checks for alarms.
 
 ## Introduction
 
-In today's post, we delve into the weighted routing policy within [Amazon Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/). This policy allows you to control the distribution of DNS requests across multiple resources by assigning weights. This flexibility can be particularly useful for various purposes such as load balancing, regional distribution, or testing new application versions.
+Monitoring the health of your infrastructure is needed to ensure [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and performance. In this guide, we'll walk through creating health checks for [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) using Amazon [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/). This process will allow you to monitor the status of your instances and take action if any become unhealthy.
 
-### How Weighted Routing Works
+### Step 1: Accessing Health Checks in Route 53
 
-Weighted routing involves assigning a weight to each resource (such as EC2 instances). These weights dictate the proportion of traffic directed to each resource. For example, consider the following setup:
+Start by navigating to the [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) dashboard in the AWS Management Console. On the left-hand side, locate and select **Health Checks**. Here, we will create health checks for each of our EC2 instances across different regions.
 
-- **Resource 1:** Weight 70
-- **Resource 2:** Weight 20
-- **Resource 3:** Weight 10
+![Health check dashboard](/blog/src/images/69/69-1.png)
 
-These weights sum up to 100, but in practice, they don't have to. The traffic distribution is based on the relative weights of the resources. Here, Resource 1 will receive 70% of the traffic, Resource 2 will receive 20%, and Resource 3 will receive 10%.
+### Step 2: Creating Your First Health Check
 
-### Implementing Weighted Routing in Route 53
+1. **Select an Instance**: Choose an instance, for example, one in the US East (N. Virginia) region.
+2. **Set the Endpoint**: Specify the endpoint using the IP address of your instance.
+3. **Configure Basic Settings**:
+   - **Port**: Set this to `80` for HTTP.
+   - **Path**: Use `/`, which represents the root of your website. If your application has a specific health-check path like `/health`, you would enter that here.
 
-To implement a weighted routing policy, follow these steps:
+### Step 3: Advanced Configuration
 
-1. **Create DNS Records:** Each resource you want to route traffic to needs its own DNS record. For instance, if you're routing to three EC2 instances, create three records. [FIND OUT MORE HERE](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/)
-2. **Assign Weights:** Assign a weight to each record. The traffic percentage directed to each resource is calculated by dividing the weight of the resource by the total sum of weights.
+Next, you can customise the health check:
 
-3. **Configure TTL (Time to Live):** Although the TTL can be set to any value, for demonstration purposes, you might set it to a low value like three seconds to observe changes quickly. In production, a higher TTL is typically used.
+- **Interval**: Choose between a standard 30-second interval or a faster 10-second interval (which is more expensive).
+- **Failure Threshold**: Determine how many consecutive failures are needed before the instance is considered unhealthy.
+- **String Matching**: Optionally, look for specific strings in the response body.
+- **Latency Graph**: Enable this to track latency over time.
+- **Health Status Inversion**: This option reverses the health status, marking an unhealthy instance as healthy, and vice versa.
+- **Region Selection**: Use the recommended health checker regions or customise as needed.
+- **Notifications**: You can set up an alarm to notify you of any health check failures.
 
-### Example Setup
+For now, we'll keep these settings as default and move forward.
 
-Let's walk through a practical example using three EC2 instances in different regions:
+### Step 4: Creating Additional Health Checks
 
-1. **Record for ap-southeast-1:**
+Repeat the process to create health checks for your other instances, such as:
 
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of ap-southeast-1 instance]
-   - **Weight:** 10
-   - **TTL:** 3 seconds
+- **AP Southeast (Singapore)**: Specify the IP address and complete the setup.
+- **EU Central (Frankfurt)**: Follow the same steps to create this health check.
 
-2. **Record for us-east-1:**
+### Step 5: Testing Health Checks by Inducing a Failure
 
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of us-east-1 instance]
-   - **Weight:** 70
-   - **TTL:** 3 seconds
+To simulate a failure, we can block port 80 on one of the instances, such as the one in Singapore:
 
-3. **Record for eu-central-1:**
-   - **Name:** weighted.magicishaq.com
-   - **Type:** A
-   - **Value:** [IP address of eu-central-1 instance]
-   - **Weight:** 20
-   - **TTL:** 3 seconds
+1. Go to the **Security Groups** of the instance.
+2. Edit the **Inbound Rules** and remove the HTTP rule (port 80).
+3. Wait a moment for the health check to detect the failure.
 
-### Testing the Setup
+You should see that the health check for the Singapore instance turns unhealthy, confirming the setup is working correctly.
 
-After configuring the records, you can test the setup by accessing the URL `weighted.magicishaq.com`. Initially, you should see responses from the us-east-1 instance (due to its higher weight). However, over time and with multiple refreshes, you will observe responses from the other instances as well, demonstrating the weighted distribution.
+![Deleting inbound rules](/blog/src/images/69/69-2.png)
+![Unhealthly check](/blog/src/images/69/69-3.png)
 
-Using the `dig` command, you can verify the DNS responses:
+### Step 6: Creating a Calculated Health Check
 
-```sh
-dig weighted.magicishaq.com
-```
+A calculated health check allows you to monitor the status of multiple health checks:
 
-This command will show the IP address of the instance that responded, aligning with the weights assigned.
+1. Create a new health check and select **Calculated**.
+2. Define the logic, such as marking it as healthy only when all monitored health checks are healthy.
+3. Finalise the setup.
 
-### Use Cases for Weighted Routing
+### Step 7: Linking Health Checks with CloudWatch Alarms
 
-Weighted routing is versatile and can be used for various scenarios:
+Lastly, you can create a health check linked to a [CloudWatch alarm](https://aws.amazon.com/cloudwatch/) . This is particularly useful for monitoring private resources:
 
-- **Load Balancing:** Distribute traffic among multiple servers to balance the load.
-- **Regional Distribution:** Direct traffic based on the geographical location of resources.
-- **Testing New Versions:** Gradually direct a small percentage of traffic to a new application version to monitor its performance before a full rollout.
+1. Specify the region where the alarm is configured.
+2. Link it to the desired [CloudWatch alarm](https://aws.amazon.com/cloudwatch/) .
+
+Currently, we won't proceed with this step as no alarms are set up, but this is a powerful feature for comprehensive monitoring.
+
+![calculated health check](/blog/src/images/69/69-4.png)
 
 ### Conclusion
 
-Weighted routing in Amazon Route 53 offers powerful control over traffic distribution to your resources. By assigning weights, you can efficiently manage load, test new applications, and handle regional traffic distribution. This functionality ensures that you can maintain optimal performance and reliability for your applications.
+By following these steps, you've successfully created health checks for your EC2 instances in Route 53. These checks will help you maintain the reliability of your services, providing insights into the health of your infrastructure.
 
 ## Recap
 
-Following the previous blogs in the series.
+from the previous entries in the series
 
 - [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
 - [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
@@ -113,7 +113,7 @@ Following the previous blogs in the series.
 - [AWS 24: EFS Hands On](https://magicishasblog.netlify.app/2023-07-07-aws-24-EFS-Hands-On)
 - [AWS 25: EFS vs EBS](https://magicishasblog.netlify.app/2023-07-14-aws-25-EFS-vs-EBS)
 - [AWS 26: Quiz 2](https://magicishaqblog.netlify.app/quiz-2/2023-07-21-aws-26-quiz-2/)
-- [AWS 27: High Availability and Scalability ](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)
+- [AWS 27: High [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and Scalability ](<https://magicishaqblog.netlify.app/section6/2023-07-28-high_[availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)_and_scalability/>)
 - [AWS 28: Elastic Load Balancer](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-11-aws-28-elastic-load-balancing/)
 - [AWS 29: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
 - [AWS 30: Alb hands on (part 1)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-25-aws-30-alb-hands-on/)
@@ -146,9 +146,11 @@ Following the previous blogs in the series.
 - [AWS 57: Quiz 3](https://magicishaqblog.netlify.app/quiz-4/2023-03-22-aws-57-quiz-4/)
 - [AWS 58: DNS Name](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/)
 - [AWS 59: Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/)
-- [AWS 60: Route 53 Registering Domain](https://magicishaqblog.netlify.app/2024-04-26-aws-60-Route53-registering-domain/)
-- [AWS 61: Route 53 Creating First Record](https://magicishaqblog.netlify.app/2024-05-03-aws-61-Route53-Creating-First-Record/)
-- [AWS 62: Setting up an EC2 instance and ALB with Route 53](https://magicishaqblog.netlify.app/2024-05-10-aws-62-setting-up-ec2-instances-and-alb-with-route-53/)
+- [AWS 60 Route 53 Registering Domain](https://magicishaqblog.netlify.app/2024-04-26-aws-60-Route53-registering-domain/)
+- [AWS 61 Route 53 Creating First Record](https://magicishaqblog.netlify.app/2024-05-03-aws-61-Route53-Creating-First-Record/)
+- [AWS 62: Setting up an EC2 instance and ALB with [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/)](https://magicishaqblog.netlify.app/2024-05-10-aws-62-setting-up-ec2-instances-and-alb-with-route-53/)
 - [AWS 63: Route 53 TTL (Time to Live)](https://magicishaqblog.netlify.app/2024-05-17-aws-63-Route53-TTL/)
 - [AWS 64: Route 53 CNAME and alias records](https://magicishaqblog.netlify.app/2024-05-07-aws-64-CNAME-alias-records/)
 - [AWS 65: Route 53 simple routing](https://magicishaqblog.netlify.app/2024-12-07-aws-65-Route53-simple-routing/)
+- [AWS 66: Route 53 weighted routing](https://magicishaqblog.netlify.app/2024-19-07-aws-route53-weighted-routing/) -[AWS 67: Route 53 Latency](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/)
+- [AWS 67: Route 53 Health Checks](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/)
