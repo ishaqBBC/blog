@@ -1,87 +1,64 @@
 ---
 layout: blog
-title: "AWS 69: Route 53 Health Checks : Hands On"
-date: 2024-08-16T12:03:42.641Z
+title: "AWS 70: Route 53 Policy - Failover"
+date: 2024-08-23T12:10:52.650Z
 ---
 
 ## TLDR
 
-Following our previous [post](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) This is a hands on, for how to create a health check for your instances. In addition how to make a health check to check a group of health checks for alarms.
+Failover routing with AWS [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) ensures your services stay online by automatically switching traffic from a failed primary server to a backup. You set it up by linking your primary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) to a [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) and creating a secondary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) as a backup. If the primary fails, [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) redirects traffic to the secondary, keeping your service up and running. It's a simple, yet powerful way to ensure high [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) for your applications.
 
-## Introduction
+### Introduction
 
-Monitoring the health of your infrastructure is needed to ensure [high availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and performance. In this guide, we'll walk through creating health checks for [EC2 instances](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) using Amazon [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/). This process will allow you to monitor the status of your instances and take action if any become unhealthy.
+In todays blog, we delve into the intricacies of routing policies, with a particular focus on implementing failover using AWS Route 53. The discussion will guide you through the process of setting up a robust failover mechanism that ensures high [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/) and reliability for your applications.
 
-### Step 1: Accessing Health Checks in Route 53
+#### What is Failover Routing?
 
-Start by navigating to the [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) dashboard in the AWS Management Console. On the left-hand side, locate and select **Health Checks**. Here, we will create health checks for each of our EC2 instances across different regions.
+Failover routing is a critical feature for maintaining the uptime of your services. It enables automatic redirection of traffic from an unhealthy primary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) to a healthy secondary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), ensuring continuous service [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/).
 
-![Health check dashboard](/blog/src/images/69/69-1.png)
+In this scenario, we use AWS Route 53, a scalable [DNS](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/) and domain name registration service, to manage this failover process effectively. The setup involves:
 
-### Step 2: Creating Your First Health Check
+- **Primary EC2 Instance**: The main [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) where traffic is directed under normal circumstances.
+- **Secondary EC2 Instance**: A backup [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) activated only when the primary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) becomes unavailable.
 
-1. **Select an Instance**: Choose an instance, for example, one in the US East (N. Virginia) region.
-2. **Set the Endpoint**: Specify the endpoint using the IP address of your instance.
-3. **Configure Basic Settings**:
-   - **Port**: Set this to `80` for HTTP.
-   - **Path**: Use `/`, which represents the root of your website. If your application has a specific health-check path like `/health`, you would enter that here.
+#### Key Steps in Setting Up Failover Routing
 
-### Step 3: Advanced Configuration
+1. **Associate Primary Record with Health Check**:
 
-Next, you can customise the health check:
+   - The primary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) must be linked to a [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/). This is mandatory to enable automatic failover.
+   - If the [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) fails (i.e., the [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) becomes unhealthy), [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) will redirect traffic to the secondary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
 
-- **Interval**: Choose between a standard 30-second interval or a faster 10-second interval (which is more expensive).
-- **Failure Threshold**: Determine how many consecutive failures are needed before the instance is considered unhealthy.
-- **String Matching**: Optionally, look for specific strings in the response body.
-- **Latency Graph**: Enable this to track latency over time.
-- **Health Status Inversion**: This option reverses the health status, marking an unhealthy instance as healthy, and vice versa.
-- **Region Selection**: Use the recommended health checker regions or customise as needed.
-- **Notifications**: You can set up an alarm to notify you of any health check failures.
+2. **Create the Failover Record in Route 53**:
 
-For now, we'll keep these settings as default and move forward.
+   - Begin by creating an A record in your hosted zone. For example, `failover.magicishaq.com`.
+   - Set the first value to your primary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), say the one in the EU-central-1 region.
+   - Configure the routing policy as a failover, with a [Time-To-Live (TTL)](https://magicishaqblog.netlify.app/2024-05-17-aws-63-Route53-TTL/) of 60 seconds.
+   - Define this record as the primary and associate it with the [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) for the EU-central-1 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
+     ![screenshot of creating the first failover record](/blog/src/images/70/70-1.png)
 
-### Step 4: Creating Additional Health Checks
+3. **Configure the Secondary Record**:
 
-Repeat the process to create health checks for your other instances, such as:
+   - Create another A record with the same name, `failover.magicishaq.com`.
+   - Set this to point to your secondary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), for example, the one in US-east-1.
+   - Again, configure the TTL to 60 seconds and set the routing policy to secondary.
+   - Optionally, you can associate this record with a [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/), but it's not obligatory.
+     ![screenshot of creating the second failover record](/blog/src/images/70/70-2.png)
 
-- **AP Southeast (Singapore)**: Specify the IP address and complete the setup.
-- **EU Central (Frankfurt)**: Follow the same steps to create this health check.
+4. **Testing the Failover**:
 
-### Step 5: Testing Health Checks by Inducing a Failure
+   - To test, manually trigger a failure on the primary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) by altering its security group settings to block traffic. This will cause the [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) to fail.
+   - As a result, [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) should automatically redirect traffic to the secondary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
+   - Verify this by accessing `failover.magicishaq.com` and ensuring that it now points to the secondary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
+     ![screenshot of testing the failovers](/blog/src/images/70/70-3.png)
 
-To simulate a failure, we can block port 80 on one of the instances, such as the one in Singapore:
+5. **Restoring the Primary Instance**:
+   - To revert to the primary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), simply restore the security group settings to allow traffic. The [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) will pass, and [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) will switch back to routing traffic to the primary [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
 
-1. Go to the **Security Groups** of the instance.
-2. Edit the **Inbound Rules** and remove the HTTP rule (port 80).
-3. Wait a moment for the health check to detect the failure.
+#### Conclusion
 
-You should see that the health check for the Singapore instance turns unhealthy, confirming the setup is working correctly.
+The failover routing policy in AWS [Route 53](https://magicishaqblog.netlify.app/2024-04-19-aws-Route53-overview/) is an essential tool for maintaining high [availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/). By correctly associating [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/)s with your primary and secondary EC2 [instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)s, you can ensure that your application remains accessible even in the event of a failure.
 
-![Deleting inbound rules](/blog/src/images/69/69-2.png)
-![Unhealthly check](/blog/src/images/69/69-3.png)
-
-### Step 6: Creating a Calculated Health Check
-
-A calculated health check allows you to monitor the status of multiple health checks:
-
-1. Create a new health check and select **Calculated**.
-2. Define the logic, such as marking it as healthy only when all monitored health checks are healthy.
-3. Finalise the setup.
-
-### Step 7: Linking Health Checks with CloudWatch Alarms
-
-Lastly, you can create a health check linked to a [CloudWatch alarm](https://aws.amazon.com/cloudwatch/) . This is particularly useful for monitoring private resources:
-
-1. Specify the region where the alarm is configured.
-2. Link it to the desired [CloudWatch alarm](https://aws.amazon.com/cloudwatch/) .
-
-Currently, we won't proceed with this step as no alarms are set up, but this is a powerful feature for comprehensive monitoring.
-
-![calculated health check](/blog/src/images/69/69-4.png)
-
-### Conclusion
-
-By following these steps, you've successfully created health checks for your EC2 instances in Route 53. These checks will help you maintain the reliability of your services, providing insights into the health of your infrastructure.
+In the hands-on portion of your configuration, you learned how to create and test these records, validating the effectiveness of your failover strategy. This seamless failover mechanism underscores the reliability and robustness of AWS infrastructure in supporting critical applications.
 
 ## Recap
 
@@ -155,3 +132,4 @@ from the previous entries in the series
 - [AWS 66: Route 53 weighted routing](https://magicishaqblog.netlify.app/2024-19-07-aws-route53-weighted-routing/) -[AWS 67: Route 53 Latency](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/)
 - [AWS 67: Route 53 Latency Routing](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/)
 - [AWS 68: Route 53 Health Checks](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/)
+- [AWS 69: Route 53 Health Checks , Hands On](https://magicishaqblog.netlify.app/2024-08-16-aws-69-Health-checks-hands-on/)
