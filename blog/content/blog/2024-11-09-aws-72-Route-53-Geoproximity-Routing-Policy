@@ -1,60 +1,89 @@
 ---
 layout: blog
-title: "AWS 71- Route 53 Geolocation Routing"
-date: 2024-09-06T13:19:09.346Z
+title: "AWS 72: Geoproximity Routing Policy"
+date: 2024-09-12T09:48:45.558Z
 ---
 
 ## TLDR
 
-Geolocation routing in AWS Route 53 directs users based on their physical location, such as a continent, country, or [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions) (e.g., U.S. states). This is useful for website localisation, content restriction, or load balancing. You create geolocation records and set a default record for users who don’t match specific locations.
-German users can be routed to a German server, French users to a French one, and everyone else to a default server. You can also associate health checks with these records to ensure server availability.
-Testing can be done via [VPNs](https://chromewebstore.google.com/detail/free-vpn-for-chrome-vpn-p/majdfhpaihoncoakbjgbdhglocklcgno?hl=en) to simulate traffic from different locations.
+Geoproximity Routing allows you to direct user traffic to your resources based on their [geographical location](TODO). By adjusting a "bias" value, you can control how much traffic is directed to different locations. Diagrams (see below) will clarify this concept further.
 
-## Intro
+## Introduction
 
-Twe’ll delve into geolocation-based routing in AWS Route 53, a crucial method that works quite differently from [latency-based](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/) routing. Geolocation routing directs users based on their physical location, allowing you to route traffic depending on a continent, country, or even more precise areas, such as individual U.S. states. The most specific location available is prioritised for routing.
+In today's interconnected world, directing web traffic efficiently is crucial for a seamless user experience. One feature that can significantly enhance your traffic management strategy is **Geoproximity Routing**. While it may sound complex, we'll break it down for you, supported by diagrams.
 
-For instance, you can configure a system where users from Germany are routed to one IP address, French users to another, and all other users to a default IP address. This is useful for scenarios such as website localisation, content restriction, or load balancing.
+Geoproximity Routing enables you to route traffic to your resources, such as servers, based on the **geographic location of your users and resources**. This is especially useful for global services that aim to provide [low-latency](https://aws.amazon.com/what-is/latency/) experiences to users spread across different [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/).
 
-### Creating a Default Record
+## What is Geoproximity Routing?
 
-It's essential to create a default record to handle cases where no specific location matches. This default ensures that any user who doesn’t fit into a specific geolocation is still routed appropriately. This approach is often used to present a default language or version of your site. You can also associate these records with health checks to monitor the availability of your resources.
-[Tutorial can be found here](https://magicishaqblog.netlify.app/2024-05-03-aws-61-Route53-Creating-First-Record/)
+The core idea behind Geoproximity Routing is simple: you want to ensure that your users are directed to the most appropriate resource based on their location. This is managed by using a "bias" value, which essentially **shifts traffic** towards specific resources. By manipulating this value, you can increase or decrease the amount of traffic sent to a particular region.
 
-### Example of Geolocation Routing in Action
+Here’s how it works:
 
-Let’s take the example of a map of Europe. Suppose we have specific IP addresses for German and French users. When a user from Germany accesses your site, they are directed to an IP containing the German version of your app. French users, meanwhile, are sent to an IP hosting the French version. Any user not in these specific locations would be routed to a default IP, perhaps hosting the English version of your app.
+1. **Increasing Bias**: If you want **more traffic** to be directed to a specific resource (for example, a server in a particular region), you increase the bias value.
+2. **Decreasing Bias**: To **reduce the traffic** to a resource, you decrease the bias value, which can even go into negative numbers.
 
-### Step-by-Step Implementation in the Console
+## Example with Diagrams
 
-Now, let’s put this into practice by creating a geolocation record in the AWS console:
+Let’s walk through an example to illustrate how this works.
 
-1. **Create a Record:** Start by creating a new A-type record. Set the routing policy to ‘Geolocation’ and link it to an EC2 instance in the Asia Pacific [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions) (ap-southeast-1).
-2. **Specify Locations:** The next step involves specifying [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions)s. For example, you can route all users from Asia to your ap-southeast-1 instance.
+![Diagram 1: Map of US with two resource regions (us-west-1 and us-east-1) and a dividing line showing unbiased traffic routing.](/blog/src/images/72/72-2.png)
 
-3. **Health Checks:** If necessary, associate a [health check](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/) to monitor the availability of the server in the selected [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions).
+In this scenario, we have two resource locations:
 
-4. **Additional Records:** Now, create additional records. For example, route U.S. users to us-east-1 and provide a default IP for other users. You can label these records, such as ‘U.S.’ for the American users and ‘Default EU’ for everyone else.
+- One in **us-west-1** (California)
+- One in **us-east-1** (Virginia)
 
-Once created, you can test the setup by simulating traffic from different [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions)s. If your system routes users based on their geolocation as expected, the setup is complete.
+If the bias is set to **zero** for both regions, traffic from users located in the western half of the United States will be routed to **us-west-1**, while those in the eastern half will be routed to **us-east-1**. This is the default behaviour when there is no bias applied, and users are routed to the nearest resource.
 
-![image of creating a record](/blog/src/images/71/71-1.png)
+---
 
-### Testing Geolocation Routing
+### Introducing Bias
 
-After creating the geolocation records, it’s essential to test them. Suppose you are not currently in the U.S. or Asia. When you access the site, it should route you to the default European IP address, confirming that the default record is working correctly.
+Now, let’s add a positive bias of **50** to the **us-east-1** region.
 
-Next, use a [VPN](https://chromewebstore.google.com/detail/free-vpn-for-chrome-vpn-p/majdfhpaihoncoakbjgbdhglocklcgno?hl=en) to connect to a country in Asia, such as India. When you refresh the page, it should direct you to the Asia Pacific (ap-southeast-1) server. If the page fails to load, check your [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/), as these often cause issues. For instance, you may need to modify the inbound rules to allow HTTP traffic.
+![Diagram 2: Same map with bias applied, shifting the dividing line towards the west, directing more traffic to us-east-1.](/blog/src/images/72/72-1.png)
 
-Once the HTTP rule is re-enabled, your traffic should route correctly to the Asia Pacific server. Finally, testing the system in the U.S. will route you to the us-east-1 instance, and accessing from a neighbouring country like Mexico, which isn't explicitly defined, will again send you to the default European server.
+With this bias, the dividing line shifts towards the west. As a result, **more traffic is directed to us-east-1**, even from users who are geographically closer to us-west-1. This example demonstrates how you can influence traffic distribution by adjusting bias values.
 
-### Conclusion
+[Read more about Bias Here](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-geoproximity.html)
 
-Geolocation routing is a powerful tool for controlling how users interact with your content based on their location. With Route 53, you can easily configure and manage traffic for various [region](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#regions)s, offering a tailored user experience.
+## Practical Application
+
+The flexibility of [Geoproximity Routing](https://magicishaqblog.netlify.app/2024-06-09-aws-71-Route-53-Geolocation-Routing/) is not just limited to AWS resources. If you’re managing on-premises data centres or non-AWS resources, you can specify the **latitude and longitude** of those locations, and AWS will take this into account when routing traffic.
+
+This feature is managed through **Route 53 Traffic Flow**, which allows you to create complex routing policies, including Geoproximity Routing, to fine-tune how your traffic is handled globally.
+
+---
+
+## Why Use Geoproximity Routing?
+
+You might be wondering, why would anyone want to shift traffic away from the closest resource? The answer lies in **load management** and **resource optimization**.
+
+For instance:
+
+- **[Load balancing](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)**: If a particular region’s servers are under heavy load, you can redirect some traffic to a less busy region by adjusting the bias.
+- **Cost management**: In regions where the cost of running servers is higher, you may want to direct less traffic to those locations to reduce expenses.
+- **Latency improvements**: You can prioritise certain regions that offer better connectivity or performance for specific user bases.
+
+---
+
+## Key Takeaways
+
+Here’s what you should remember about Geoproximity Routing:
+
+1. **Geoproximity Routing** allows you to direct user traffic based on geographical proximity to resources.
+2. **Bias values** help you increase or decrease the traffic directed to specific locations.
+3. It is a versatile feature that can be applied to **both AWS resources and on-premises data centres** by specifying their latitude and longitude.
+4. The **[Route 53 Traffic Flow](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html)** is required to use this feature, enabling advanced routing policies.
+
+Geoproximity Routing is a valuable tool for anyone looking to optimise their traffic flow globally. By strategically adjusting bias values, you can ensure that your resources are used more efficiently and that your users enjoy a faster, smoother experience.
+
+Hopefully, the accompanying diagrams clarified the concept. Thank you for reading, and I look forward to explaining more cloud features in the next post.
 
 ## Recap
 
-from the previous entries in the series
+from the previous entries in the series.
 
 - [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
 - [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
@@ -126,3 +155,4 @@ from the previous entries in the series
 - [AWS 68: Route 53 Health Checks](https://magicishaqblog.netlify.app/2024-09-08-aws-68-Route-53-Health-checks/)
 - [AWS 69: Route 53 Health Checks , Hands On](https://magicishaqblog.netlify.app/2024-08-16-aws-69-Health-checks-hands-on/)
 - [AWS 70: Route 53 route policy failover](https://magicishaqblog.netlify.app/2024-06-09-aws-71-Route-53-Geolocation-Routing/)
+- [AWS 71: Route 53 Geolocation Routing](https://magicishaqblog.netlify.app/2024-06-09-aws-71-Route-53-Geolocation-Routing/)
