@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 72: Geoproximity Routing Policy"
-date: 2024-09-12T09:48:45.558Z
+date: 2024-09-13T09:48:45.558Z
 ---
 
 ## TLDR
