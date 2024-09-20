@@ -6,7 +6,7 @@ date: 2024-09-13T09:48:45.558Z
 
 ## TLDR
 
-Geoproximity Routing allows you to direct user traffic to your resources based on their [geographical location](TODO). By adjusting a "bias" value, you can control how much traffic is directed to different locations. Diagrams (see below) will clarify this concept further.
+Geoproximity Routing allows you to direct user traffic to your resources based on their [geographical location](https://magicishaqblog.netlify.app/2024-06-09-aws-71-Route-53-Geolocation-Routing/). By adjusting a "bias" value, you can control how much traffic is directed to different locations. Diagrams (see below) will clarify this concept further.
 
 ## Introduction
 
