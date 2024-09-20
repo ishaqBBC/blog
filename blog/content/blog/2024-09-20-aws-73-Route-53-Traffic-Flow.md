@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 73:Route 53 Traffic Flow"
-date: 2024-09-19T23:00:00.000Z
+date: 2024-09-20T14:26:12.677Z
 ---
 
 # Creating Geoproximity Routing Policies in AWS Route 53
