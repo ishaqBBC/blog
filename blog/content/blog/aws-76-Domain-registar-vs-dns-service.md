@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 76: Domain Registar vs [DNS](https://magicishaqblog.netlify.app/2024-03-12-aws-58-DNS-name/) Service"
+title: "AWS 76: Domain Registar vs DNS Service"
 date: 2024-10-18T08:31:59.441Z
 ---
 
