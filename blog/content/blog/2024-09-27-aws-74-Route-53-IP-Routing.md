@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS Route 53: IP-Based Routing"
+title: "AWS 47: Route 53 IP-Based Routing"
 date: 2024-09-27T13:31:24.499Z
 ---
 
