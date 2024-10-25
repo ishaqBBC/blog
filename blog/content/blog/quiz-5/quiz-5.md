@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 57: Quiz 5 Route 53"
+title: "AWS 58: Quiz 5 Route 53"
 date: 2024-10-25T13:14:28.671Z
 ---
 
