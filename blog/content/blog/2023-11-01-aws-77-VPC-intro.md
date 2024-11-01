@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 76: Domain Registar vs DNS Service"
+title: "AWS 77: Virtual Private Cloud"
 date: 2024-11-01T08:31:59.441Z
 ---
 
