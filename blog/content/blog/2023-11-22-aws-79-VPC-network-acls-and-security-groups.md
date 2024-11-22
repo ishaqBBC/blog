@@ -6,15 +6,15 @@ date: 2024-11-22T10:51:18.484Z
 
 ## TLDR
 
-We explore the differences between Network ACLs (NACLs) and Security Groups in AWS [VPCs](TODO)(Vitrual Private Cloud) . NACLs act as a firewall at the subnet level with both allow and deny rules, while Security Groups operate at the instance level with only allow rules. We also discussed [VPC](TODO)Flow Logs, which capture IP traffic information for monitoring and troubleshooting. Understanding these components is crucial for securing and managing your AWS infrastructure effectively.
+We explore the differences between Network ACLs NACLs (Network Access Control Logs) and Security Groups in AWS [VPCs](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)(Vitrual Private Cloud) . NACLs (Network Access Control Logs) act as a firewall at the subnet level with both allow and deny rules, while Security Groups operate at the instance level with only allow rules. We also discussed [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)Flow Logs, which capture IP traffic information for monitoring and troubleshooting. Understanding these components is crucial for securing and managing your AWS infrastructure effectively.
 
 ### Network ACL and Security Groups
 
-In our VPC, which has one public subnet and one [EC2 instance](TODO), we can create a Network ACL (NACL). A NACL is a firewall that controls traffic to and from subnets, with explicit allow and deny rules. These rules are applied at the subnet level and only include IP addresses.
+In our VPC, which has one public subnet and one [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), we can create a Network ACL (NACL). A NACL is a firewall that controls traffic to and from subnets, with explicit allow and deny rules. These rules are applied at the subnet level and only include IP addresses.
 
-NACLs are the first line of defense for our public subnets. Traffic from the internet first goes through the NACL before reaching the [EC2 instance](TODO).
+NACLs (Network Access Control Logs) are the first line of defense for our public subnets. Traffic from the internet first goes through the NACL before reaching the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/).
 
-Next, we have [security groups](TODO), which control traffic to and from an Elastic Network Interface (ENI) or an [EC2 instance](TODO). Security groups can only have allow rules and can reference IP addresses or other [security groups](TODO). They are attached to the [EC2 instance](TODO), providing a second layer of defense.
+Next, we have [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/), which control traffic to and from an Elastic Network Interface (ENI) or an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/). Security groups can only have allow rules and can reference IP addresses or other [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). They are attached to the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), providing a second layer of defense.
 ![diagram on NACL and security groups](/blog/src/images/79/79-1.png)
 
 ### Differences Between NACL and Security Groups
@@ -26,9 +26,9 @@ further information can be found in the [AWS documentation](https://docs.aws.ama
 
 ### VPC Flow Logs
 
-[VPC](TODO) Flow Logs capture information about IP traffic going into your interfaces, including VPC, subnet, and ENI flow logs. They help monitor and troubleshoot connectivity issues by logging allowed and denied traffic. Flow log data can be sent to Amazon S3, CloudWatch Logs, and Kinesis Data Firehose.
+[VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/) Flow Logs capture information about IP traffic going into your interfaces, including VPC, subnet, and ENI flow logs. They help monitor and troubleshoot connectivity issues by logging allowed and denied traffic. Flow log data can be sent to Amazon S3, CloudWatch Logs, and Kinesis Data Firehose.
 
-This concludes our discussion on NACLs, security groups, and [VPC](TODO) flow logs. I hope you found it informative, and I will see you in the next lecture.
+This concludes our discussion on NACLs (Network Access Control Logs), security groups, and [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/) flow logs. I hope you found it informative, and I will see you in the next lecture.
 
 ## Recap
 
@@ -112,4 +112,4 @@ from the previous entries in the series.
 - [Quiz 5 : Route 53](https://magicishaqblog.netlify.app/quiz-5/quiz-5/)
 - [AWS 76: Domain Registar vs DNS Service](https://magicishaqblog.netlify.app/aws-76-Domain-registar-vs-dns-service/)
 - [AWS 77: VPC intro](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)
-- [AWS 78: Understanding AWS VPC and Subnets](TODO)
+- [AWS 78: Understanding AWS VPC and Subnets](https://magicishaqblog.netlify.app/2023-15-11-aws-78-VPC/)
