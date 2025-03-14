@@ -37,7 +37,7 @@ AWS is global we have;
 
 And this will be very helpful when we deliver content
 
-![aws regions](/blog/src/images/screenshot-2023-01-25-at-11.26.44.png)
+![aws regions](/blog/src/images/regions.png)
 
 You can find more about the regions and availability zone here\
 <https://aws.amazon.com/about-aws/global-infrastructure/regions_az/>
