@@ -45,11 +45,13 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
+    "goplus": "netlify deploy --prod --site=a98fa8a7-8b53-4b38-b7da-7dc34add9e57 --dir=/Users/khani05/blog/blog/public",
     "go": "netlify deploy --prod",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "dev": "npm run build && npm run develop",
     "pub": "npm run build && npm run go",
+    "pubg": "npm run build && npm run goplus",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
     "serve": "gatsby serve",
