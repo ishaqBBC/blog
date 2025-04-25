@@ -20,7 +20,8 @@ Upload your files (e.g. index.html, {{your image}}.jpg) to an [S3 bucket](https:
 
 Hosting a static website on Amazon S3 is an efficient and straightforward method to publish your HTML files, images, and other resources on the web. This guide will take you through the essential steps to upload your content, activate static website hosting, and configure public access for your site.
 
-## Step-by-Step: Enabling Static Website Hosting
+## Enabling Static Website Hosting
+
 First, we need to upload the necessary files to our [S3 bucket](https://magicishaqblog.netlify.app/2025-28-03-aws-86-s3-security-bucket-policy/). This includes any HTML files and other assets like images.
 
 - Upload files
