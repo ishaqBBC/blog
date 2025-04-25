@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 89: S3 Website Hosting Hands On"
-date: dateT17:08:34.142Z
+date: 2025-04-25T14:56:16.176Z
 ---
 
 ## TLDR
