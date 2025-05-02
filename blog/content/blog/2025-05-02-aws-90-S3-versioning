@@ -1,12 +1,68 @@
 ---
 layout: blog
 title: "AWS 90: S3 versioning"
-date: dateT17:08:34.142Z
+date: 2025-05-02T08:46:54.136Z
 ---
 
 ## TLDR
 
-date
+[Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) _versioning_ is a feature that helps you manage and protect your data by keeping multiple versions of your files. It allows you to recover from accidental deletions and roll back to earlier versions when needed. Versioning must be enabled at the [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/) level and can be suspended at any time without losing past versions.
+
+## Introduction
+
+Managing websites and static content on [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is straightforward—but what happens when you need to make updates or corrections? What if you accidentally delete a file? This is where S3 versioning becomes essential. Think of it like a time machine for your files: every change you make is saved as a new version, and nothing is lost unless you decide to delete it permanently.
+
+## What is S3 Versioning?
+
+Versioning in [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a way to keep multiple variants of an object in the same [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). When you enable versioning on a [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/), every time you upload a file—even if it’s at the same path or “key”—S3 stores it as a new version.
+
+Here’s what that means:
+
+- First Upload: The file is saved as version 1.
+
+- Second Upload (Same File Key): S3 saves it as version 2, keeping version 1 intact.
+
+- Deletion: If a file is deleted, S3 adds a delete marker instead of removing the file completely. The older versions are still there and recoverable.
+
+This makes it a best practice for production environments and websites, because it gives you control, security, and peace of mind.
+
+### Why use versioning?
+
+Protection against accidental deletions: You can recover files, even if someone deletes them.
+
+Easy rollback: Want to go back to how your site looked yesterday? Just restore the previous version.
+
+Audit trail: You get a full history of file changes.
+
+## Example of S3 Versioning
+
+Let’s say you have an S3 [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/) named my-website-[bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). You enable versioning on this [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/).
+
+You upload index.html. This is version 1.
+
+You update index.html and re-upload it. Now S3 stores it as version 2.
+
+You upload it again with more changes. That’s version 3.
+
+You delete index.html. S3 adds a delete marker, but versions 1, 2, and 3 still exist.
+
+Later, you realise you want to go back to version 2. No problem—you just restore that specific version.
+
+A few technical notes:
+
+Any files uploaded before enabling versioning will have a null version ID.
+
+Suspending versioning doesn't delete your history—it just stops new versions from being created temporarily.
+
+![diagram of s3 versioning](/blog/src/images/90/90-1.png)
+
+## Conclusion
+
+By using S3 versioning, you gain safety, control, and flexibility—ideal for websites, backups, or any critical data stored in the cloud.
+
+## Recap
+
+Based off the previous posts in the series, we have covered the following topics:
 
 - [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
 - [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
@@ -98,13 +154,4 @@ date
 - [AWS 86: s3 security bucket policy](https://magicishaqblog.netlify.app/2025-28-03-aws-86-s3-security-bucket-policy/)
 - [AWS 87: S3 Buckets - Hands On](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/)
 - [AWS 88: S3 Buckets WebHosting](https://magicishaqblog.netlify.app/2025-04-11-aws-88-s3-buckets-web-hosting/)
-
-## Introduction
-
-## Heading
-
-Text
-
-## Conclusion
-
-Conclusion
+- [AWS 89: Amazon S3 Buckets: Hands On](https://magicishaqblog.netlify.app/2025-04-25-aws-89-s3-website-hands-on/)
