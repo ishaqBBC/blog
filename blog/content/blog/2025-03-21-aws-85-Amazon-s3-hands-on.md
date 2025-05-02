@@ -5,12 +5,12 @@ date: 2025-03-21T12:19:22.409Z
 ---
 
 ## TLDR
-Today I will walk through the process of using [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) to create a bucket, upload files, and manage settings. Key steps include selecting a region, naming your bucket (which must be unique), and configuring security options like blocking public access and enabling encryption. After uploading files, you can view and organize them into folders. Access to files is secured by default, but you can use pre-signed URLs for personal access. The post also covers how to delete files and folders in S3.
 
+Today I will walk through the process of using [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) to create a bucket, upload files, and manage settings. Key steps include selecting a region, naming your bucket (which must be unique), and configuring security options like blocking public access and enabling encryption. After uploading files, you can view and organize them into folders. Access to files is secured by default, but you can use pre-signed URLs for personal access. The post also covers how to delete files and folders in S3.
 
 ### Amazon S3
 
- Amazon Simple Storage Service ([Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)), which provides a scalable, durable, and low-latency object storage service. For those of us accustomed to traditional file storage systems, S3 can seem a bit intimidating at first. However, with a few simple steps, you can effectively manage your data using S3.
+Amazon Simple Storage Service ([Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)), which provides a scalable, durable, and low-latency object storage service. For those of us accustomed to traditional file storage systems, S3 can seem a bit intimidating at first. However, with a few simple steps, you can effectively manage your data using S3.
 
 In this blog post, we'll take a detailed walk through the process of creating a bucket, uploading files, and understanding the various settings in [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/). Whether you're new to AWS or simply looking to refine your skills, these steps will provide you with a solid foundation.
 
@@ -24,7 +24,6 @@ If you don’t see the bucket type option, rest assured that the system will aut
 
 ![general purpose](/blog/src/images/85/85-1.png)
 
-
 ### 2. **Choosing a Bucket Name**
 
 Once you’ve selected the region, the next critical step is choosing your bucket name. Amazon requires that your bucket name be globally unique, meaning no other AWS user across the world can have the same name. If the name you choose is already taken, you'll receive an error, and you’ll need to select a different name.
@@ -36,7 +35,6 @@ To avoid conflicts, I typically opt for something personal and unique, such as *
 Once you’ve chosen your bucket name, it’s time to configure some basic settings:
 
 - **Object Ownership:** By default, [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) disables **Access Control Lists (ACLs)**, which is the recommended security setting. This helps ensure that only authorized users can access your objects.
-  
 - **Public Access Settings:** For security reasons, it’s a good practice to **block all public access** to your bucket unless you explicitly want to share the data with others. This prevents unauthorized access to your objects.
 
 - **Bucket Versioning:** While versioning can be useful for maintaining multiple versions of your files, it’s typically best to leave it disabled at first. We’ll cover versioning in later tutorials.
@@ -53,8 +51,6 @@ Once your bucket is set up, it's time to upload files. Let's start by uploading 
 
 After selecting your file, click **Upload**, and [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) will take care of the rest. Once the upload is complete, you’ll see your file listed under the **Objects** section of your bucket.
 
-
-
 ### 5. **Accessing Uploaded Files**
 
 Once your file is uploaded, you can easily view its details by clicking on it. You’ll see essential information like file size, type, and a URL that links to the object.
@@ -62,7 +58,6 @@ Once your file is uploaded, you can easily view its details by clicking on it. Y
 However, you might encounter an **Access Denied** message if you attempt to access the object using the public URL. This is because, by default, all objects uploaded to S3 are private. To access the file, you’ll need to use a **pre-signed URL**. This URL contains an authentication signature that verifies your identity and grants access to the file.
 
 ![accessing files](/blog/src/images/85/85-3.png)
-
 
 ### 6. **Organizing Files with Folders**
 
@@ -108,7 +103,7 @@ from the previous entries in the series.
 - [AWS 24: EFS Hands On](https://magicishasblog.netlify.app/2023-07-07-aws-24-EFS-Hands-On)
 - [AWS 25: EFS vs EBS](https://magicishasblog.netlify.app/2023-07-14-aws-25-EFS-vs-EBS)
 - [AWS 26: Quiz 2](https://magicishaqblog.netlify.app/quiz-2/2023-07-21-aws-26-quiz-2/)
-- [AWS 27: High availability and Scalability ](<https://magicishaqblog.netlify.app/section6/2023-07-28-high_[availability](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)_and_scalability/>)
+- [AWS 27: High availability and Scalability ](https://magicishaqblog.netlify.app/section6/2023-07-28-high_availability_and_scalability/)
 - [AWS 28: Elastic Load Balancer](https://magicishaqblog.netlify.app/ElasticLoadBalancing/2023-08-11-aws-28-elastic-load-balancing/)
 - [AWS 29: Application Load Balancer](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)
 - [AWS 30: Alb hands on (part 1)](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-25-aws-30-alb-hands-on/)
@@ -168,5 +163,3 @@ from the previous entries in the series.
 - [AWS 82: Three Tier Architecture](https://magicishaqblog.netlify.app/2025-17-01-aws-82-three-tier-architecture/)
 - [AWS 83: Quiz 6 VPC](https://magicishaqblog.netlify.app/quiz-6/2025-02-24-aws-83-quiz-6/)
 - [AWS 84: Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)
-
-
