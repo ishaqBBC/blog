@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 92: Amazon S3 Replication"
+title: "AWS 92: Amazon S3 Replication notes"
 date: 2025-05-16T08:13:21.478Z
 ---
 
