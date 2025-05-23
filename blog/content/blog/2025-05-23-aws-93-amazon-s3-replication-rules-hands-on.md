@@ -1,60 +1,96 @@
 ---
 layout: blog
-title: "AWS 92: Amazon S3 Replication notes"
-date: 2025-05-16T08:13:21.478Z
+title: "AWS 92: Amazon S3 Replication Rules Hands-On"
+date: 2025-05-23T08:13:21.478Z
 ---
 
 ## TLDR
 
-New objects are replicated once replication is enabled.
+In this guide, we walk through how to set up **cross-region replication** for Amazon S3 buckets. You'll learn how to:
 
-- Use **S3 Batch Replication** for existing and failed objects.
-- **Permanent deletions are not replicated**, for security reasons.
-- **Replication is not transitive**—no chaining between multiple buckets.
+- Create source and target S3 buckets
+- Enable versioning
+- Configure replication rules
+- Understand how delete markers and versioning affect replication
 
-# Understanding Amazon S3 Replication: A Practical Overview
+## Introduction
 
-Amazon Simple Storage Service [(S3)](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) offers powerful replication capabilities to help organisations maintain redundancy, improve availability, and support compliance requirements. In this article, we break down how S3 Replication works and highlight key features and limitations, especially around batch replication, delete operations, and chaining.
+Replication in Amazon S3 allows you to automatically copy objects across buckets, even in different [AWS regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#region). This is a powerful feature for **disaster recovery**, **data compliance**, and **global availability**.
 
-## Replication Basics
+In this walkthrough, we’ll set up a simple [replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/) scenario using two buckets—one in Europe and another in the US.
 
-Once **S3 Replication** is enabled on a bucket, it begins to automatically copy **newly added objects** to the destination bucket. However, it's important to note:
+## Step-by-Step: Setting Up S3 Replication
 
-**Only objects uploaded _after_ replication is enabled will be replicated by default.**
+### 1. Create the Origin Bucket
 
-If your use case requires existing data to be copied as well, this is where **S3 Batch Replication** comes in.
+We start by creating a source bucket. In this example:
 
-## What Is S3 Batch Replication?
+- **Bucket name**: `s3-magicishaq-origin-v2`
+- **Region**: `eu-west-1` (Ireland)
+- **Versioning**: **Enabled** (required for replication)
 
-S3 Batch Replication is a feature that allows you to replicate:
+### 2. Create the Replica Bucket
 
-- **Existing objects** already present before replication was enabled.
-- **Previously failed replication objects**, giving you another chance to synchronize your data.
+Next, create your target bucket:
 
-This functionality ensures older or missed data can still be propagated to your target storage location.
+- **Bucket name**: `s3-magicishaq-replica-v2`
+- **Region**: `us-east-1` (Virginia)
+- **Versioning**: **Enabled**
 
-## Handling Delete Operations
+> You can also replicate within the same region, but we’re demonstrating cross-region replication here.
 
-S3 Replication also supports the replication of **delete markers**, which are special markers that indicate a versioned delete in a source bucket. This is useful for mirroring the state of your objects between buckets.
+### 3. Upload a Test File
 
-However:
+We upload a file, `beach.jpg`, to the **origin bucket**. At this point, **nothing gets replicated yet**—replication needs to be configured.
 
-- **Replication of delete markers is optional.**
-- **Permanent deletions**, where a specific version ID is targeted and deleted, **are _not_ replicated**. This limitation is by design—to prevent accidental or malicious deletions from propagating across your storage infrastructure.
+### 4. Create a Replication Rule
 
-## No Replication Chaining
+In the **origin bucket**:
 
-One of the more subtle but critical rules in S3 Replication is the **lack of replication chaining**.
+- Navigate to the **Management** tab
+- Create a **replication rule** (e.g., `DemoReplicationRule`)
+- **Apply to all objects**
+- Select your **target bucket** as the destination
+- Create a new **IAM role** as prompted
 
-For example:
+Replication **only applies to new uploads** after the rule is created. To replicate existing files, you’ll need an **S3 Batch Operation**.
 
-- If **Bucket A** replicates to **Bucket B**, and **Bucket B** replicates to **Bucket C**, objects added to Bucket A will **not** be automatically replicated to Bucket C.
+### 5. Test the Replication
 
-This prevents unintended data propagation and ensures that replication flows are always explicit.
+Upload a new file, `coffee.jpg`, to the origin bucket.
 
-## Summary
+- Within seconds, `coffee.jpg` appears in the replica bucket.
+- The version ID is preserved, which confirms that versioning is working correctly.
 
-Amazon S3 Replication is a robust tool for managing cross-region or same-region data redundancy, but it’s essential to understand its scope and limitations to use it effectively.
+### 6. Update Existing Files
+
+Re-upload `beach.jpg` to create a new version. This new version will also be replicated to the replica bucket.
+
+---
+
+## Advanced Setting: Delete Marker Replication
+
+By default, **delete markers** (used in versioned buckets to mark files as deleted) **are not replicated**.
+
+You can change this:
+
+- Edit the replication rule
+- **Enable delete marker replication**
+
+Now, if you delete `coffee.jpg` (which creates a delete marker), this deletion is reflected in the replica bucket.
+
+**Permanent deletes** (deleting specific versions) are **not** replicated.
+
+## Conclusion
+
+S3 replication is a powerful tool, but it comes with some key details to understand:
+
+- **Versioning must be enabled** on both buckets.
+- **Only new objects** (after the rule is created) are replicated by default.
+- **Delete markers** can be replicated, but **permanent deletes are not**.
+- **Batch Operations** are required to replicate existing files.
+
+With proper setup, S3 replication can greatly enhance your data redundancy and resilience strategy.
 
 ## Recap
 
@@ -153,3 +189,4 @@ Based off the previous posts in the series, we have covered the following topics
 - [AWS 89: Amazon S3 Buckets: Hands On](https://magicishaqblog.netlify.app/2025-04-25-aws-89-s3-website-hands-on/)
 - [AWS 90: Amazon S3 Buckets: Versioning](https://magicishaqblog.netlify.app/2025-05-02-aws-90-S3-versioning/)
 - [AWS 91: Amazon S3 Replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/)
+- [AWS 92: Amazon S3 Replication Rules Notes](https://magicishaqblog.netlify.app/2023-05-16-aws-92-amazon-s3-replication-notes/)
