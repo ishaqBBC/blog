@@ -1,12 +1,12 @@
 ---
 layout: blog
 title: "AWS 100: CLI MFA IAMs"
-date: dateT17:08:34.142Z
+date: 2025-08-01T10:10:02.868Z
 ---
 
 
 ## TLDR
-  
+
 To use AWS CLI with Multi-Factor Authentication (MFA), you need to call the `sts get-session-token` API with your MFA device's serial number and a valid token code. This generates temporary credentials (Access Key, Secret Key, Session Token) valid for a limited time. You then configure these into a named profile for use in [CLI/API](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli) calls.
 
 
