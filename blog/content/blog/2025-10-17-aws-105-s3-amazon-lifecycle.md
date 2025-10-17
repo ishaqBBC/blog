@@ -5,6 +5,78 @@ date: 2025-10-17T08:31:35.286Z
 ---
 
 ## TLDR
+Learn how to optimise [Amazon S3 storage](https://magicishaqblog.netlify.app/2025-05-20-aws-94-s3-storage-classes/) by moving objects between classes using lifecycle rules. Transition data from Standard to infrequent access or archival tiers like Glacier to reduce costs. Set rules to delete old files or incomplete uploads, and use S3 Analytics for data-driven recommendations. Lifecycle management helps balance performance, availability, and cost.
+
+
+# Introduction
+
+We will look at how objects can move between different [Amazon S3 storage classes](https://magicishaqblog.netlify.app/2025-05-20-aws-94-s3-storage-classes/), and how lifecycle rules can automate this process.
+
+##  Storage Class Transitions
+
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) offers  storage classes, each designed for different access patterns and cost considerations. Objects can move between these classes depending on how frequently they are accessed.
+
+For instance, an object might start in the **Standard** class, then move to **Standard-IA** (Infrequent Access), **Intelligent-Tiering**, or **One Zone-IA**. From there, it can transition further into **Glacier Flexible Retrieval** or **Glacier Deep Archive** for long-term storage.  
+
+This flexibility allows you to reduce costs without losing access to your data when you need.
+
+If you know that certain objects will be accessed rarely, you can move them to **Standard-IA**. If the data is purely for archival purposes, **Glacier** or **Deep Archive** are suitable choices.
+
+## Automating Transitions with Lifecycle Rules
+
+While these transitions can be performed manually, automation is often the smarter approach. **Lifecycle rules** in S3 allow you to define when and how objects should move between storage classes or when they should be deleted.
+
+Each lifecycle rule typically includes two main actions:
+
+1. **Transition actions** – to move objects between storage classes  
+   For example, you might specify that objects move to Standard-IA after 60 days, or to Glacier after six months.  
+
+2. **Expiration actions** – to delete objects after a set period  
+   For instance, you could delete access logs after 365 days or remove old versions of files if versioning is enabled.  
+
+Lifecycle rules can also handle incomplete multi-part uploads. If an upload remains unfinished for more than two weeks, it can be automatically deleted.
+
+Rules can apply to:
+- The entire bucket  
+- A specific prefix (such as a folder path)  
+- Objects with certain tags (for example, only items tagged with `department=finance`)
+
+## Example Scenarios
+
+### Scenario 1: Image Application
+
+An application running on EC2 that uploads profile photos to S3 and generates thumbnail images.  
+
+- **Source images**: These need to be immediately retrievable for 60 days. After that, users can tolerate a delay of several hours.  
+  - Store in **Standard** class.
+  - Transition to **Glacier** after 60 days using a lifecycle rule.  
+
+- **Thumbnails**: These are small, can be recreated easily, and are rarely accessed.  
+  - Store in **One Zone-IA**.
+  - Set an expiration rule to delete them after 60 days.  
+
+In this case, prefixes such as `/source/` and `/thumbnails/` help you apply separate rules for each type of file.
+
+### Scenario 2: Recoverable Deleted Objects
+
+If a policy requires that deleted objects be recoverable immediately for 30 days, and within 48 hours for up to a year after.
+
+- Enable **S3 Versioning** so that deleted objects are hidden by a delete marker rather than being permanently removed.  
+- Create a lifecycle rule to:
+  - Transition non-current (older) versions to **Standard-IA** after 30 days.  
+  - Transition those same versions to **Glacier Deep Archive** after 365 days for long-term retention.  
+
+## Using S3 Analytics for Decision-Making
+
+Determining when to transition an object is not always obvious. **Amazon S3 Analytics** can help by analysing your storage and providing recommendations.  
+
+It works with the Standard and Standard-IA classes, generating a **CSV report** with daily updates. This report includes usage statistics and transition suggestions, usually available within 24 to 48 hours after activation.
+
+
+### Conclusion
+
+In summary, S3 lifecycle rules and analytics allow you to manage storage, automate transitions, and reduce costs without compromising accessibility. Once you understand how to combine these tools, managing data lifecycles in S3 becomes a structured and predictable process.
+
 
 ## Recap
 
