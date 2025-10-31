@@ -1,116 +1,72 @@
 ---
 layout: blog
-title: "AWS 106: Lifecycle Hands On"
-date: 2025-10-24T08:30:49.819Z
----
-]
-
-## TLDR  
-[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) [lifecycle](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/) rules let you automatically move, archive, or delete objects based on age or version. You can transition objects between storage classes (like Standard IA, Glacier, or Deep Archive), expire outdated files, and clean up incomplete uploads — saving time and reducing costs.
-
-
-## Introduction  
-
-Managing data in [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) and dealing with large volumes of objects. AWS provides a feature called **Lifecycle Rules**, which automates transitions and deletions of objects to for storage and cost. In this guide, we’ll create and understand a [lifecycle](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/) rule step by step.
-
-
-## Creating a Lifecycle Rule  
-
-1. **Go to Management Tab**  
-   Under your S3 bucket, navigate to the **Management** tab and choose **Create Lifecycle Rule**.
-
-2. **Name the Rule**  
-   Call it something descriptive, such as `demo-rule`.
-
-3. **Apply the Rule**  
-   Apply it to **all objects** in the bucket and acknowledge the settings.
-
+title: "AWS 107: Amazon S3 Event Notification"
+date: 2025-10-31T12:20:03.526Z
 ---
 
-## The Five Lifecycle Rule Actions  
 
-When setting up your rule, AWS provides five main options:
+# Intro
+When something happens in your [s3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/), that is called an **event**.  
+An event could be when a file is added, removed, copied, or restored.  
 
-1. **Move current versions of objects between storage classes**  
-2. **Move non-current versions of objects between storage classes**  
-3. **Expire current versions of objects**  
-4. **Permanently delete non-current versions**  
-5. **Delete expired objects, delete markers, or incomplete multi-part uploads**
+You can also choose which events you want to notice.  
+For example:  “Events when the file ends with `.jpg`.”  
 
-Below is an explaination of each one
+## Why Event Notifications?
 
-
-##  Moving Current Versions  
-
-A *current version* is the most recent version of an object, the one users see by default.
-
-You can define a sequence of transitions, for example:
-- Move to **Standard-IA** after 30 days  
-- Move to **Intelligent-Tiering** after 60 days  
-- Move to **Glacier Instant Retrieval** after 90 days  
-- Move to **Glacier Flexible Retrieval** after 180 days  
-- Move to **Glacier Deep Archive** after 365 days  
-
-This staged approach balances performance, accessibility, and cost.
-
-
-## Moving Non-Current Versions  
-
-A *non-current version* appears when a file is replaced or updated.  
-You can move these versions faster, since they are less likely to be accessed.
-
-For example:
-- Move to **Glacier Flexible Retrieval** after 90 days  
-- Add more transitions if needed to optimize storage over time
-
-
-## Expiring Current Versions  
-
-If data is no longer needed after a certain period, you can set an expiration date.  
-For example:
-- Expire current versions after **700 days**
-
-This ensures outdated data does not consume unnecessary storage.
-
-
-## Deleting Non-Current Versions  
-
-To avoid retaining obsolete versions indefinitely, you can:
-- Permanently delete non-current versions after **700 days**
-
-This step helps maintain a clean and cost-effective bucket.
-
-
-## Deleting Expired Objects and Incomplete Uploads  
-
-Finally, you can clean up:
-- **Expired delete markers**  
-- **Incomplete multipart uploads**
-
-These often accumulate unnoticed and can inflate storage bills.
-
-
-## Reviewing and Creating the Rule  
-
-Before saving, AWS provides a **timeline view** that shows how your current and non-current objects will transition over time. Once you confirm everything looks right, create the rule.
-
-AWS will now automatically apply these transitions and deletions in the background — no manual intervention required.
-
-![Review image of making a lifecycle](/blog/src/images/106/106-1.png)
-
-## Conclusion  
-
-Lifecycle rules in [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a way to automate data management. They help you:
-- Save money by archiving or deleting unused data  
-- Keep storage organized and compliant  
-- Reduce manual cleanup  
-
-manage your storage and costs using the lifecycle rules.
+Event Notifications **react automatically** to changes in your [s3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/).  
+For example, when someone uploads an image, you might want to make a small version of it called a **thumbnail**.  
+To do this, you can signal S3 to send a message when a new image arrives.  
 
 
 
-**Next Step:** Try creating your own [lifecycle](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/) rule in the AWS console and monitor its effect over a few weeks.  
+## Where Do the Notifications Go?
 
+Your S3 Event Notification can be sent to different places:
+
+- **SNS topic** – to send a message to many people or systems. [Learn more about SNS topics in the AWS documentation](https://docs.aws.amazon.com/sns/latest/dg/welcome.html).   
+- **SQS queue** – to store messages until another service reads them. [Learn more about SQS queues in the AWS documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html).  
+- **Lambda function** – to run code as soon as the event happens. [Learn more about Lambda functions in the AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html).   
+
+You can have many event notifications and send them wherever you need.  
+Most of the time, the event arrives within seconds, but sometimes it can take a bit longer.  
+
+## Permissions and Policies
+
+For Event Notifications to work, S3 needs **permission** to send messages.  
+
+Here’s how that works:
+- For **SNS**, we use an **SNS resource access policy**. [Learn more about SNS resource access policies in the AWS documentation](https://docs.aws.amazon.com/sns/latest/dg/sns-access-policy-use-cases.html).  
+- For **SQS**, we use an **SQS resource access policy**. [Learn more about SQS resource access policies in the AWS documentation](https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-creating-custom-policies.html).  
+- For **Lambda**, we use a **Lambda resource policy**. [Learn more about Lambda resource policies in the AWS documentation](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html).    
+
+These policies tell AWS, “S3 is allowed to send data here.”  
+They are like special rules that keep your system safe.  
+
+## EventBridge Integration
+
+There is also a new way to use Event Notifications.  
+Every event in your [s3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) can go to **Amazon EventBridge**.  
+[Learn more about Amazon EventBridge in the AWS documentation](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html).   
+
+EventBridge can then send those events to more than **18 AWS services**, such as:
+- **Step Functions**  
+- **Kinesis Data Streams**  
+- **Firehose**
+
+With EventBridge, you can filter by file name, size, or other details.  
+You can also **archive** and **replay** events if needed.  
+This makes EventBridge very powerful and flexible.  
+
+Below is a diagram of the process
+
+![Diagram of the Amazon S3 Event Notifications](/blog/src/images/107/107-1.png)
+
+## Conclusion
+
+Amazon S3 Event Notifications let you respond quickly when things happen in your bucket.  
+You can send those events to **SNS**, **SQS**, **Lambda**, or **EventBridge**.  
+This helps your applications stay smart and react on their own.  
 
 ## Recap
 
@@ -224,5 +180,9 @@ Based off the previous posts in the series, we have covered the following topics
 - [Quiz 8](https://magicishaqblog.netlify.app/quiz-8/2025-09-05-aws-quiz-8/)
 - [AWS 104: SigV4](https://magicishaqblog.netlify.app/2025-08-29-aws-104-SigV4/)
 - [AWS 105: Amazon s3 lifecycle Rules](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/)
+- [AWS 106: Amazon s3 lifecycle Rules - Hands On](https://magicishaqblog.netlify.app/2025-10-24-196-lifecycles-hands-on/)
+
+
+
 
 
