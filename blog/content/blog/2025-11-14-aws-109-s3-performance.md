@@ -7,13 +7,13 @@ date: 2025-11-14T10:25:20.070Z
 
 ## TLDR
 
-[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is very fast. It can handle many requests if you organize your files with different prefixes. You can improve upload and download performance with multipart upload, parallelization, transfer acceleration, and byte-range fetches.
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is fast. It can handle many requests if you organise your files with different prefixes. You can improve upload and download performance with multipart upload, parallelization, transfer acceleration, and byte-range fetches.
 
 
 ## What Is S3 Baseline Performance?
 
-[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a cloud storage service built to scale quickly. This means it can handle a lot of traffic without slowing down.
-When you request a file from S3, you often get the first byte in about **100 to 200 milliseconds**, which is quite fast.
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a cloud storage service built to scale. This means it can handle a lot of traffic.
+When you request a file from S3, you often get the first byte in about **100 to 200 milliseconds**.
 
 S3 also handles many requests every second. It supports:
 
@@ -55,7 +55,7 @@ For example, with four prefixes, reads can reach roughly **22,000 requests per s
 * Note: Scaling happens gradually. You may see some **503 Slow Down** errors until S3 adapts to your higher request rate.
 
 
-## How To Make S3 Even Faster
+## How To Make S3 Faster
 
 ### 1. Multipart Upload + Parallelization
 
@@ -64,21 +64,20 @@ Big files can take time to upload. Multipart upload helps by splitting a file in
 * Uploading parts **in parallel** allows S3 to handle multiple parts simultaneously, improving throughput.
 * AWS recommends using multipart upload for **files larger than 100 MB**, and it is **required for files over 5 GB**.
 
-> Reminder: Multipart upload itself does not automatically make uploads faster—**parallelization by the client is needed**.
+* Reminder: Multipart upload itself does not automatically make uploads faster **[parallelization](https://www.lenovo.com/gb/en/glossary/parallelization/?srsltid=AfmBOooePNQr8pPPQVeBo1DpSk0wznegoLbXC6_kqfOGDqoM0M1U1_xg) by the [client](https://en.wikipedia.org/wiki/Client_(computing)) is needed**.
 
----
+
 
 ### 2. S3 Transfer Acceleration
 
-For long-distance transfers (e.g., uploading from the US to Australia), Transfer Acceleration helps.
+For long-distance transfers (e.g., uploading from the US to Australia), [Transfer Acceleration](https://aws.amazon.com/s3/transfer-acceleration/) helps.
 
-1. Send your file to the nearest **edge location**.
+1. Send your file to the nearest [**edge location**](https://www.lastweekinaws.com/blog/what-is-an-edge-location-in-aws-a-simple-explanation/).
 2. The file travels the rest of the way over AWS’s fast, private network.
 3. Less time on the public internet means faster, more reliable uploads.
 
-Transfer Acceleration also works with multipart uploads.
+[Transfer Acceleration](https://aws.amazon.com/s3/transfer-acceleration/) also works with multipart uploads.
 
----
 
 ### 3. Faster Downloads With Byte Range Fetches
 
