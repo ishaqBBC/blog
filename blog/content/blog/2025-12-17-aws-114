@@ -77,18 +77,54 @@ When we open the website in a browser, everything works. The extra page is succe
 
 To demonstrate CORS properly, we need a second origin. This means hosting the extra page somewhere else.
 
-[We create a new storage bucket](https://magicishaqblog.netlify.app/2025-04-11-aws-88-s3-buckets-web-hosting/), enable it as a static website and make it public. To underline the difference, we even place it in another region, such as Canada. This helps show that the files are served from a completely different location.
+[We create a new storage bucket](https://magicishaqblog.netlify.app/2025-04-11-aws-88-s3-buckets-web-hosting/), enable it as a static website and make it public. To underline the difference, we even place it in another region, such as Canada. This
+ helps show that the files are served from a completely different location.
 
 Into this second bucket, we upload only the extra-page.html file. When we open its public website URL directly, the page loads correctly. It is public and accessible.
+Below is a screenshot of where to look in AWS
+![screen shot of the URL needed for Cors reference bucket](/blog/src/images/113/113-1.png)
 
 
-Making a cross-origin request
+
+## Making a cross-origin request
 
 Next, we update the original index.html file. Instead of fetching `extra-page.html` from the same bucket, the script now points to the full website URL of the file in the second bucket.
+ ### Updated Script
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Site</title>
+</head>
+<body>
+    <h1>I love coffee</h1>
+    <p>hello world</p>
+
+    <img src="coffee.jpeg" alt="a picture of a cofee mug">
+     <!-- this coffee image is stored on the bucket -->
+
+    <!-- Cors Demo -->
+     <!-- <div id="ToFetch"></div>
+     <script>
+        const toFetch = document.getElementById('toFetch');
+        fetch('INSERT YOUR URL HERE').then(response => response.text()).then(html => {toFetch.innerHTML = html})
+     </script> -->
+
+</body>
+</html>
+
+```
 
 We upload the updated index.html back to the first bucket and refresh the webpage in the browser.
 
 At first glance, something looks wrong. The extra content does not appear. To see why, we open the browser’s developer tools and refresh the page again.
+below is a screenshot of the error message:
+
+![screenshot of cors error message in chrome dev tools](/blog/src/images/113/113-2.png)
+
+
 
 In the console, there is an error message. It says that a cross-origin request has been blocked. The browser explains that a required CORS header, called Access-Control-Allow-Origin, is missing.
 
