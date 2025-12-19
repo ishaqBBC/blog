@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 113: Cors Hands On"
-date: 2025-12-18T09:38:41.382Z
+date: 2025-12-19T09:38:41.382Z
 ---
 
 ## TLDR
