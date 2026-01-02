@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 114: Amazon S3 MFA Delete"
-date: dateT17:08:34.142Z //TODO
+date: 2026-01-02T13:12:54.013Z
 ---
 
 ## TLDR
@@ -9,7 +9,7 @@ MFA Delete is an Amazon S3 security feature that helps protect data from permane
 
 
 ## Intro
-
+Hope you had a great new year.
 Security in the cloud is not just about keeping attackers out. It is also about protecting yourself from mistakes. One accidental click or command can sometimes lead to permanent data loss. This is where a feature called MFA Delete comes in.
 
 MFA Delete is designed to add an extra layer of protection to your Amazon S3 buckets, especially when versioning is involved.
