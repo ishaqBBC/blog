@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 115: MFA Delete: Hands On"
-date: dateT17:08:34.142Z
+date: 2026-01-09T14:10:06.024Z
 ---
 
 ## TLDR
