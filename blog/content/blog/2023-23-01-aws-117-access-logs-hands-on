@@ -15,7 +15,7 @@ date: 2026-01-23T14:56:27.739Z
 
 ## Introduction
 
-Based on our previous blog post about [S3 Access Logs](https://magicishaqblog.netlify.app/2026-01-16-aws-116-amazon-s3-access-LOGS/). [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) [access logs](https://magicishaqblog.netlify.app/2026-01-16-aws-116-amazon-s3-access-LOGS/) help you understand what is happening inside your [strorge buckets](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). They record every request made to a bucket, such as uploading a file or opening an object. In this short guide, we’ll walk through how to set them up and what to expect afterwards.
+Based on our previous [blog post](https://magicishaqblog.netlify.app/2026-01-16-aws-116-amazon-s3-access-LOGS/) about Amazon S3 Access Logs. [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) [access logs](https://magicishaqblog.netlify.app/2026-01-16-aws-116-amazon-s3-access-LOGS/) help you understand what is happening inside your [strorge buckets](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). They record every request made to a bucket, such as uploading a file or opening an object. In this short guide, we’ll walk through how to set them up and what to expect afterwards.
 
 ### Create a Logging Bucket
 
