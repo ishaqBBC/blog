@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 116: S3 Access Buckets"
+title: "AWS 116: S3 Access Logs"
 date: 2026-01-16T10:43:15.421Z
 ---
 
