@@ -8,16 +8,16 @@ date: 2026-02-06T12:50:51.324Z'
 [Amazon S3 pre-signed URLs](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) let you temporarily share private files without making your [bucket](TODO) public. You generate a link that works for a set time, only those with the link gain access. Once the link expires, access is automatically blocked.
 
 ## Introduction
-[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is used to store files in the cloud, from documents to images.[S3 buckets](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) are private by default, meaning their contents cannot be accessed by the public. But what if you want to share a single file—quickly and securely—without changing the bucket’s privacy settings?
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is used to store files in the cloud, from documents to images.[S3 buckets](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) are private by default, meaning their contents cannot be accessed by the public. But what if you want to share a single file quickly and securely without changing the bucket’s privacy settings?
 
 This is where [**pre-signed URLs**](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) come in.
 
 ### Previously
 Imagine you have an image stored in an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) that is not public. If you click on the object’s standard URL and try to open it in a browser, you will see an “Access Denied” message. This is expected behavior. The bucket is private, so Amazon S3 blocks public access.
 
- From within the [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), you might notice something interesting. Clicking “Open” on that same image displays it perfectly in a new browser tab. This works because AWS is quietly using a special type of link behind the scenes—a pre-signed URL.
+ From within the [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), you might notice something interesting. Clicking “Open” on that same image displays it perfectly in a new browser tab. This works because AWS is quietly using a special type of link behind the scenes.
 
- ![image of opening a file in the AWS console](/blog/src/image/119-1.png) 
+ ![image of opening a file in the AWS console](/blog/src/images/119/119-1.png) 
 
 ### What Is a Pre-Signed URL?
 
@@ -40,14 +40,14 @@ There are two main ways to generate a pre-signed URL:
 
 From the [console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), follow these steps:
 
-* Open your S3 bucket and select the file you want to share.
-![screenshot of s3 bucket](/blog/src/images/119/119-1.png)
+* Open your [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) and select the file you want to share.
+
 
 * Click **Object actions**.
 ![object actions in s3](/blog/src/images/119/119-2.png)
 
 * Choose **Share with a pre-signed URL**.
-* Set how long the link should remain valid—minutes or hours.
+* Set how long the link should remain valid minutes or hours.
 * Click **Create pre-signed URL**.
 ![link of the pre-signed url](/blog/src/images/119/119-3.png)
 
