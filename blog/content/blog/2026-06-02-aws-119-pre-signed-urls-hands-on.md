@@ -1,102 +1,72 @@
 ---
 layout: blog
-title: "AWS 118: Amazon S3 Pre Signed Urls"
-date: 2026-01-30T13:07:16.168Z
+title: "AWS 119: Pre-Signed Urls: Hands On"
+date: 2026-02-06T12:50:51.324Z'
 ---
-
 ## TLDR
 
-Pre-signed URLs let you give temporary access to a specific [s3 object](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/).  
-The link carries the permissions of the user who created it and expires after a set time.  
-They are commonly used for secure downloads or uploads without exposing your [s3 bucket](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) to the public.
+[Amazon S3 pre-signed URLs](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) let you temporarily share private files without making your [bucket](TODO) public. You generate a link that works for a set time, only those with the link gain access. Once the link expires, access is automatically blocked.
 
+## Introduction
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is used to store files in the cloud, from documents to images.[S3 buckets](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) are private by default, meaning their contents cannot be accessed by the public. But what if you want to share a single file—quickly and securely—without changing the bucket’s privacy settings?
 
+This is where [**pre-signed URLs**](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) come in.
 
-## What Is a Pre-Signed URL?
+### Previously
+Imagine you have an image stored in an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) that is not public. If you click on the object’s standard URL and try to open it in a browser, you will see an “Access Denied” message. This is expected behavior. The bucket is private, so Amazon S3 blocks public access.
 
-Amazon S3 pre-signed URLs are a way to control access to files stored in S3. They are widely used in modern applications to share data securely, without making buckets or objects public.
+ From within the [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), you might notice something interesting. Clicking “Open” on that same image displays it perfectly in a new browser tab. This works because AWS is quietly using a special type of link behind the scenes—a pre-signed URL.
 
-This article explains what pre-signed URLs are, how they work, and when you should use them.
+ ![image of opening a file in the AWS console](/blog/src/image/119-1.png) 
 
-A pre-signed URL is a special S3 link that grants time-limited access to a specific object in a bucket.
+### What Is a Pre-Signed URL?
 
-You can generate these URLs using:
-- [The AWS Management Console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/)
-- [The AWS Command Line Interface (CLI)](https://magicishaqblog.netlify.app/2023-10-03-aws-7-cli/)
-- [AWS SDKs](https://magicishaqblog.netlify.app/2025-08-08-aws-101-sdk/)
+A [pre-signed URL](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) is a temporary link that grants access to a specific object in [S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/). It is created using valid AWS credentials and includes permission to view or download the file.
 
-Each URL has an expiration time:
-- Up to **12 hours** when created in the console
-- Up to **168 hours (7 days)** when created using the CLI or SDK
+The key point is this:
+**anyone with the link can access the file until the link expires**, even if the bucket and object are private.
 
-**Once the link expires, it no longer works.**
+The link becomes invalid after expiration.
 
+### How to Create a Pre-Signed URL
 
+There are two main ways to generate a pre-signed URL:
 
-## How Pre-Signed URLs Work
+1. **Using the AWS Command Line Interface (CLI)**
+   This is useful for developers and automated systems.
 
-When you generate a pre-signed URL, AWS signs the request using your credentials.  
+2. **Using the AWS Management Console**
+   This is the quickest option for manual sharing.
 
-This means:
-- The person using the link temporarily **inherits your permissions**
-- The access is limited to a **single operation**, such as [`GET`](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (download) or [`PUT`](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) (upload).
-- No AWS account or credentials are required by the end user.
+From the [console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), follow these steps:
 
- The URL itself acts as a short-lived **concert ticket** to a private event. It allows someone to enter through a specific door, enjoy a single performance, and then leave all without granting them backstage access or a pass to future shows.
+* Open your S3 bucket and select the file you want to share.
+![screenshot of s3 bucket](/blog/src/images/119/119-1.png)
 
+* Click **Object actions**.
+![object actions in s3](/blog/src/images/119/119-2.png)
 
+* Choose **Share with a pre-signed URL**.
+* Set how long the link should remain valid—minutes or hours.
+* Click **Create pre-signed URL**.
+![link of the pre-signed url](/blog/src/images/119/119-3.png)
 
-## A Common Use Case
+The link is generated instantly and can be copied and shared.
 
-Imagine you have an [s3 bucket](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) that is private.
+### Sharing Files with Confidence
 
-You want to share one file with someone outside AWS:
-- You do not want to make the bucket public
-- You do not want to change [bucket policies](https://magicishaqblog.netlify.app/2025-28-03-aws-86-s3-security-bucket-policy/)
-- You only want access to last for a short time
+The link can be accessed in a browser without AWS login. Access is revoked after expiration.
 
-The solution is a pre-signed URL.
+This makes pre-signed URLs ideal for:
 
-As the bucket owner:
-- Generate a pre-signed URL for a specific object.
-- AWS creates a secure, time-limited link.
-- Send the link to the intended user.
-- The user accesses the file directly from S3.
-- Access ends automatically when the URL expires.
+* Sharing images or documents temporarily
+* Sending files securely without making them public
+* Reducing risk by limiting access time
 
-Security stays intact, and control remains with you.
+### A Simple but Powerful Feature
 
+Pre-signed URLs offer a secure way to share files temporarily without exposing your S3 bucket or managing permissions manually.
 
-
-## Download and Upload Scenarios
-
-Pre-signed URLs are not limited to downloads.
-
-They are commonly used to:
-- Let logged-in users download premium content
-- Share files with a changing list of users
-- Allow users to upload files directly to S3
-- Avoid routing large files through your application servers
-
-For uploads, a pre-signed `PUT` URL lets a user send a file straight to a specific location in your bucket — while the bucket itself stays private.
-
-
-
-## Why They Matter
-
-Pre-signed URLs strike a balance between security and convenience.
-
-They:
-- Reduce operational complexity
-- Limit exposure of sensitive data
-- Scale well for large numbers of users
-- Work seamlessly with private [s3 bucket](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)s
-
-For temporary, controlled access to individual files, use a pre-signed URL.
-
-below is a diagram of the process
-
-![diagram of how a pre-signed url works](/blog/src/images/118/118-1.png)
 
 ## Recap
 
@@ -222,6 +192,6 @@ Based off the previous posts in the series, we have covered the following topics
 - [AWS 115: MFA Delete Hands On](https://magicishaqblog.netlify.app/2026-01-06-aws-115-MFA-delete-hands-on/)
 - [AWS 116: Amazon S3 Access Logs](https://magicishaqblog.netlify.app/2026-01-16-aws-116-amazon-s3-access-LOGS/)
 - [AWS 117: Amazon S3 Access Logs - Hands On](https://magicishaqblog.netlify.app/2023-23-01-aws-117-access-logs-hands-on/)
-
+- [AWS 118: Amazon S3 Pre-signed URLS](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/)
 
 
