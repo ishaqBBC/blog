@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 119: Pre-Signed Urls: Hands On"
-date: 2026-02-06T12:50:51.324Z'
+date: 2026-02-06T12:50:51.324Z
 ---
 ## TLDR
 
