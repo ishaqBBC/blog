@@ -20,7 +20,7 @@ const getAnswerText = () => {
 const getAnswers = () => {
     const isCorrect = (li) => {
         if (li.firstChild.firstChild.checked === true) {
-            return `<p><span class="correct">Correct</span> ${getAnswerText() ? getAnswerText() : ''} </p>`
+            return `<p><span class="correct">Correct ${getAnswerText() ? getAnswerText() : ''}</span>  </p>`
         }
         return `<p>False</p>`
     }
