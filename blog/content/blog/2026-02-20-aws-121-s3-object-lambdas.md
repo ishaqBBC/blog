@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 121: S3 Object Lambdas"
-date: dateT17:08:34.142Z
+date: 2026-02-20T14:28:27.786Z
 ---
 
 ## TLDR
