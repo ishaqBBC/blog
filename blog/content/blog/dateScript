@@ -2,3 +2,44 @@ const newDate = () => new Date().toISOString()
 // TODO: Ishaq remove console
 // eslint-disable-next-line no-console
 console.log(newDate(), '');
+
+//aws quiz script 
+
+// for udemy course quiz 
+// https://www.udemy.com/course/aws-certified-developer-associate-dva-c01/learn/quiz/5348848#overview
+
+const getQuestion = () => {
+    const questionNum = document.querySelector('[data-testid*=mc] > span').textContent;
+    const question = document.querySelector('#question-prompt > p').textContent;
+    const getQuestionHtml = (q, num) => `<h4>${num} ${q} </h4>`;
+    return getQuestionHtml(question, questionNum);
+}
+const getAnswerText = () => {
+    const answerText = document.querySelector('[data-purpose="safely-set-inner-html:rich-text-viewer:html"]').textContent
+}
+const getAnswers = () => {
+    const isCorrect = (li) => {
+        if (li.firstChild.firstChild.checked === true) {
+            return `<p><span class="correct">Correct</span> ${getAnswerText() ? getAnswerText() : ''} </p>`
+        }
+        return `<p>False</p>`
+    }
+    const answers = [...document.querySelectorAll('[class*=mc-quiz-question--answer--]')].map(item => {
+        return `<details>
+   <summary>${item.textContent}</summary>
+   ${isCorrect(item)}
+</details>`
+
+    }
+    );
+    return `${answers.join('')}`
+
+}
+
+const question = getQuestion()
+
+const answers = getAnswers()
+
+const everything = `${question} ${answers}`
+
+copy(everything);
