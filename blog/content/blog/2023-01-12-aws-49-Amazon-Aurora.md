@@ -12,7 +12,7 @@ Amazon Aurora, a **proprietary** AWS technology compatible with Postgres and MyS
 
 Aurora is a type of database. Its proprietary and not open-sourced, it boasts compatibility with Postgres and MySQL, complete with compatible drivers. This means that connecting to your Aurora database as if it were a Postgres or MySQL database is seamlessly achieved.
 
-What sets Aurora apart is its cloud optimisation. Through a series of optimisations and ingenious strategies, it achieves remarkable performance gains—5 times faster than MySQL on RDS and 3 times faster than Postgres on RDS, among other improvements. The intricacies of these optimizations, while intriguing, will not be delved into at present.
+What sets Aurora apart is its cloud optimisation. Through a series of optimisations and ingenious strategies, it achieves remarkable performance gains  5 times faster than MySQL on RDS and 3 times faster than Postgres on RDS, among other improvements. The intricacies of these optimizations, while intriguing, will not be delved into at present.
 
 [More information can found here](https://www.youtube.com/watch?v=FzxqIdIZ9wc)
 

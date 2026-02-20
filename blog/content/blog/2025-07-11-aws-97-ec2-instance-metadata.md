@@ -27,7 +27,7 @@ Read more about EC2 Instances [HERE](https://magicishaqblog.netlify.app/2023-02-
 * Private IP address
 * [The IAM Role](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices/)
 
-This info is called **metadata** — meaning *“data about the instance.”*
+This info is called **metadata**    meaning *“data about the instance.”*
 
 Read more about EC2 Instance Metadata [HERE](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 
@@ -43,7 +43,7 @@ http://169.254.169.254/
 
 This address isn’t on the internet. It only works *inside* the EC2 instance.
 
-When the instance asks that address, it gets its own metadata — like reading your own name tag.
+When the instance asks that address, it gets its own metadata    like reading your own name tag.
 
 
 ## What’s the Difference Between Metadata and User Data?

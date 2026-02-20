@@ -10,11 +10,11 @@ date: 2025-05-02T08:46:54.136Z
 
 ## Introduction
 
-Managing websites and static content on [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is straightforward—but what happens when you need to make updates or corrections? What if you accidentally delete a file? This is where S3 versioning becomes essential. Think of it like a time machine for your files: every change you make is saved as a new version, and nothing is lost unless you decide to delete it permanently.
+Managing websites and static content on [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is straightforward  but what happens when you need to make updates or corrections? What if you accidentally delete a file? This is where S3 versioning becomes essential. Think of it like a time machine for your files: every change you make is saved as a new version, and nothing is lost unless you decide to delete it permanently.
 
 ## What is S3 Versioning?
 
-Versioning in [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a way to keep multiple variants of an object in the same [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). When you enable versioning on a [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/), every time you upload a file—even if it’s at the same path or “key”—S3 stores it as a new version.
+Versioning in [Amazon s3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is a way to keep multiple variants of an object in the same [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/). When you enable versioning on a [bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/), every time you upload a file  even if it’s at the same path or “key”  S3 stores it as a new version.
 
 Here’s what that means:
 
@@ -46,19 +46,19 @@ You upload it again with more changes. That’s version 3.
 
 You delete index.html. S3 adds a delete marker, but versions 1, 2, and 3 still exist.
 
-Later, you realise you want to go back to version 2. No problem—you just restore that specific version.
+Later, you realise you want to go back to version 2. No problem  you just restore that specific version.
 
 A few technical notes:
 
 Any files uploaded before enabling versioning will have a null version ID.
 
-Suspending versioning doesn't delete your history—it just stops new versions from being created temporarily.
+Suspending versioning doesn't delete your history  it just stops new versions from being created temporarily.
 
 ![diagram of s3 versioning](/blog/src/images/90/90-1.png)
 
 ## Conclusion
 
-By using S3 versioning, you gain safety, control, and flexibility—ideal for websites, backups, or any critical data stored in the cloud.
+By using S3 versioning, you gain safety, control, and flexibility  ideal for websites, backups, or any critical data stored in the cloud.
 
 ## Recap
 

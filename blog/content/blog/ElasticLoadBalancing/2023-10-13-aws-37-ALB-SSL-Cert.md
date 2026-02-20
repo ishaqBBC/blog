@@ -61,7 +61,7 @@ Excellent. So finally, what is supported for SSL certificates? For the classic l
 
 SSL and TLS certificates are essential for website security. They ensure that data is encrypted, protecting sensitive information and offering a secure browsing experience. Server Name Indication (SNI) is a crucial technology for serving multiple SSL certificates on a single web server. Understanding these concepts is vital for anyone responsible for web server management and security.
 
-By implementing these security measures, you can bolster the trust of your website visitors and protect your data from potential threats. So, don't delay—secure your website with SSL and TLS certificates today.
+By implementing these security measures, you can bolster the trust of your website visitors and protect your data from potential threats. So, don't delay  secure your website with SSL and TLS certificates today.
 
 ## Recap
 

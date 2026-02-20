@@ -11,7 +11,7 @@ If you're juggling multiple AWS accounts, don't overwrite your default credentia
 
 ## Introduction
 
-When working with Amazon Web Services (AWS), you have a single account. As your responsibilities grow , whether across projects, teams, or clients—you may need to manage **multiple AWS accounts**. This presents a challenge: how do you avoid constantly replacing your default credentials?
+When working with Amazon Web Services (AWS), you have a single account. As your responsibilities grow , whether across projects, teams, or clients  you may need to manage **multiple AWS accounts**. This presents a challenge: how do you avoid constantly replacing your default credentials?
 
 ### The Problem
 
@@ -36,7 +36,7 @@ region = us-west-2
 output = json
 ```
 
-This works fine—until you need to access a second AWS account. Overwriting the default every time is not only inefficient, but error-prone.
+This works fine  until you need to access a second AWS account. Overwriting the default every time is not only inefficient, but error-prone.
 
 
 ### Named Profiles

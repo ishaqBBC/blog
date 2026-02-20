@@ -62,7 +62,7 @@ This ensures lower costs over time without sacrificing data integrity.
 
 ## Final Thoughts
 
-[Storage classes](https://aws.amazon.com/s3/storage-classes/) are needed for cost-effective, scalable, and resilient cloud architecture. Whether you're designing for performance, budget, or longevity, [storage classes](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)’s offerings allow for granular control or full automation — all with unmatched durability.
+[Storage classes](https://aws.amazon.com/s3/storage-classes/) are needed for cost-effective, scalable, and resilient cloud architecture. Whether you're designing for performance, budget, or longevity, [storage classes](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/)’s offerings allow for granular control or full automation    all with unmatched durability.
 
 ## Recap
 

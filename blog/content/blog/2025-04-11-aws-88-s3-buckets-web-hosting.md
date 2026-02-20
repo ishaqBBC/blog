@@ -9,15 +9,15 @@ date: 2025-04-11T08:44:09.955Z
 [Amazon S3 (Simple Storage Service)](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) can be used to host static websites like portfolios or landing pages. All you need are your files (like HTML and images), a correctly configured S3 bucket, and public read access. Once everything's set up, your website is live and accessible from a special S3 URL. Just make sure you allow public access, or visitors will get a “403 Forbidden” error.
 
 ## Amazon S3
-Amazon S3 is a cloud-based storage service by AWS (Amazon Web Services). You can think of it like a digital locker where you can store files. But here’s the cool part—it can also host static websites.
+Amazon S3 is a cloud-based storage service by AWS (Amazon Web Services). You can think of it like a digital locker where you can store files. But here’s the cool part  it can also host static websites.
 
-Static websites are websites made up of fixed content—like HTML, CSS, JavaScript, and images—without any server-side processing.
+Static websites are websites made up of fixed content  like HTML, CSS, JavaScript, and images  without any server-side processing.
 
 ### How S3 Works
 To use S3 for a website, here’s what happens:
 
 - Create an S3 bucket
-This is your main storage container—think of it like a folder.
+This is your main storage container  think of it like a folder.
 
 - Upload your website files
 These could be .html files, images, CSS, and so on.
@@ -38,7 +38,7 @@ http://bucket-name.s3-website-region.amazonaws.com
 http://bucket-name.s3-website.region.amazonaws.com
 ```
 Notice the difference? Some use a dash (-), others use a dot (.) between parts of the URL.
-But don’t worry—you don’t need to memorise this. AWS will generate it for you.
+But don’t worry  you don’t need to memorise this. AWS will generate it for you.
 
 **The most common mistake: 403 errors**
 If you visit your new S3 website and see a 403 Forbidden error, here’s what went wrong:
@@ -68,7 +68,7 @@ Here’s a basic example of a bucket policy that allows public reads:
 Replace *your-bucket-name* with your actual bucket name.
 
 ## Conclusion
-That’s it! Once your S3 bucket is set up, your static site is live for the world to see. Whether it's a personal portfolio or a project landing page, Amazon S3 makes it easy to get a clean, aesthetic site online—fast.
+That’s it! Once your S3 bucket is set up, your static site is live for the world to see. Whether it's a personal portfolio or a project landing page, Amazon S3 makes it easy to get a clean, aesthetic site online  fast.
 
 
 ## Recap

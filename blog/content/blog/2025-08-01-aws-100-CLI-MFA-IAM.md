@@ -22,7 +22,7 @@ First, assign an MFA device to your IAM user:
 2. Under **Security Credentials**, choose **Manage MFA device**.
 3. Select **Virtual MFA device**, scan the QR code using an app like **Authy** or **Google Authenticator**.
 4. Enter two consecutive MFA codes to verify.
-5. Save the **MFA ARN** — you'll need it for the next step.
+5. Save the **MFA ARN**    you'll need it for the next step.
 
 
 Use the AWS CLI to call the `get-session-token` API:

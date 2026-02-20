@@ -10,7 +10,7 @@ AWS’s three-tier architecture involves public subnets for Elastic Load Balance
 
 ### The Role of VPC in AWS Architecture
 
-A Virtual Private Cloud ([VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)) forms the foundation of AWS network architecture, enabling you to segment and manage your cloud resources securely. Before diving into three-tier solutions, understanding [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)s—public and [private subnets](https://magicishaqblog.netlify.app/2023-15-11-aws-78-VPC/), route tables, and gateways—is essential.
+A Virtual Private Cloud ([VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)) forms the foundation of AWS network architecture, enabling you to segment and manage your cloud resources securely. Before diving into three-tier solutions, understanding [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/)s  public and [private subnets](https://magicishaqblog.netlify.app/2023-15-11-aws-78-VPC/), route tables, and gateways  is essential.
 
 ### Breaking Down the Three-Tier Architecture
 
@@ -59,7 +59,7 @@ AWS provides a detailed WordPress architecture, incorporating additional compone
 
 ## Conclusion
 
-Understanding AWS’s [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/) structure and three-tier architecture is foundational for developers and architects alike. By mastering these principles, you can design secure, scalable, and performant applications—whether deploying a [LAMP](https://aws.amazon.com/what-is/lamp-stack/) stack, a WordPress site, or a custom solution. Explore the diagrams and documentation to solidify these concepts and prepare for certification exams or real-world projects.
+Understanding AWS’s [VPC](https://magicishaqblog.netlify.app/2023-11-01-aws-77-VPC-intro/) structure and three-tier architecture is foundational for developers and architects alike. By mastering these principles, you can design secure, scalable, and performant applications  whether deploying a [LAMP](https://aws.amazon.com/what-is/lamp-stack/) stack, a WordPress site, or a custom solution. Explore the diagrams and documentation to solidify these concepts and prepare for certification exams or real-world projects.
 
 ## Recap
 

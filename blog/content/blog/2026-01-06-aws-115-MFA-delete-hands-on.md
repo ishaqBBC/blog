@@ -100,7 +100,7 @@ Using the temporary root access keys: Inside the [AWS CLI](https://magicishaqblo
 example command lines in the AWS CLI terminal. replace the `${YOUR_ACCESS_ID}` and `${YOUR_SECRET_ACCESS_KEY}` with the ones from 3
 ```bash
 Last login: Fri Jan 7 19:08:49 on ttys000
-~ aws configure —-profile root-mfa-delete-demo
+~ aws configure   -profile root-mfa-delete-demo
 AWS Access Key ID [None]: ${YOUR_ACCESS_ID}
 AWS Secret Access Key [None]: ${YOUR_SECRET_ACCESS_KEY}
 Default region name [None]: eu-west-1
@@ -109,7 +109,7 @@ Default output format [None]:
 
 *Test it by listing your buckets. If it works, the profile is ready.*
 ```bash
-aws s3 ls —-profile root-mfa-delete-demo
+aws s3 ls   -profile root-mfa-delete-demo
 2020-12-08 18:17:54 demo-magicishaq-cors-2020
 2020-12-08 18:29:50 demo-magicishaq-mfa-delete-2020
 2020-12-08 18:06:10 demo-magicishaq-s3-bucket-2020

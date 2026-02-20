@@ -10,7 +10,7 @@ New objects are replicated once replication is enabled.
 
 - Use **S3 Batch Replication** for existing and failed objects.
 - **Permanent deletions are not replicated**, for security reasons.
-- **Replication is not transitive**—no chaining between multiple buckets.
+- **Replication is not transitive**  no chaining between multiple buckets.
 
 # Understanding Amazon S3 Replication: A Practical Overview
 
@@ -40,7 +40,7 @@ S3 Replication also supports the replication of **delete markers**, which are sp
 However:
 
 - **Replication of delete markers is optional.**
-- **Permanent deletions**, where a specific version ID is targeted and deleted, **are _not_ replicated**. This limitation is by design—to prevent accidental or malicious deletions from propagating across your storage infrastructure.
+- **Permanent deletions**, where a specific version ID is targeted and deleted, **are _not_ replicated**. This limitation is by design  to prevent accidental or malicious deletions from propagating across your storage infrastructure.
 
 ## No Replication Chaining
 

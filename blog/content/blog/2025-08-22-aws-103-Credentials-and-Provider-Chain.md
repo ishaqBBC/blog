@@ -42,7 +42,7 @@ When you use the [**AWS Command Line Interface (CLI)**](https://magicishaqblog.n
 
 ## The SDK Credentials Chain
 
-If you’re using an SDK — for example, the **Java SDK** — the process is similar but with slight variations:
+If you’re using an SDK    for example, the **Java SDK**    the process is similar but with slight variations:
 
 1. **System properties**  
    - Java-specific system properties (e.g., `aws.accessKeyId`).
@@ -73,7 +73,7 @@ Yet the application **still** has full access to every bucket. Why?
 
 The answer lies in the credentials chain. The **environment variables** you set earlier take priority over the instance profile. To fix this, you must **unset those environment variables** so that the application falls back to using the instance profile and its restricted permissions.  
 
-This is a common exam scenario — and a real-world pitfall.
+This is a common exam scenario    and a real-world pitfall.
 
 
 

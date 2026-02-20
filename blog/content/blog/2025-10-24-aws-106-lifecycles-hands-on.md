@@ -5,7 +5,7 @@ date: 2025-10-24T08:30:49.819Z
 ---
 
 ## TLDR  
-[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) [lifecycle](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/) rules let you automatically move, archive, or delete objects based on age or version. You can transition objects between storage classes (like Standard IA, Glacier, or Deep Archive), expire outdated files, and clean up incomplete uploads — saving time and reducing costs.
+[Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) [lifecycle](https://magicishaqblog.netlify.app/2025-10-17-aws-105-s3-amazon-lifecycle/) rules let you automatically move, archive, or delete objects based on age or version. You can transition objects between storage classes (like Standard IA, Glacier, or Deep Archive), expire outdated files, and clean up incomplete uploads    saving time and reducing costs.
 
 
 ## Introduction  
@@ -93,7 +93,7 @@ These often accumulate unnoticed and can inflate storage bills.
 
 Before saving, AWS provides a **timeline view** that shows how your current and non-current objects will transition over time. Once you confirm everything looks right, create the rule.
 
-AWS will now automatically apply these transitions and deletions in the background — no manual intervention required.
+AWS will now automatically apply these transitions and deletions in the background    no manual intervention required.
 
 ![Review image of making a lifecycle](/blog/src/images/106/106-1.png)
 

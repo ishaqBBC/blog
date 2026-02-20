@@ -6,9 +6,9 @@ date: 2025-05-09T08:49:13.586Z
 
 ## TLDR
 
-Amazon S3 Replication comes in two types — Cross-Region Replication (CRR) and Same-Region Replication (SRR). CRR helps copy data between buckets in different AWS regions, while SRR handles replication within the same region. Both require versioning and appropriate IAM permissions to function. Use cases include compliance, latency improvements, cross-account data sharing, and log aggregation.
+Amazon S3 Replication comes in two types    Cross-Region Replication (CRR) and Same-Region Replication (SRR). CRR helps copy data between buckets in different AWS regions, while SRR handles replication within the same region. Both require versioning and appropriate IAM permissions to function. Use cases include compliance, latency improvements, cross-account data sharing, and log aggregation.
 
-Amazon S3 is a powerful and widely used [object storage service](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) provided by [AWS](https://magicishaqblog.netlify.app/aws/). Among its features, **S3 Replication** stands out as a way to **automatically copy objects** between S3 buckets — either across regions or within the same one.
+Amazon S3 is a powerful and widely used [object storage service](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) provided by [AWS](https://magicishaqblog.netlify.app/aws/). Among its features, **S3 Replication** stands out as a way to **automatically copy objects** between S3 buckets    either across regions or within the same one.
 
 ## Two Types of Replication
 
@@ -26,7 +26,7 @@ S3 Replication is **asynchronous**, meaning the copy process runs in the backgro
 
 1. **Enable Versioning** on both the source and destination buckets. This is a strict prerequisite.
 2. **Set proper IAM permissions**, allowing the S3 service to read from the source and write to the target bucket.
-3. Buckets involved in replication can be in **the same or different AWS accounts** — giving flexibility for complex architectures.
+3. Buckets involved in replication can be in **the same or different AWS accounts**    giving flexibility for complex architectures.
 
 ## Use Cases
 
@@ -41,7 +41,7 @@ Here’s when you might choose one over the other:
 ### Same-Region Replication (SRR)
 
 - Ideal for **log aggregation** across several buckets.
-- Supports **real-time mirroring** between environments — such as production and test accounts — within the same region.
+- Supports **real-time mirroring** between environments    such as production and test accounts    within the same region.
 - Enables internal backup without leaving your chosen AWS region.
 
 ## Conclusion

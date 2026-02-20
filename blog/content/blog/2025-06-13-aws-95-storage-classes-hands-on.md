@@ -32,7 +32,7 @@ Walk through guide to create a storage class in Amazon s3
 ![Screenshot 1: S3 Dashboard with 'Create bucket' button](/blog/src/images/95/95-1.png)
 
 4. Name your bucket:  
-5. Choose a  [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/): — e.g. `us-east-1`. Leave other settings as default.  
+5. Choose a  [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/):    e.g. `us-east-1`. Leave other settings as default.  
 6. Click **Create bucket**.
 
 ![Screenshot 2: Bucket creation page](/blog/src/images/95/95-2.png)

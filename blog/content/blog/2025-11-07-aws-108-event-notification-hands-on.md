@@ -5,11 +5,11 @@ date: 2025-11-07T10:09:36.359Z
 ---
 
 ## TLDR
-[Amazon S3 Event Notifications](https://magicishaqblog.netlify.app/2025-10-31-aws-107-aws-S3-event-notification/) let your bucket tell other AWS services when something happens — like when a file is uploaded or deleted. You can send these alerts to SQS, SNS, or Lambda to trigger actions automatically. In this blog, a bucket was set up to send a message to an SQS queue every time a new file (like an image) was added. 
+[Amazon S3 Event Notifications](https://magicishaqblog.netlify.app/2025-10-31-aws-107-aws-S3-event-notification/) let your bucket tell other AWS services when something happens    like when a file is uploaded or deleted. You can send these alerts to SQS, SNS, or Lambda to trigger actions automatically. In this blog, a bucket was set up to send a message to an SQS queue every time a new file (like an image) was added. 
 
 ## Introduction
 
-When we use Amazon S3, we often want to know when something happens — like when a new file is added.  
+When we use Amazon S3, we often want to know when something happens    like when a new file is added.  
 This is where **S3 [Event Notifications](https://magicishaqblog.netlify.app/2025-10-31-aws-107-aws-S3-event-notification/)** come in. They tell other parts of our system when an event happens.
 
 below are the steps:
@@ -55,7 +55,7 @@ S3 can send notifications to three types of places:
 - **[SNS](https://docs.aws.amazon.com/sns/latest/dg/welcome.html)** (to send messages)
 - **[SQS](https://docs.aws.amazon.com/sqs/latest/dg/welcome.html)** (to send messages to a queue)
 
-We’ll choose **SQS** — a simple message queue where events wait to be read.
+We’ll choose **SQS**    a simple message queue where events wait to be read.
 
 ---
 
@@ -84,7 +84,7 @@ S3 sends a small test message to the SQS queue to check the connection.
 
 Now we can try it for real.
 
-We upload a file — let’s say **coffee.jpeg** — into our bucket.  
+We upload a file    let’s say **coffee.jpeg**    into our bucket.  
 When the file is uploaded, S3 automatically sends a message to our SQS queue.
 
 If we open the queue and **poll for messages**, we can see a new one.  

@@ -10,7 +10,7 @@ An Overview of Virtual Private Cloud (VPC) for the AWS Certified Developer – A
 
 # Introduction to VPC: Virtual Private Cloud
 
-Welcome to this section on **Virtual Private Cloud (VPC)**—a foundational concept in AWS networking that you’ll need to grasp to confidently tackle AWS certifications and build secure, scalable architectures in the cloud. Here, we’ll cover VPC basics at a high level, tailored for the **AWS Certified Developer – Associate** exam.
+Welcome to this section on **Virtual Private Cloud (VPC)**  a foundational concept in AWS networking that you’ll need to grasp to confidently tackle AWS certifications and build secure, scalable architectures in the cloud. Here, we’ll cover VPC basics at a high level, tailored for the **AWS Certified Developer – Associate** exam.
 
 ## Why VPC Matters for Your AWS Certification
 
@@ -28,7 +28,7 @@ Here's a quick look at what we’ll cover:
 - **VPC Peering and VPC Endpoints** – Methods for connecting VPCs securely within or across AWS accounts, enabling private communication without traversing the internet.
 - **Site-to-Site VPN and Direct Connect** – Options for securely linking your on-premises network with your VPC.
 
-These topics cover the essentials you’ll need to confidently address VPC-related questions in the exam. If you've already completed a VPC section in another AWS course, such as for [SysOps](https://aws.amazon.com/certification/certified-sysops-admin-associate/) or [Solutions Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/), feel free to skip ahead—or stay tuned for a helpful review!
+These topics cover the essentials you’ll need to confidently address VPC-related questions in the exam. If you've already completed a VPC section in another AWS course, such as for [SysOps](https://aws.amazon.com/certification/certified-sysops-admin-associate/) or [Solutions Architect](https://aws.amazon.com/certification/certified-solutions-architect-associate/), feel free to skip ahead  or stay tuned for a helpful review!
 
 ## How This Post will help you
 

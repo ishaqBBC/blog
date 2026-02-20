@@ -78,7 +78,7 @@ They are commonly used to:
 - Allow users to upload files directly to S3
 - Avoid routing large files through your application servers
 
-For uploads, a pre-signed `PUT` URL lets a user send a file straight to a specific location in your bucket — while the bucket itself stays private.
+For uploads, a pre-signed `PUT` URL lets a user send a file straight to a specific location in your bucket    while the bucket itself stays private.
 
 
 

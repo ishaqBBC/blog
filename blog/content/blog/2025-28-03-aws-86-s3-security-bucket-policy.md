@@ -33,7 +33,7 @@ ACLs allow you to specify who can access individual objects within your bucket, 
 How IAM Permissions and Resource Policies Work Together
 So, how do - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) permissions and resource policies work together? To access an S3 object, an - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) user or role must have the necessary permissions, as defined by - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policies. Additionally, the resource-based policies (such as S3 Bucket policies) must also permit the requested action. If there is an explicit "Deny" in either the - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policy or the bucket policy, access will be denied.
 
-For example, if you create an - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policy that allows "GetObject" on a specific bucket, but the S3 Bucket policy explicitly denies public access, the user will not be able to access the object—even though the - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policy grants permission.
+For example, if you create an - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policy that allows "GetObject" on a specific bucket, but the S3 Bucket policy explicitly denies public access, the user will not be able to access the object  even though the - [IAM](https://magicishaqblog.netlify.app/2023-02-03-aws-5-IAM-polices) policy grants permission.
 
 ## Deep Dive
 The core of S3 security revolves around Bucket policies, which are defined using JSON. A typical bucket policy includes:

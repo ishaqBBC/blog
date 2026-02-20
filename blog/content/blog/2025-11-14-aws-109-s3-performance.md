@@ -90,7 +90,7 @@ For large files, you can request only specific parts of a file:
 Downloading chunks in **parallel** can improve throughput.
 Byte-range fetches also help if you only need a small part of a file (e.g., the header).
 
- Note: Byte-range fetches are not automatically faster—performance gains depend on workload and parallelization.
+ Note: Byte-range fetches are not automatically faster  performance gains depend on workload and parallelization.
 
 
 ## Final Thoughts

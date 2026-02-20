@@ -17,7 +17,7 @@ In this guide, we walk through how to set up **cross-region replication** for Am
 
 Replication in Amazon S3 allows you to automatically copy objects across buckets, even in different [AWS regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/#region). This is a powerful feature for **disaster recovery**, **data compliance**, and **global availability**.
 
-In this walkthrough, we’ll set up a simple [replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/) scenario using two buckets—one in Europe and another in the US.
+In this walkthrough, we’ll set up a simple [replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/) scenario using two buckets  one in Europe and another in the US.
 
 ## Step-by-Step: Setting Up S3 Replication
 
@@ -41,7 +41,7 @@ Next, create your target bucket:
 
 ### 3. Upload a Test File
 
-We upload a file, `beach.jpg`, to the **origin bucket**. At this point, **nothing gets replicated yet**—replication needs to be configured.
+We upload a file, `beach.jpg`, to the **origin bucket**. At this point, **nothing gets replicated yet**  replication needs to be configured.
 
 ### 4. Create a Replication Rule
 
