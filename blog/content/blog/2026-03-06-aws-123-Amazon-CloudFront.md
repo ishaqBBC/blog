@@ -1,128 +1,116 @@
 ---
 layout: blog
-title: "AWS 122: Quiz 10: Amazon S3 Advanced"
-date: 2026-02-27T23:36:08.298Z
+title: "AWS 123: Amazon Cloud Front"
+date: 2026-03-06T10:55:11.661Z
 ---
 
+## TLDR
+CloudFront is AWS’s CDN. It caches website content at global edge locations so users get faster load times. Requests go to the nearest edge, which fetches from the origin once and then serves cached copies.
 
+# What Is Amazon CloudFront?
 
-<style>
-  .correct{
-        color: #9C27B0;
-    -webkit-box-shadow: 5px 5px 20px 5px #FF19FD;
-    box-shadow: 0px 2px 11px 4px #FF19FD;
-    border-radius: 10%;
-    margin: 14px;
-  }
-  </style>
+[Amazon CloudFront](https://aws.amazon.com/cloudfront/) is a [content delivery network, or CDN](https://en.wikipedia.org/wiki/Content_delivery_network). A CDN is a system that delivers web content from servers located around the world. The goal is simple: bring the content closer to the user.
 
-## Introduction
+For detailed documentation, visit the [Amazon CloudFront Developer Guide](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html).
 
-This weeks blog post will be a quiz about [**Amazon S3 Security**](https://magicishaqblog.netlify.app/?s=Amazon+S3+Security)
+When people study for cloud exams, the term **CDN** often appears. In many AWS contexts, this refers to CloudFront.
 
-<h4>Question 1:  Your client wants to make sure that file encryption is happening in S3, but he wants to fully manage the encryption keys and never store them in AWS. You recommend him to use ............................. </h4> <details>
-   <summary>SSE-S3</summary>
-   <p>False</p>
-</details><details>
-   <summary>SSE-KMS</summary>
-   <p>False</p>
-</details><details>
-   <summary>SSE-C</summary>
-   <p><span class="correct">Correct You selected SSE-C because it allows you to manage your own encryption keys while still benefiting from encryption performed by AWS. This ensures that your keys are never stored within AWS, aligning with your client's requirement for complete control over their encryption process.</span>  </p>
-</details><details>
-   <summary>Client-Side Encryption</summary>
-   <p>False</p>
-</details>
-<h4>Question 3:  Your company does not trust AWS for the encryption process and wants it to happen on the application. You recommend them to use .................... </h4> <details>
-   <summary>SSE-S3</summary>
-   <p>False</p>
-</details><details>
-   <summary>SSE-KMS</summary>
-   <p>False</p>
-</details><details>
-   <summary>SSE-C</summary>
-   <p>False</p>
-</details><details>
-   <summary>Client-Side Encryption</summary>
-   <p><span class="correct">Correct With Client-Side Encryption, you have to do the encryption yourself and you have full control over the encryption keys. You perform the encryption yourself and send the encrypted data to AWS. AWS does not know your encryption keys and cannot decrypt your data.Explain this further</span>  </p>
-</details>
-<h4>Question 4:  You have a website that loads files from an S3 bucket. When you try the URL of the files directly in your Chrome browser it works, but when you try to visit a website with a different domain that tries to load these files it doesn't. What's the problem? </h4> <details>
-   <summary>The Bucket policy is wrong</summary>
-   <p>False</p>
-</details><details>
-   <summary>The IAM policy is wrong</summary>
-   <p>False</p>
-</details><details>
-   <summary>Encryption is wrong</summary>
-   <p>False</p>
-</details><details>
-   <summary>CORS is wrong</summary>
-   <p><span class="correct">Correct Cross-Origin Resource Sharing (CORS) defines a way for client web applications that are loaded in one domain to interact with resources in a different domain. To learn more about CORS, go here: https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.htmlExplain this further</span>  </p>
-</details>
-<h4>Question 5:  Which S3 encryption method mandates that you use HTTPS while uploading/download objects? </h4> <details>
-   <summary>SSE-C</summary>
-   <p><span class="correct">Correct You selected SSE-C because it requires the use of HTTPS for both uploading and downloading objects, ensuring that your data remains secure during transmission. This aligns with the focus on maintaining data integrity and confidentiality in cloud storage practices.</span>  </p>
-</details><details>
-   <summary>SSE-S3</summary>
-   <p>False</p>
-</details><details>
-   <summary>SSE-KMS</summary>
-   <p>False</p>
-</details><details>
-   <summary>Client-Side Encryption</summary>
-   <p>False</p>
-</details>
-<h4>Question 6:  You have enabled versioning and want to be extra careful when it comes to deleting files on an S3 bucket. What should you enable to prevent accidental permanent deletions? </h4> <details>
-   <summary>Use a bucket policy</summary>
-   <p>False</p>
-</details><details>
-   <summary>Encrypt the files</summary>
-   <p>False</p>
-</details><details>
-   <summary>Enable MFA Delete</summary>
-   <p><span class="correct">Correct MFA Delete forces users to use MFA codes before deleting S3 objects. It's an extra level of security to prevent accidental deletions.Explain this further</span>  </p>
-</details><details>
-   <summary>Disable versioning</summary>
-   <p>False</p>
-</details>
-<h4>Question 7:  You would like all your files in an S3 bucket to be encrypted by default. What is the optimal way of achieving this? </h4> <details>
-   <summary>Use a bucket policy that forces HTTPS connections</summary>
-   <p>False</p>
-</details><details>
-   <summary>Do nothing, Amazon S3 automatically encrypt new objects using Server-Side Encryption with S3-Managed Keys (SSE-S3)</summary>
-   <p><span class="correct">Correct By selecting "Do nothing, Amazon S3 automatically encrypt new objects using Server-Side Encryption with S3-Managed Keys (SSE-S3)," you ensured that all new files in your S3 bucket are encrypted by default, leveraging AWS's built-in capabilities without needing additional configuration, which aligns perfectly with the goal of securing data at rest.</span>  </p>
-</details><details>
-   <summary>Enable Versioning</summary>
-   <p>False</p>
-</details>
-<h4>Question 8:  You suspect that some of your employees try to access files in an S3 bucket that they don't have access to. How can you verify this is indeed the case without them noticing? </h4> <details>
-   <summary>Restrict their IAM policies and look at CloudTail logs</summary>
-   <p>False</p>
-</details><details>
-   <summary>Use a bucket policy</summary>
-   <p>False</p>
-</details><details>
-   <summary>Enable S3 Access Logs and analyze them using Athena</summary>
-   <p><span class="correct">Correct S3 Access Logs log all the requests made to S3 buckets and Amazon Athena can then be used to run serverless analytics on top of the log files.Explain this further</span>  </p>
-</details>
-<h4>Question 9:  You are looking to provide temporary URLs to a growing list of federated users to allow them to perform a file upload on your S3 bucket to a specific location. What should you use? </h4> <details>
-   <summary>S3 CORS</summary>
-   <p>False</p>
-</details><details>
-   <summary>S3 Pre-Signed URL</summary>
-   <p><span class="correct">Correct S3 Pre-Signed URLs are temporary URLs that you generate to grant time-limited access to some actions in your S3 bucket.Explain this further</span>  </p>
-</details><details>
-   <summary>S3 Bucket Policies</summary>
-   <p>False</p>
-</details><details>
-   <summary>IAM Users</summary>
-   <p>False</p>
-</details>
+CloudFront improves read performance by caching copies of website content at many locations across the globe. These locations are called **edge locations**.
+
+![image of cloudFront Logo](/blog/src/images/123/123-1.png);
+
+When content is stored closer to users, the time it takes to load a page becomes shorter. This delay is known as [latency](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/). Lower [latency](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/) leads to a faster and smoother user experience.
+
+## A Global Network
+
+CloudFront operates through hundreds of points of presence around the world. These include edge locations and regional edge caches.
+
+Each point of presence acts as a local access point for users. Instead of requesting data from a distant server, users connect to the nearest CloudFront location.
+
+This global distribution also strengthens security. When traffic spreads across many locations, it becomes harder for attackers to overwhelm a single system.
+
+Large scale attacks known as distributed denial of service attacks, or DDoS attacks, attempt to flood servers with traffic. CloudFront helps defend against these threats. It works with services such as AWS Shield and AWS Web Application Firewall to provide protection.
+
+![image of a global network](/blog/src/images/123/123-2.png)
+
+## How CloudFront Delivers Content
+
+CloudFront sits between the user and the origin server. The origin is the system that stores the original version of the content.
+
+The process works in a few steps:
+
+1. A user sends a request for content.
+2. The request goes to the nearest CloudFront edge location.
+3. The edge location checks whether the content is already cached.
+4. If the content is cached, it is returned immediately.
+5. If it is not cached, CloudFront retrieves it from the origin server.
+6. The content is then stored in the edge cache for future requests.
+
+This system reduces repeated trips to the origin server.
+
+## Example
+
+Imagine a website hosted in an [Amazon [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/)](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) located in Australia.
+
+A user in the United States visits the site. Instead of connecting directly to Australia, the request goes to a nearby CloudFront edge location in the United States.
+
+If the content is not already stored there, CloudFront fetches it from the [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) in Australia. The content is then cached at the US edge location.
+
+When another user in the same region requests the same content, the edge location serves it directly. There is no need to contact the origin again.
+
+The same process works in other regions. A user in China connects to a nearby point of presence. A user in Brazil connects to a location closer to South America. Each edge location can store cached copies of the content.
+
+## Origins in CloudFront
+
+CloudFront can retrieve content from several types of origins. An origin is the backend service that holds the original files.
+
+Common origins include:
+
+- **[Amazon [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/)](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/)s** used to store files such as images, videos, and static websites  
+- **Resources inside a [Virtual Private Cloud (VPC)](https://magicishaqblog.netlify.app/2024-10-01-aws-81-vpc-round-up/)** such as private load balancers or  [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)s  
+- **Custom HTTP servers** such as public web servers or [application load balancers](https://magicishaqblog.netlify.app/ApplicationLoadBalancer/2023-08-18-aws-29-applicaton-load-balancer/)  
+
+When CloudFront connects to an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/), access can be secured using Origin Access Control, or OAC. This method allows CloudFront to retrieve files while preventing direct public access to the bucket.
+
+## CloudFront and Edge Caching
+
+Edge locations cache content locally. Once an item is cached, future requests from nearby users are served directly from that cache.
+
+For example:
+
+- A user in Los Angeles requests content.
+- The Los Angeles edge location retrieves the content from the origin.
+- The content is stored in the local cache.
+- Later requests from users in the same area are served from that cache.
+
+This approach reduces load on the origin server and improves performance.
+
+## CloudFront vs S3 [cross region replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/)
+
+CloudFront and S3 [cross region replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/) solve different problems.
+
+**CloudFront**
+
+- Uses a global network of more than 200 points of presence  
+- Caches files temporarily at edge locations  
+- Designed to deliver static content quickly to users worldwide  
+
+**S3 [cross region replication](https://magicishaqblog.netlify.app/2025-05-09-aws-91-amazon-s3-replication/)**
+
+- Copies an entire [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) to another region  
+- Requires configuration for each destination region  
+- Updates files in near real time without caching  
+- Used when data must exist permanently in multiple regions  
+
+CloudFront focuses on fast delivery. Replication focuses on data duplication.
 
 ## Conclusion
 
-How did you do? 
+CloudFront allows a single origin server to serve users across the world with low [latency](https://magicishaqblog.netlify.app/2024-07-26-aws-67-route53-latency-routing/). By caching content at edge locations, it reduces delays and improves performance.
 
+At the same time, it provides built in security features and protection against large scale attacks.
+
+For modern web applications, especially those serving a global audience, content delivery networks such as CloudFront have become a central part of the internet’s infrastructure.
 ## Recap
 
 Based off the previous posts in the series, we have covered the following topics:
@@ -250,3 +238,7 @@ Based off the previous posts in the series, we have covered the following topics
 - [AWS 118: Amazon S3 Pre-signed URLS](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/)
 - [AWS 119: Amazon S3 Pre-signed URLS Hands On](https://magicishaqblog.netlify.app/2026-06-02-aws-119-pre-signed-urls-hands-on/)
 - [AWS 120: Amazon S3 Object lambdas](https://magicishaqblog.netlify.app/2026-02-20-aws-121-s3-object-lambdas/)
+- [AWS 121: Quiz 5: Amazon S3 Advanced](https://magicishaqblog.netlify.app/quiz-11/2026-02-20-Quiz-11/)
+
+
+
