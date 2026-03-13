@@ -111,6 +111,8 @@ CloudFront allows a single origin server to serve users across the world with lo
 At the same time, it provides built in security features and protection against large scale attacks.
 
 For modern web applications, especially those serving a global audience, content delivery networks such as CloudFront have become a central part of the internet’s infrastructure.
+
+
 ## Recap
 
 Based off the previous posts in the series, we have covered the following topics:
@@ -237,8 +239,8 @@ Based off the previous posts in the series, we have covered the following topics
 - [AWS 117: Amazon S3 Access Logs - Hands On](https://magicishaqblog.netlify.app/2023-23-01-aws-117-access-logs-hands-on/)
 - [AWS 118: Amazon S3 Pre-signed URLS](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/)
 - [AWS 119: Amazon S3 Pre-signed URLS Hands On](https://magicishaqblog.netlify.app/2026-06-02-aws-119-pre-signed-urls-hands-on/)
-- [AWS 120: Amazon S3 Object lambdas](https://magicishaqblog.netlify.app/2026-02-20-aws-121-s3-object-lambdas/)
-- [AWS 121: Quiz 5: Amazon S3 Advanced](https://magicishaqblog.netlify.app/quiz-11/2026-02-20-Quiz-11/)
-
+- [AWS 120: Amazon S3 Access Points](https://magicishaqblog.netlify.app/2026-12-02-13-aws-120-access-points/)
+- [AWS 121: Amazon S3 Object lambdas](https://magicishaqblog.netlify.app/2026-02-20-aws-121-s3-object-lambdas/)
+- [AWS 122: Quiz 10: Amazon S3 Advanced](https://magicishaqblog.netlify.app/quiz-11/2026-02-20-Quiz-11/)
 
 
