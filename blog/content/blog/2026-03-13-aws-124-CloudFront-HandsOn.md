@@ -5,11 +5,11 @@ date: 2026-03-13T12:07:18.069Z
 ---
 
 ## TLDR
-Amazon [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/), combined with S3, lets you serve webpages faster  by caching and increasing security. This guide covers setting up an S3 bucket, creating a [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) distribution, and configuring private access. [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) caches files at edge locations, improving global performance while keeping S3 objects private. Ideal for hosting websites and static content.
+Amazon [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/), combined with S3, lets you serve webpages faster  by caching and increasing security. Today we cover:  setting up an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) , creating a [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) distribution, and configuring private access. [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) caches files at edge locations, improving global performance while keeping S3 objects private. Ideal for hosting websites and static content.
 
 The basic process is: 
 
-1. Create an S3 bucket and upload files
+1. Create an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/)  and upload files
 2. Create a [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) distribution
 3. Configure the bucket as the origin
 4. Allow private access through a [bucket policy](https://magicishaqblog.netlify.app/2025-28-03-aws-86-s3-security-bucket-policy/)
@@ -18,7 +18,7 @@ The basic process is:
 
 One of the most common ways to use Amazon [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) is to deliver files stored in Amazon S3. This setup allows you to keep your files private while still serving them quickly to users around the world.
 
-In this guide, we walk through a  example of creating an S3 bucket, uploading files, and connecting it to [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/).
+In this guide, we walk through a  example of creating an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) , uploading files, and connecting it to [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/).
 
 ## Create an S3 Bucket for Store Files
 
