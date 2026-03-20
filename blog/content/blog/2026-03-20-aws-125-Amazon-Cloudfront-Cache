@@ -3,6 +3,8 @@ layout: blog
 title: "AWS 125: Amazon CloudFront Caching" 
 date: 2026-03-20T10:32:54.760Z
 ---
+
+
 ## TLDR
 * CloudFront uses [edge locations](https://aws.amazon.com/cloudfront/features/#Edge_Locations) globally to store content closer to users, ensuring faster delivery and reduced latency.
 * It checks the cache before querying the origin server. This ensures faster responses for repeated requests.
@@ -10,7 +12,7 @@ date: 2026-03-20T10:32:54.760Z
 * [Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers), cookies, and query strings can customize the Cache Key.
 * **Cache Policy** defines caching behavior.
 * **Origin Request Policy** specifies data sent to the origin server.
-* The objective is to optimize cache hits and reduce origin requests.
+* The objective is to enhance cache hits and reduce origin requests.
 
 
 ## Introduction
@@ -25,7 +27,7 @@ In computing, a cache is a high-speed data storage layer that stores a subset of
 
 ![image of caching in action](/blog/src/images/125/125-1.png)
 
-### How does CloudFront caching work?
+### How does caching work?
 
 1. A user makes a request (for example, opening a webpage).
 2. The nearest[ CloudFront edge location](https://aws.amazon.com/cloudfront/features/#Edge_Locations) checks:
@@ -52,7 +54,6 @@ A Cache Key is made up of:
 
 If two users request the same URL, they’ll get the cached version.
 
-
 Sometimes, the same page changes depending on:
 
 * Language
@@ -68,8 +69,6 @@ So, you can expand the Cache Key to include:
 * **Query strings** (extra info in the URL like `?size=large`)
 
 This is controlled using a **cache policy**.
-
-
 
 ### Cache Policy
 
@@ -109,14 +108,37 @@ You can also manually remove cached content using something called [**invalidati
 * Decides **what affects caching**
 * Determines the **Cache Key**
 
+This is stored in a yaml file, and looks similar to the one below
+```yaml
+CachePolicy:
+    Name: "CustomCachePolicy"
+    ParametersInCacheKeyAndForwardedToOrigin:
+        EnableAcceptEncodingGzip: true
+        EnableAcceptEncodingBrotli: true
+        HeadersConfig:
+            HeaderBehavior: "whitelist"
+            Headers:
+                - "Accept-Language"
+        CookiesConfig:
+            CookieBehavior: "all"
+        QueryStringsConfig:
+            QueryStringBehavior: "whitelist"
+            QueryStrings:
+                - "size"
+                - "color"
+    DefaultTTL: 3600
+    MaxTTL: 86400
+    MinTTL: 0
+```
+
 #### Origin Request Policy
 
 * Decides **what gets sent to the origin server**
 * Does **NOT affect caching**
 
-**Cache Policy** determines what affects caching and the Cache Key, while **Origin Request Policy** decides what data is sent to the origin server without impacting caching.  
+**Cache Policy** defines the rules for caching, including what data is used to create the Cache Key and how long content is stored. On the other hand, the **Origin Request Policy** specifies what data is forwarded to the origin server, without influencing the caching process.  
 
-### A simple example
+### An example
 
 When caching, you can base the Cache Key on the URL and the language header, while ensuring that additional data like the user session ID and device type is sent only to the origin server. This approach allows CloudFront to maintain efficient caching performance by using the language header in the Cache Key, while still providing the origin server with the necessary session and device information to handle requests appropriately.
 
@@ -125,7 +147,7 @@ When caching, you can base the Cache Key on the URL and the language header, whi
 
 ### Conclusion
 
-Effective caching with Amazon CloudFront is essential for optimizing website performance, reducing costs, and enhancing user experience. By understanding and implementing caching strategies such as Cache Keys, Cache Policies, and TTL, you can ensure faster content delivery and minimize the load on your origin servers. Leveraging these tools allows you to build websites that are not only faster but also more reliable and scalable, meeting the demands of modern users.
+Effective caching with Amazon CloudFront is essential for website performance, reducing costs, and enhancing user experience. By understanding and implementing caching strategies such as Cache Keys, Cache Policies, and TTL, you can ensure faster content delivery and minimise the load on your origin servers. These tools allows you to build websites that are not only faster but also more reliable and scalable, meeting the demands of modern users.
 
 ## Recap
 
