@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 126: CloudFront Invalidations"
-date: dateT17:08:34.142Z
+date: 2026-03-27T11:48:51.415Z
 ---
 
 ## TLDR
