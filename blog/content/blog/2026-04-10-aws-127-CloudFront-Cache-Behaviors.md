@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 127: Cache Behaviors"
-date: dateT17:08:34.142Z
+date: 2026-04-10T11:01:24.997Z
 ---
 
 
