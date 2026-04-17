@@ -238,7 +238,7 @@ Based off the previous posts in the series, we have covered the following topics
 - [AWS 119: Amazon S3 Pre-signed URLS Hands On](https://magicishaqblog.netlify.app/2026-06-02-aws-119-pre-signed-urls-hands-on/)
 - [AWS 120: Amazon S3 Access Points](https://magicishaqblog.netlify.app/2026-12-02-13-aws-120-access-points/)
 - [AWS 121: Amazon S3 Object lambdas](https://magicishaqblog.netlify.app/2026-02-20-aws-121-s3-object-lambdas/)
-- [AWS 122: Quiz 10: Amazon S3 Advanced](https://magicishaqblog.netlify.app/quiz-11/2026-02-20-Quiz-11/)
+- [AWS 122: Quiz 11: Amazon S3 Security](https://magicishaqblog.netlify.app/quiz-11/2026-02-20-Quiz-11/)
 - [AWS 123: Amazon CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/)
 - [AWS 124: Amazon CloudFront - Hands On](https://magicishaqblog.netlify.app/2026-03-13-aws-124-CloudFront-HandsOn/)
 - [AWS 125: CloudFront Caching](https://magicishaqblog.netlify.app/2026-03-20-aws-125-Amazon-Cloudfront-Caching/)
