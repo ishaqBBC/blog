@@ -1,6 +1,6 @@
 ---
 layout: blog
-title: "AWS 132: Lighting Talk"
+title: "AWS 132: Lightning Talk"
 date: 2026-05-29T14:30:12.910Z
 ---
 
