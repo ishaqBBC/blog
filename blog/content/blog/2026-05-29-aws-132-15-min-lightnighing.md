@@ -31,7 +31,7 @@ Every building needs locks, keys and security guards. AWS is no different.
 ### IAM & AWS CLI
 
 Identity and Access Management (IAM) works like employee ID badges. It controls who can enter certain areas and what actions they are allowed to perform.
-![IAM icon](/blog/src/images/132/132-1.svg)
+![IAM icon](/blog/src/images/132/132-1.png)
 
 
 ### IAM Roles & Policies
@@ -47,14 +47,14 @@ Find out more on this site:
 ### S3 Security
 
 Security settings for Amazon S3 act like padlocks on storage units, ensuring only authorised people can open them.
-![IAM roles icon](/blog/src/images/132/132-2.svg)
-![IAM polices icon](/blog/src/images/132/132-3.svg)
+![IAM roles icon](/blog/src/images/132/132-2.png)
+![IAM polices icon](/blog/src/images/132/132-3.png)
 
 ### KMS & Encryption
 
 Encryption tools protect sensitive information by turning it into secret code that only approved users can read.
 
-![Encryption icon](/blog/src/images/132/132-4.svg)
+![Encryption icon](/blog/src/images/132/132-4.png)
  
 
 ## The Cloud: Renting Computers on the Internet
@@ -68,9 +68,9 @@ Find out more on this site:
 - [Elastic Load Balancing notes](https://magicishaqblog.netlify.app/2023-27-10-aws-39-connection-draining/)
 - [Auto Scaling Groups overview](https://magicishaqblog.netlify.app/2023-11-10-aws-40-Auto-Scaling-Groups/)
 
-![EC2 Icon](/blog/src/images/132/132-5.svg)
-![EC2 Icon](/blog/src/images/132/132-6.svg)
-![EC2 Icon](/blog/src/images/132/132-8.svg)
+![EC2 Icon](/blog/src/images/132/132-5.png)
+![EC2 Icon](/blog/src/images/132/132-6.png)
+![EC2 Icon](/blog/src/images/132/132-8.png)
 
 ### EC2 Fundamentals
 
@@ -101,7 +101,7 @@ Find out more on this site:
 ### RDS, Aurora and ElastiCache
 
 These are organised database systems that store structured information. ElastiCache uses memory (RAM) to retrieve information extremely quickly.
-![RDS Icon](/blog/src/images/132/132-9.svg)
+![RDS Icon](/blog/src/images/132/132-9.png)
 
 ### Amazon S3
 
@@ -109,12 +109,12 @@ S3 is one of AWS’s most popular services — essentially a giant digital stora
 
 find out more on this site: 
 [AWS S3](https://magicishaqblog.netlify.app/?s=s3)
-![s3 Icon](/blog/src/images/132/132-10.svg)
+![s3 Icon](/blog/src/images/132/132-10.png)
 
 ### DynamoDB
 
 DynamoDB is a fast, scalable database designed to handle huge amounts of information without slowing down.
-![Dynamo DB Icon](/blog/src/images/132/132-11.svg)
+![Dynamo DB Icon](/blog/src/images/132/132-11.png)
 
  
 
@@ -234,7 +234,7 @@ These services coordinate workflows, ensuring different tasks happen in the corr
 
 Amazon Cognito manages user accounts, sign-up forms and login systems for applications.
 
- ![icons for Sign in](/blog/src/images/132/132-18.svg)
+ ![icons for Sign in](/blog/src/images/132/132-18.png)
 
 
  
