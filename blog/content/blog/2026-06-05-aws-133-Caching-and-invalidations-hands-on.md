@@ -8,7 +8,7 @@ date: 2026-06-05T08:44:54.507Z
 
 
 
-## TL;DR
+## TLDR
 
 Amazon [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) stores copies of files closer to users to improve website speed. Cache policies determine what information [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) uses to decide whether to serve a cached file or fetch a new one. Origin request policies control what additional data is sent to the origin server. When content changes but remains cached, invalidations can be used to force [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) to fetch the latest version from the origin.
 
