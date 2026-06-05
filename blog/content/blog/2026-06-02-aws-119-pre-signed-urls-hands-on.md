@@ -5,7 +5,7 @@ date: 2026-02-06T12:50:51.324Z
 ---
 ## TLDR
 
-[Amazon S3 pre-signed URLs](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) let you temporarily share private files without making your [bucket](TODO) public. You generate a link that works for a set time, only those with the link gain access. Once the link expires, access is automatically blocked.
+[Amazon S3 pre-signed URLs](https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/) let you temporarily share private files without making your [bucket](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) public. You generate a link that works for a set time, only those with the link gain access. Once the link expires, access is automatically blocked.
 
 ## Introduction
 [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/) is used to store files in the cloud, from documents to images.[S3 buckets](https://magicishaqblog.netlify.app/2025-03-21-aws-85-Amazon-s3-hands-on/) are private by default, meaning their contents cannot be accessed by the public. But what if you want to share a single file quickly and securely without changing the bucket’s privacy settings?

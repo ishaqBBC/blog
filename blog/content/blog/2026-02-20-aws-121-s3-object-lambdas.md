@@ -29,7 +29,7 @@ Instead of storing multiple versions of the same object, you transform it in rea
 To understand how this works, we need three building blocks:
 
 * [S3 Bucket](https://magicishaqblog.netlify.app/2025-04-04-aws-87-s3-bucket-hands-on/)
-* [ S3 Access Point](TODO)
+* [ S3 Access Point](https://magicishaqblog.netlify.app/2026-12-02-13-aws-120-access-points/)
 * [A Lambda function](https://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
 
 below is a diagram

@@ -1,0 +1,170 @@
+---
+layout: blog
+title: "AWS 133: CloudFront Cache Behaviours and Invalidations - Hands On"
+date: 2026-06-05T08:44:54.507Z
+---
+
+
+
+
+
+## TL;DR
+
+Amazon [CloudFront](TODO) stores copies of files closer to users to improve website speed. Cache policies determine what information [CloudFront](TODO) uses to decide whether to serve a cached file or fetch a new one. Origin request policies control what additional data is sent to the origin server. When content changes but remains cached, invalidations can be used to force [CloudFront](TODO) to fetch the latest version from the origin.
+
+ 
+
+# How [CloudFront](TODO) Decides What to Cache
+
+Caching is one of the most important features of a content delivery network (CDN). In Amazon [CloudFront](TODO), caching helps websites load faster by storing copies of files at locations around the world.
+
+Every [CloudFront](TODO) distribution includes a default cache behaviour. This behaviour applies to all requests unless a more specific rule is created.
+
+The default behaviour uses the path pattern `*`, which means it matches every request. While the path pattern cannot be edited for the default behaviour, administrators can customise how [CloudFront](TODO) handles caching through cache policies and origin request policies.
+
+## Creating a Cache Policy
+
+A cache policy controls how [CloudFront](TODO) stores and serves cached content.
+
+When creating a cache policy, several [Time to Live (TTL)](TODO) settings can be configured:
+
+* **Minimum TTL** – the shortest amount of time an object can remain cached.
+* **Maximum TTL** – the longest amount of time an object can remain cached.
+* **Default TTL** – the standard caching period when no other instructions are provided.
+
+These settings determine how long [CloudFront](TODO) keeps content before checking for updates from the origin.
+
+### Building the Cache Key
+
+The cache key is used by [CloudFront](TODO) to decide whether it already has a suitable cached version of a file.
+
+Administrators can choose which request elements are included in the cache key:
+
+* HTTP headers
+* Query strings
+* Cookies
+
+For example, if a particular header is included in the cache key, [CloudFront](TODO) will store separate cached versions based on the value of that header.
+
+This provides fine-grained control over caching behaviour and allows different users or requests to receive different content when necessary.
+
+## Understanding Origin Request Policies
+
+While cache policies determine what affects caching, origin request policies control what information is forwarded to the origin server.
+
+Importantly, any headers, cookies or query strings included in the cache key are automatically forwarded to the origin.
+
+However, there may be situations where additional information needs to be sent to the origin without affecting caching.
+
+This is where origin request policies become useful.
+
+An origin request policy allows administrators to forward:
+
+* Additional headers
+* Extra query strings
+* Additional cookies
+
+These values are passed to the origin server but do not become part of the cache key unless specifically configured in the cache policy.
+
+In simple terms:
+
+* **Cache Policy = What affects caching**
+* **Origin Request Policy = What is forwarded to the origin**
+
+Together, these policies provide precise control over how [CloudFront](TODO) handles requests.
+
+## Creating Multiple Cache Behaviours
+
+  [CloudFront](TODO) distributions are not limited to a single behaviour.
+
+Additional behaviours can be created for specific paths.
+
+For example:
+
+```text
+/images/*
+```
+
+A rule like this could send image requests to a different origin.
+
+That origin might be:
+
+* Another Amazon S3 bucket
+* An Amazon EC2 instance
+* A load balancer
+* Any supported web server
+
+Each behaviour can have its own:
+
+* Cache policy
+* Origin request policy
+* Origin server
+
+  [CloudFront](TODO) evaluates behaviours from the most specific to the least specific. This means a request for an image would match `/images/*` before falling back to the default `*` behaviour.
+
+This flexibility allows different parts of a website to use different caching strategies.
+
+## Demonstrating Cache Expiry
+
+To understand caching in practice, consider a simple website hosted in Amazon S3.
+
+Suppose the page title originally contains the text:
+
+> I really love coffee
+
+The file is then edited and changed to:
+
+> I really love coffee every morning
+
+After uploading the updated file to Amazon S3, opening the file directly from S3 shows the new version immediately.
+
+However, refreshing the website through [CloudFront](TODO) still displays the original text.
+
+Why?
+
+Because [CloudFront](TODO) has already cached the earlier version and is configured to keep it for one day. Until the cache expires, [CloudFront](TODO) continues serving the stored copy instead of requesting the updated file from S3.
+
+## Using Invalidations to Refresh Content
+
+Sometimes it is necessary to make [CloudFront](TODO) retrieve updated content immediately.
+
+This can be achieved through an invalidation.
+
+An invalidation tells [CloudFront](TODO) to remove cached objects so that fresh versions are fetched from the origin during the next request.
+
+To invalidate everything in the distribution, the following path can be used:
+
+```text
+/*
+```
+
+The asterisk acts as a wildcard, meaning all cached objects are removed.
+
+Once the invalidation process completes, [CloudFront](TODO) fetches the latest version of files directly from Amazon S3.
+
+When the website is refreshed after the invalidation, the updated title appears:
+
+![image of cloudfront](/blog/src/images/133/133-1.png)
+
+> I really love coffee every morning
+
+The change becomes visible because [CloudFront](TODO) no longer serves the outdated cached copy.
+
+## Why Invalidations Matter
+
+Invalidations are particularly useful when:
+
+* Correcting errors in published content
+* Updating website assets quickly
+* Deploying urgent fixes
+* Replacing files before their TTL expires
+
+Without invalidations, users may continue seeing older versions of content until the cache naturally expires.
+
+## Conclusion
+
+  [CloudFront](TODO)'s caching system is designed to improve performance by reducing the number of requests sent to origin servers. Cache policies define what information is used to create cache entries, while origin request policies control what additional data is forwarded to the origin.
+
+Multiple cache behaviours can be configured to apply different rules to different parts of a website. When content changes before the cache expires, invalidations provide a simple way to force [CloudFront](TODO) to fetch fresh content from the origin.
+
+Understanding these features is essential for building fast, efficient and reliable web applications using Amazon [CloudFront](TODO).

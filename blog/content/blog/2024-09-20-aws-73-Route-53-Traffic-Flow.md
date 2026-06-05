@@ -8,7 +8,7 @@ date: 2024-09-20T14:26:12.677Z
 
 ## TLDR
 
-This guide walks through setting up [geoproximity routing in AWS Route 53.](TODO) Using a visual map interface **Traffic Flow**, you can specify different geographical [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/) and route traffic to various endpoints based on location and custom bias settings. While we explore the creation of geoproximity rules, note that deploying these policies costs, with pricing starting at $50 per month.
+This guide walks through setting up [geoproximity routing in AWS Route 53.](https://magicishaqblog.netlify.app/2024-11-09-aws-72-Route-53-Geoproximity-Routing-Policy/) Using a visual map interface **Traffic Flow**, you can specify different geographical [regions](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/) and route traffic to various endpoints based on location and custom bias settings. While we explore the creation of geoproximity rules, note that deploying these policies costs, with pricing starting at $50 per month.
 
 ---
 
@@ -22,7 +22,7 @@ In this post, we will create a geoproximity routing policy, configure endpoints,
 
 ### Step 1: Initial Setup
 
-Begin by creating a geoproximity routing policy in [AWS Route 53](TODO). Unlike a weighted rule where traffic is split based on weight, a geoproximity rule utilises geographic data.
+Begin by creating a geoproximity routing policy in [AWS Route 53](https://magicishaqblog.netlify.app/2024-11-09-aws-72-Route-53-Geoproximity-Routing-Policy/). Unlike a weighted rule where traffic is split based on weight, a geoproximity rule utilises geographic data.
 
 To get started:
 
