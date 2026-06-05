@@ -34,6 +34,8 @@ When creating a cache policy, several [Time to Live (TTL)](https://magicishaqblo
 
 These settings determine how long [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) keeps content before checking for updates from the origin.
 
+![screenshot of setting the TTL policy](/blog/src/images/133/133-2.png)
+
 ### Building the Cache Key
 
 The cache key is used by [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) to decide whether it already has a suitable cached version of a file.
