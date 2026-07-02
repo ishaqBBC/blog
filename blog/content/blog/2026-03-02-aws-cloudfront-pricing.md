@@ -1,97 +1,85 @@
 ---
 layout: blog
-title: "AWS 136: CloudFront Signed URL and Signed Cookie"
-date: 2026-06-26T08:55:44.785Z
+title: "AWS 137 : CloudFront Pricing"
+date: 2026-03-03T10:00:00.000Z
 ---
 
 ## TLDR
 
-CloudFront signed URLs and signed cookies let you securely share premium content with specific users while tracking who accesses what. Use signed URLs for individual files and signed cookies for multiple files. They're better than [S3 pre-signed URLs](<(https://magicishaqblog.netlify.app/2026-01-30-aws-118-pre-signed-urls/)>) when you need to control access to content through CloudFront distributions.
+Continuing our [AWS series](https://magicishaqblog.netlify.app/aws/), we're exploring more [CloudFront](https://magicishaqblog.netlify.app/2026-03-06-aws-123-Amazon-CloudFront/) features. CloudFront costs different amounts depending on where your data goes. America and Europe are cheaper, while places like India cost more. You can save money by picking which parts of the world get your content. Plus, CloudFront has clever tricks for backup plans when things go wrong and special ways to keep secrets safe.
 
-## Making Your CloudFront Private and Secure
+## Diagram of the pricing
 
-Imagine you have a CloudFront distribution packed with premium content—maybe movies, music, or exclusive documents. You want only paying customers to access it, and you need to know exactly who is accessing what.
+** 2026 last updated **
+![diagram of cloudfront pricing model](/blog/src/images/137/137-1.png)
 
-That's where **CloudFront signed URLs** and **signed cookies** come in. They give you the power to control who sees your content and when they can see it.
+## Why Does CloudFront Cost Different Amounts?
 
-## Setting Up Access: The Policy
+Here's something interesting: CloudFront doesn't cost the same everywhere. Imagine you're selling lemonade, but it costs more to deliver it to some streets than others. That's what happens with CloudFront.
 
-Before you create a signed URL or cookie, you need to set up a policy. Think of it like creating rules for a bouncer at a club. Your policy tells CloudFront:
+When you send data from CloudFront servers in the United States, you pay about 8 cents per gigabyte for the first 10 terabytes. But if you send the same amount from India, it costs nearly double - around 17 cents per gigabyte.
 
-- **When does access expire?** You set an expiration date and time.
-- **Where can people access from?** You can limit access to specific IP addresses. If you know your customers' locations, this is smart to use.
-- **Who can create these URLs?** You assign trusted signers—these are AWS accounts that have permission to create signed URLs for your users.
+The good news? The more data you send, the cheaper it gets. If you're sending massive amounts (we're talking five petabytes), the cost drops to just 2 cents per gigabyte in the US.
 
-## How Long Should Access Last?
+## Pick Your Regions, Save Some Money
 
-The expiration time depends on what you're sharing:
+You don't have to use every CloudFront location on the planet. AWS gives you three choices:
 
-- **Short-lived access (minutes)**: Perfect for movies or music you want people to download once
-- **Long-lived access (days, months, or years)**: Better for private content users access regularly over time
+**Price Class All** - Uses every location everywhere. Your visitors get the fastest experience, but you pay more because some locations cost extra.
 
-## Signed URL vs. Signed Cookie: What's the Difference?
+**Price Class 200** - Skips the most expensive locations but keeps most others. A good middle ground.
 
-**Signed URLs:**
+**Price Class 100** - Only uses the cheapest locations in North America and Europe. Saves you the most money, but people in other parts of the world might wait a bit longer.
 
-- Give access to **one file at a time**
-- Each file needs its own URL
-- If you have 100 files, you create 100 URLs
-- Use when you want to share specific files
+Think of it like choosing between standard delivery, express delivery, or premium delivery. You pick what works for your budget.
 
-**Signed Cookies:**
+## Sending Requests to Different Places
 
-- Give access to **multiple files**
-- One cookie works for many files
-- The cookie can be reused across your entire site
-- Use when you want users to browse multiple files
+Sometimes your website needs different things from different places. Photos might come from one server, while your API information comes from another. (We covered basic distribution setup in our [hands-on guide](https://magicishaqblog.netlify.app/2026-03-13-aws-124-CloudFront-HandsOn/).)
 
-Pick whichever fits your situation better!
+CloudFront lets you set up rules based on the web address path. If someone asks for `/api/something`, CloudFront knows to get that from your Application Load Balancer. But if they ask for anything else, CloudFront grabs it from your S3 bucket instead.
 
-![diagram of signed URLs and Cookies](/blog/src/images/136/136-1.png)
+It's like having a receptionist who knows exactly which department handles which question.
 
-## How Signed URLs Work
+## Backup Plans When Things Break
 
-Here's the flow:
+What happens if one of your servers stops working? CloudFront has a clever solution called origin groups.
 
-1. A customer visits your app and logs in
-2. Your app confirms they're a paying customer
-3. Your app uses the AWS SDK to generate a signed URL directly from CloudFront
-4. The signed URL is sent back to the customer
-5. The customer uses that URL to download or stream the file from CloudFront
-6. CloudFront checks the signature and confirms it's valid before serving the content
+You set up two servers: one primary and one backup. CloudFront tries the primary server first. If something goes wrong and it gets an error, CloudFront immediately tries the backup server instead.
 
-The same process works for signed cookies too.
+This works brilliantly with S3 buckets. You can have two buckets in different regions with identical content (using S3 replication). If one entire region has problems, CloudFront automatically switches to the other region. Your visitors never notice anything went wrong.
 
-![diagram of signed URLs and Cookies how they work](/blog/src/images/136/136-2.png)
+It's like having a spare tire in your car. You hope you never need it, but when you do, you're really glad it's there.
 
-## CloudFront Signed URL vs. S3 Pre-Signed URL
+## Keeping Secrets Extra Secret
 
-These sound similar, but they serve different purposes:
+Sometimes people send sensitive information through your website, like credit card numbers. Even though HTTPS encrypts data while it travels, you can add an extra layer of protection.
 
-**CloudFront Signed URL:**
+Field-level encryption works like a special locked box. When someone sends you their credit card details:
 
-- Works with any origin (S3, EC2, HTTP backends, anything)
-- Managed by your AWS root account key-pair
-- You can filter by IP address, file path, date, and expiration time
-- You get all of CloudFront's caching benefits
-- Perfect when CloudFront sits in front of your content
+1. The CloudFront edge location immediately locks that information in an encrypted box using a public key
+2. The locked box travels through your entire system - CloudFront servers, load balancers, everything
+3. Nobody along the way can open the box and peek inside
+4. Only your web server has the special private key that opens the box
+5. The web server unlocks it, reads the credit card number, and processes the payment
 
-**S3 Pre-Signed URL:**
+You can protect up to 10 different fields this way. The clever bit is that only your final web server can see the actual information. Every other part of your system just sees encrypted gibberish.
 
-- Issues requests using whoever signed the URL
-- If you sign it with your IAM account, the person with that URL has your permissions
-- Has a limited lifetime
-- Customers access S3 directly without CloudFront
-- Best when distributing files straight from S3 without a CDN
+It's like sending a letter in a safe that only one specific person can open, even though lots of people might carry the safe along the way.
 
-**When to use each:**
+## Why This Matters
 
-- Use CloudFront signed URLs if content is behind CloudFront with [Origin Access Control](https://magicishaqblog.netlify.app/2026-06-12-aws-134-ALB-EC2-VPC-Origin/)
-- Use S3 pre-signed URLs if users are accessing S3 directly without CloudFront
+These features give you control over three important things:
+
+- **Your budget** - Choose where CloudFront operates to manage costs
+- **Reliability** - Set up backup systems so your site stays online even when problems happen
+- **Security** - Protect sensitive data with multiple layers of encryption
+
+CloudFront isn't just about making websites faster (though [caching](https://magicishaqblog.netlify.app/2026-03-20-aws-125-Amazon-Cloudfront-Caching/) certainly helps with that). It's about making smart choices that balance speed, cost, and safety based on what your application actually needs.
 
 ## Conclusion
 
-Signed URLs and signed cookies give you control over who accesses content. Whether you pick URLs for individual files or cookies for multiple files, you're protecting your content while making it open for customers to get what they paid for.
+We've covered the advanced CloudFront features you might see on the AWS exam. Next up, we'll put some of these concepts into practice and see how they work in real scenarios.
 
 ## Recap
 
@@ -235,3 +223,4 @@ Learn more about securing your CloudFront distribution:
 - [AWS 133: AWS 133: Caching and Invalidations - Hands On](https://magicishaqblog.netlify.app/2026-06-05-aws-133-Caching-and-invalidations-hands-on/)
 - [AWS 134: CloudFront VPC Origins for ALB, NLB, and EC2](https://magicishaqblog.netlify.app/2026-06-12-aws-134-ALB-EC2-VPC-Origin/)
 - [AWS 135:CloudFront Geo-restriction ](https://magicishaqblog.netlify.app/2026-06-19-aws-135-cloudFront-georestriction/)
+- [AWS 136: Cloudfront Signed Url and Cookies](https://magicishaqblog.netlify.app/2026-06-26-aws-136-cloudfront-signed-url-cookie/)
