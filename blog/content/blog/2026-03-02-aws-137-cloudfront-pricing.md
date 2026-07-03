@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 137 : CloudFront Pricing"
-date: 2026-03-03T10:00:00.000Z
+date: 2026-07-03T10:00:00.000Z
 ---
 
 ## TLDR
