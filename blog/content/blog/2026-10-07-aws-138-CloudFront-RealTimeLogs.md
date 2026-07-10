@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 138: CloudFront Real-Time Logs"
-date: 2026-10-07T09:15:22.440Z
+date: 2026-07-10T09:15:22.440Z
 ---
 
 ## TLDR
