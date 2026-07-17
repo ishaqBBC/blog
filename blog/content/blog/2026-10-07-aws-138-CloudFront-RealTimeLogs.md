@@ -181,7 +181,7 @@ Real-time logs cost extra. But for websites where every second matters, that cos
 
 ## Recap
 
-Learn more about securing your CloudFront distribution:
+More in the AWS series
 
 - [AWS 1: BookClub Overview](https://magicishaqblog.netlify.app/aws/)
 - [AWS 2: Getting Started](https://magicishaqblog.netlify.app/2023-01-23-aws-2-getting-started/)
