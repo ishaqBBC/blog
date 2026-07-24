@@ -19,7 +19,7 @@ Containers offer lightweight isolation by sharing the host OS, a different appro
 
 Modern applications are expected to run reliably across laptops, data centres, and cloud platforms. Containers have become one of the most widely adopted technologies for achieving that, with [Docker](https://docs.docker.com/) leading the way. Alongside [Docker](https://docs.docker.com/), Amazon Web Services (AWS) provides several services that simplify deploying, managing, and scaling containerised applications.
 
-This article explains what [Docker](https://docs.docker.com/) is, how it works, how it differs from virtual machines, and how AWS services such as Amazon ECS, Amazon EKS, AWS Fargate, and Amazon ECR fit into the picture.
+I will attempt to explain what [Docker](https://docs.docker.com/) is, how it works, how it differs from virtual machines, and how AWS services such as Amazon ECS, Amazon EKS, AWS Fargate, and Amazon ECR fit into the picture.
 
 ## What Is Docker?
 
