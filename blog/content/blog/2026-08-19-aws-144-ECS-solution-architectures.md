@@ -1,22 +1,22 @@
 ---
 layout: blog
 title: "AWS 144: ECS Solution Architectures"
-date: 2026-08-19T10:45:00.000Z
+date: 2026-08-21T10:45:00.000Z
 ---
 
 ## TLDR
 
-Amazon [ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/) integrates with multiple AWS services to build serverless architectures. EventBridge can trigger [ECS tasks](https://magicishaqblog.netlify.app/2026-08-07-aws-142-ECS-hands-on/) based on S3 events or scheduled intervals. SQS queues combined with ECS Service Auto Scaling enable dynamic workload processing. EventBridge also monitors the ECS task lifecycle, capturing state changes for alerting and automation. These patterns eliminate infrastructure management whilst maintaining flexibility for batch processing, event-driven workflows, and distributed systems.
+Amazon [ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/) works with other AWS services to build serverless systems. EventBridge can start [ECS tasks](https://magicishaqblog.netlify.app/2026-08-07-aws-142-ECS-hands-on/) from S3 events or on a schedule. SQS and ECS Auto Scaling help process workloads as demand changes. EventBridge can also track task state changes for alerts and automation. This setup reduces infrastructure overhead while staying flexible for batch jobs and event-driven apps.
 
 ## Introduction
 
-Container orchestration isn't just about running Docker containers. The real value emerges when you connect those containers to other services—triggering them based on events, scheduling them to run periodically, or scaling them in response to workload demands.
+Container orchestration isn't just about running [Docker](https://magicishaqblog.netlify.app/2026-07-24-aws-140-docker-introduction/) containers. The real value emerges when you connect those containers to other services—triggering them based on events, scheduling them to run periodically, or scaling them in response to workload demands.
 
 Amazon ECS offers multiple integration patterns that transform simple container deployments into complete serverless architectures. After covering [rolling updates](https://magicishaqblog.netlify.app/2026-08-12-aws-143-ECS-rolling-updates/) in the previous post, it's time to examine practical architectures you'll encounter in production.
 
 ## Event-Driven Processing with S3 and EventBridge
 
-Imagine this scenario: users upload files to an S3 bucket. Each file needs processing—perhaps resizing images, extracting metadata, or generating thumbnails. You could run a server that polls S3 continuously, but that wastes resources. A better approach uses events.
+Imagine this scenario: users upload files to an [S3 bucket](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/). Each file needs processing—perhaps resizing images, extracting metadata, or generating thumbnails. You could run a server that polls S3 continuously, but that wastes resources. A better approach uses events.
 
 ### How It Works
 
@@ -47,7 +47,7 @@ Not every workflow is event-driven. Some tasks need to run on a schedule—hourl
 
 ### Cron Jobs Without Servers
 
-EventBridge supports [schedule expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-create-rule-schedule.html) using cron or rate syntax. Set a rule to run every hour, every day at midnight, or every Monday at 9am.
+EventBridge supports [schedule expressions](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-scheduled-rule-pattern.html) using cron or rate syntax. Set a rule to run every hour, every day at midnight, or every Monday at 9am.
 
 When the schedule triggers, EventBridge launches an ECS task. The task performs its work—perhaps downloading files from S3, processing data, and uploading results—then terminates.
 
@@ -136,11 +136,18 @@ Each architecture serves different needs:
 
 **S3 + EventBridge + ECS**: Use for event-driven file processing. Scales automatically based on upload volume. Ideal for image processing, document conversion, log analysis.
 
+![example 1](/blog/src/images/144/144-1.png)
+
 **EventBridge Schedule + ECS**: Use for periodic batch jobs. Replaces traditional cron jobs with serverless execution. Good for reports, backups, cleanup tasks.
+![example 2](/blog/src/images/144/144-2.png)
 
 **SQS + ECS + Auto Scaling**: Use for continuous message processing with variable throughput. Scales task count based on queue depth. Fits asynchronous workflows and distributed processing.
 
+![example 1](/blog/src/images/144/144-3.png)
+
 **EventBridge Monitoring**: Use for operational visibility. Captures task lifecycle events for alerting and automation. Essential for production workloads.
+
+![example 4](/blog/src/images/144/144-1.png)
 
 These patterns often combine. A scheduled task might write to SQS. SQS-processing tasks might write results to S3, triggering another task. EventBridge monitors everything, alerting when issues arise.
 
