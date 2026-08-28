@@ -1,20 +1,20 @@
 ---
 layout: blog
-title: "AWS 145: Amazon ECS Task Definitions Deep Dive"
-date: 2026-08-27T09:30:00.000Z
+title: "AWS 145: Amazon ECS Task Definitions"
+date: 2026-08-28T09:30:00.000Z
 ---
 
 ## TLDR
 
-ECS Task Definitions are JSON blueprints that tell [ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/) how to run your Docker containers. They specify the image name, port mappings, memory and CPU requirements, [environment variables](https://en.wikipedia.org/wiki/Environment_variable), networking configuration, [IAM roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/), and logging settings. The definition handles port mapping differently between EC2 (dynamic host port mapping with ALB support) and Fargate (unique private IPs per task). You can mount bind volumes to share data between containers within the same task, with Fargate offering 20-200 GB of ephemeral storage.
+ECS Task Definitions are JSON blueprints that tell [ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/) how to run your [Docker containers](https://magicishaqblog.netlify.app/2026-07-24-aws-140-docker-introduction/). They specify the image name, port mappings, memory and CPU requirements, [environment variables](https://en.wikipedia.org/wiki/Environment_variable), networking configuration, [IAM roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/), and logging settings. The definition handles port mapping differently between EC2 (dynamic host port mapping with ALB support) and Fargate (unique private IPs per task). You can mount bind volumes to share data between containers within the same task, with Fargate offering 20-200 GB of ephemeral storage.
 
 ## Introduction
 
-After getting [hands-on with ECS](https://magicishaqblog.netlify.app/2026-08-07-aws-142-ECS-hands-on/), it's worth examining task definitions more closely. These JSON documents are the foundation of every ECS deployment. Understanding how they work like around port mapping, [IAM roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/), [environment variables](https://en.wikipedia.org/wiki/Environment_variable), and data volumes—makes the difference between a basic deployment and a properly architected containerised application.
+After getting [hands-on with ECS](https://magicishaqblog.netlify.app/2026-08-07-aws-142-ECS-hands-on/), it's worth examining task definitions more closely. These JSON documents are the foundation of every ECS deployment. Understanding how they work like around port mapping, [IAM roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles/), [environment variables](https://en.wikipedia.org/wiki/Environment_variable), and data volumes—makes the difference between a basic deployment and a architected containerised application.
 
 ## What Goes Into a Task Definition
 
-Task definitions are created through the AWS console, which provides a UI that generates the underlying JSON. You could write the JSON directly, but most people use the console.
+Task definitions are created through the [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/), which provides a UI that generates the underlying JSON. You could write the JSON directly. [EXAMPLES](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/example_task_definitions.html)
 
 The task definition contains everything [ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/) needs to run your containers:
 
@@ -26,7 +26,37 @@ The task definition contains everything [ECS](https://magicishaqblog.netlify.app
 - **IAM Role** - What AWS services your task can access
 - **Logging Configuration** - Where to send container logs (typically CloudWatch)
 
-The AWS exam focuses on a few of these, particularly port mappings and IAM roles.
+below is a simple windows task definition.
+
+```json
+{
+  "family": "windows-simple-iis",
+  "containerDefinitions": [
+    {
+      "name": "windows_sample_app",
+      "image": "mcr.microsoft.com/windows/servercore/iis",
+      "cpu": 1024,
+      "entryPoint": ["powershell", "-Command"],
+      "command": [
+        "New-Item -Path C:\\inetpub\\wwwroot\\index.html -Type file -Value '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p>'; C:\\ServiceMonitor.exe w3svc"
+      ],
+      "portMappings": [
+        {
+          "protocol": "tcp",
+          "containerPort": 80
+        }
+      ],
+      "memory": 1024,
+      "essential": true
+    }
+  ],
+  "networkMode": "awsvpc",
+  "memory": "1024",
+  "cpu": "1024"
+}
+```
+
+_The AWS exam focuses on a few of these, particularly port mappings and IAM roles._
 
 ## Port Mapping on EC2
 
@@ -34,15 +64,15 @@ Port configuration works differently depending on your launch type. With EC2, yo
 
 ### Container and Host Ports
 
-Consider an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) registered with an ECS cluster. It runs the ECS agent, which enables container orchestration.
+Consider an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) registered with an [ECS cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/clusters.html). It runs the [ECS agent](https://github.com/aws/amazon-ecs-agent), which enables container orchestration.
 
-You deploy an Apache HTTP server through an ECS task definition. The server needs exposure to the internet.
+You deploy an [Apache HTTP server](https://httpd.apache.org/) through an ECS task definition. The server needs exposure to the internet.
 
 The **container port** is 80—that's where Apache listens inside the container. But you also specify a **host port** on the EC2 instance itself. This could be 80, or it could be something else like 8080. They don't have to match.
 
 External traffic hits the EC2 instance on the host port (8080), which maps to the container port (80), giving access to the HTTP server running inside.
 
-With Fargate, host ports are irrelevant because there's no host to manage. Fargate only uses container ports.
+With [Fargate](https://aws.amazon.com/fargate/), host ports are irrelevant because there's no host to manage. Fargate only uses container ports.
 
 ![port mapping diagram](/blog/src/images/145/145-1.png)
 
