@@ -1,0 +1,86 @@
+---
+layout: blog
+title: "AWS 146:ECS Task Definition - Hands On"
+date: 2026-09-03T09:30:00.000Z
+---
+
+## TLDR
+
+An [Amazon ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/Welcome.html) task definition is the recipe ECS uses to start a group of containers. Choose a launch type first: Fargate accepts only supported CPU and memory pairs and requires `awsvpc` networking, while EC2 gives more latitude. Keep the task role separate from the execution role, mark only genuinely indispensable containers as essential, store secrets outside the definition, and decide how logs, storage, health checks, and telemetry should work before creating a revision.
+
+## Starting With the Task Family
+
+The task family is the stable name for a task definition. Each change creates a new revision under that family, so a name such as `wordpress` can grow from `wordpress:1` to `wordpress:2` without changing the service that refers to it.
+
+The first consequential choice is the infrastructure requirement. ECS can run a task on [AWS Fargate](https://en.wikipedia.org/wiki/AWS_Fargate), on Amazon EC2 instances registered with a cluster, or in environments that support both.
+![diagram of task definition on aws](/blog/src/images/146/146-1.png)
+
+Fargate asks for a valid combination of CPU and memory. These values are selected from supported increments because AWS supplies the underlying capacity. EC2 tasks are less constrained: the task definition can specify the CPU and memory values appropriate to the workload, provided the cluster has enough capacity to schedule them.
+
+Networking follows the same divide. Fargate tasks use `awsvpc` mode, which gives the task its own elastic network interface. EC2 launch type also supports `bridge`, `host`, and `none` network modes, although `awsvpc` is often the practical choice when a task needs its own security groups and private IP address.
+
+## Task Role and Execution Role
+
+These two IAM roles have different jobs and are easy to mix up.
+
+- The **task role** is assumed by the application code inside the container. Use it to grant access to AWS services such as [Amazon S3](https://magicishaqblog.netlify.app/2025-03-14-aws-84-Amazon-s3/), DynamoDB, or an SQS queue.
+- The **task execution role** is used by the ECS agent and AWS-managed components while starting the task. It commonly permits pulling an image from ECR, reading a referenced secret, and publishing logs to CloudWatch.
+
+Treat the task role as the application identity. A WordPress container that needs to read objects from S3 needs that permission on its task role, not merely on the execution role.
+
+## Defining the Containers
+
+A task definition can include one or many containers. Add a name and an image URI for each one; `wordpress`, for example, can use the public WordPress image or an image held in a private registry.
+
+Private registry images require credentials. Store those credentials in [AWS Secrets Manager](https://en.wikipedia.org/wiki/AWS_Secrets_Manager) and provide the secret ARN in the container definition. This keeps registry credentials out of the task-definition source.
+
+At least one container should be marked **essential**. If an essential container stops, ECS stops the entire task. A non-essential container may stop without ending the task, which can be suitable for an optional helper but not for a dependency that the application cannot run without. A logging or telemetry sidecar should be marked essential only when losing it must stop the workload.
+
+### Ports and Resource Limits
+
+Port mappings name the container port, transport protocol, and, where relevant, an application protocol such as HTTP, HTTP/2, or gRPC. A task can expose several ports, useful for an application with separate web, metrics, and administrative endpoints.
+
+Container-level CPU and memory settings matter most in multi-container tasks. They prevent one container from taking capacity needed by another. ECS supports hard memory limits and soft reservations, allowing an application to receive its normal allocation while still defining a firm ceiling.
+
+### Configuration and Secrets
+
+Plain environment variables suit non-sensitive configuration:
+
+```text
+FOO=BAR
+```
+
+For a database password, define a variable such as `SECRET_DB_PASSWORD` and point it to a value in Secrets Manager or [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html). ECS retrieves the value when the task starts instead of recording the password in the definition.
+
+When a container needs a larger set of non-sensitive variables, it can load an environment file from Amazon S3. This keeps a lengthy configuration list separate from the task JSON. Secrets still belong in a secret store with access granted through IAM.
+
+## Logs, Checks, and Observability
+
+The `awslogs` log driver sends container output directly to [Amazon CloudWatch Logs](https://en.wikipedia.org/wiki/Amazon_CloudWatch). Configure its log group, Region, stream prefix, and whether ECS should create the group. For other destinations, FireLens can route logs to services including Kinesis Data Firehose, OpenSearch, Splunk, and S3.
+
+A container health check confirms that the process is useful, not merely running. Start and stop timeouts set the boundaries around lifecycle operations: a container that cannot start within its start timeout fails, while a stop timeout defines how long it has to shut down cleanly before ECS ends it.
+
+Tracing can be enabled with an [AWS Distro for OpenTelemetry](https://aws-otel.github.io/docs/introduction) sidecar, which sends trace data to AWS X-Ray. ECS accounts for the extra CPU and memory required by that sidecar. Metrics can likewise be collected and sent to CloudWatch or [Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/latest/userguide/what-is-Amazon-Managed-Service-Prometheus.html).
+
+## Storage and Mount Points
+
+Volumes give containers a shared place for data. A bind mount can make a directory available to more than one container in the same task. An [Amazon EFS](https://en.wikipedia.org/wiki/Amazon_Elastic_File_System) volume provides persistent shared storage when the data must outlive an individual task.
+
+The volume definition declares the storage, then each container receives a mount point that identifies where it appears in that container's filesystem. This pattern is useful when an application writes files that another container must process, or when several tasks need access to the same durable files.
+
+## Reviewing the Revision
+
+The ECS console exposes the resulting configuration as JSON. Reviewing it before deployment is worthwhile: it is the exact document ECS receives. Later changes should be made as a new revision, then rolled out deliberately through the service or by running a new task.
+
+## Conclusion
+
+An ECS task definition is more than an image reference. It decides where the task can run, which identity the application has, how containers communicate, where configuration and secrets come from, and what happens when a component fails. Starting with the launch type and IAM roles makes the rest of the configuration easier to reason about. The final JSON revision is a useful record of those decisions and the unit you promote through an ECS deployment.
+
+## Recap
+
+More in the AWS series
+
+- [AWS 140: Docker Introduction](https://magicishaqblog.netlify.app/2026-07-24-aws-140-docker-introduction/)
+- [AWS 141: AWS ECS](https://magicishaqblog.netlify.app/2026-07-31-aws-141-aws-ECS/)
+- [AWS 142: ECS Hands On](https://magicishaqblog.netlify.app/2026-08-07-aws-142-ECS-hands-on/)
+- [AWS 145: Amazon ECS Task Definitions](https://magicishaqblog.netlify.app/2026-08-27-aws-145-ECS-task-definitions/)
