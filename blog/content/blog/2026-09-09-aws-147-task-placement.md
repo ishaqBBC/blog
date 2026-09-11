@@ -1,7 +1,7 @@
 ---
 layout: blog
 title: "AWS 147: ECS Task Placement"
-date: 2026-09-09T09:30:00.000Z
+date: 2026-09-11T09:30:00.000Z
 ---
 
 ## TLDR
