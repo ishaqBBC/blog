@@ -29,14 +29,14 @@ For this example, replace these values with your own:
 ```text
 ACCOUNT_ID=123456789012
 REGION=eu-west-1
-REPOSITORY=demostephane
+REPOSITORY=magicishaq
 IMAGE=nginxdemos/hello
 TAG=latest
 ```
 
 ## Step 1: Create a Private Repository
 
-Open the **Amazon ECR** console, select **Private repositories**, then choose **Create repository**. Enter a repository name such as `demostephane` and create it.
+Open the **Amazon ECR** console, select **Private repositories**, then choose **Create repository**. Enter a repository name such as `magicishaq` and create it.
 
 The console also offers a few decisions worth understanding:
 
@@ -86,7 +86,7 @@ Tagging does not rebuild or duplicate the image layers. It adds another local re
 
 ```bash
 docker tag nginxdemos/hello:latest \
-  123456789012.dkr.ecr.eu-west-1.amazonaws.com/demostephane:latest
+  123456789012.dkr.ecr.eu-west-1.amazonaws.com/magicishaq:latest
 ```
 
 The destination follows this format:
@@ -102,7 +102,7 @@ This is the crucial change. When Docker sees the ECR registry hostname at the be
 Push the newly tagged image:
 
 ```bash
-docker push 123456789012.dkr.ecr.eu-west-1.amazonaws.com/demostephane:latest
+docker push 123456789012.dkr.ecr.eu-west-1.amazonaws.com/magicishaq:latest
 ```
 
 Docker uploads the image manifest and any layers that ECR does not already have. Once the command completes, refresh the ECR repository page. The image should appear with the `latest` tag, its digest, size, and push time.
@@ -114,7 +114,7 @@ If the push is rejected, do not assume Docker is at fault. Check that the reposi
 The ECR image can now replace the Docker Hub image in an [ECS task definition](https://magicishaqblog.netlify.app/2026-08-27-aws-145-ECS-task-definitions/). Set the container image URI to:
 
 ```text
-123456789012.dkr.ecr.eu-west-1.amazonaws.com/demostephane:latest
+123456789012.dkr.ecr.eu-west-1.amazonaws.com/magicishaq:latest
 ```
 
 When ECS starts the task, it pulls the image from ECR. The permissions are different from the permissions used on your laptop to push the image: ECS uses the task execution role, or the EC2 container-instance role for an EC2 launch type. The [ECS task-definition hands-on post](https://magicishaqblog.netlify.app/2026-09-03-aws-146-ECS-task-definition-hands-on/) explains where that execution role is configured.
