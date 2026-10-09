@@ -6,23 +6,23 @@ date: 2026-10-10T09:49:11.647Z
 
 ## TLDR
 
-Updating a CloudFormation stack means uploading a revised template and reviewing the change set before applying it. In this hands-on example, the new template adds an Elastic IP and two security groups, passes a parameter into a security group description, and replaces the existing EC2 instance. Deleting the stack afterwards removes the resources that CloudFormation created, in the correct dependency order.
+Updating a [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) stack means uploading a revised template and reviewing the change set before applying it. In this hands-on example, the new template adds an Elastic IP and two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/), passes a parameter into a security group description, and replaces the existing [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/). Deleting the stack afterwards removes the resources that [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) created, in the correct dependency order.
 
 ## Introduction
 
-CloudFormation lets us manage infrastructure from a template rather than changing each resource manually in the AWS console. After creating a stack, we can update it by replacing the template with a new version. CloudFormation then works out which resources must be added, changed or replaced to reach the desired final state.
+[CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) lets us manage infrastructure from a template rather than changing each resource manually in the [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/). After creating a stack, we can update it by replacing the template with a new version. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) then works out which resources must be added, changed or replaced to reach the desired final state.
 
-This walkthrough updates an existing EC2 stack. The revised template contains an EC2 instance, an Elastic IP and two security groups. It also includes a parameter that is used as the description for one of the security groups.
+This walkthrough updates an existing EC2 stack. The revised template contains an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), an Elastic IP and two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). It also includes a parameter that is used as the description for one of the [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/).
 
 ![screenshot of a stack](/blog/src/images/151/151-1.png)
 
 ## How to Update a Stack
 
-Open the existing stack in the CloudFormation console and choose **Update**. CloudFormation gives you two template options: use the current template or replace it with a new one. The current template can be reused, but it cannot describe any changes. Choose **Replace current template** and upload the updated `EC2 with SG-EIP.yaml` file.
+Open the existing stack in the [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) console and choose **Update**. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) gives you two template options: use the current template or replace it with a new one. The current template can be reused, but it cannot describe any changes. Choose **Replace current template** and upload the updated `EC2 with SG-EIP.yaml` file.
 
-The new template introduces several resources that will be explored in later posts. It defines an EC2 instance with security groups attached, an Elastic IP associated with the instance, and two security groups. It also references security groups that are created later in the template, so CloudFormation can build the resources in the necessary order.
+The new template introduces several resources that will be explored in later posts. It defines an [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) with [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/) attached, an Elastic IP associated with the instance, and two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). It also references [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/) that are created later in the template, so [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) can build the resources in the necessary order.
 
-After choosing **Next**, CloudFormation asks for the `SecurityGroupDescription` parameter. Enter a value such as:
+After choosing **Next**, [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) asks for the `SecurityGroupDescription` parameter. Enter a value such as:
 
 ```text
 This is a cool security group
@@ -30,26 +30,26 @@ This is a cool security group
 
 You can use any description you like. This value will be passed into the template and used when the security group is created.
 
-Continue through the update wizard and review the stack details. At the bottom of the review page, open the **Change set preview**. A change set is a list of the changes CloudFormation plans to make as part of the update.
+Continue through the update wizard and review the stack details. At the bottom of the review page, open the **Change set preview**. A change set is a list of the changes [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) plans to make as part of the update.
 
 In this example, the preview shows four changes:
 
 - An Elastic IP will be added.
-- An SSH security group will be added.
+- An [SSH](https://magicishaqblog.netlify.app/2023-03-17-aws-13-ssh/) security group will be added.
 - A server security group will be added.
-- The existing EC2 instance will be replaced.
+- The existing [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) will be replaced.
 
-The replacement is shown as `Replacement: True`. This means that CloudFormation will terminate the previous instance and create a new one in its place. When a change can be made in place, the preview may instead show `Replacement: False`. CloudFormation determines this from the properties changed in the template. If the proposed replacement is not what you want, investigate the relevant resource property and adjust the template before submitting the change.
+The replacement is shown as `Replacement: True`. This means that [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) will terminate the previous instance and create a new one in its place. When a change can be made in place, the preview may instead show `Replacement: False`. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) determines this from the properties changed in the template. If the proposed replacement is not what you want, investigate the relevant resource property and adjust the template before submitting the change.
 
-Submit the update. The stack will move into an **UPDATE_IN_PROGRESS** state. CloudFormation first creates the two security groups, then creates the replacement EC2 instance because the requested update requires a new physical resource.
+Submit the update. The stack will move into an **UPDATE_IN_PROGRESS** state. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) first creates the two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/), then creates the replacement [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) because the requested update requires a new physical resource.
 
 ![screenshot of updating a stack](/blog/src/images/151/151-2.png)
 
-While the update is running, open **EC2** and remove any instance filters. Both the original instance and the replacement may be visible for a short time. The new instance is initially pending while CloudFormation creates it. Once it is running, the old instance can be terminated as part of the replacement process.
+While the update is running, open **EC2** and remove any instance filters. Both the original instance and the replacement may be visible for a short time. The new instance is initially pending while [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) creates it. Once it is running, the old instance can be terminated as part of the replacement process.
 
-CloudFormation also creates the Elastic IP and associates it with the new instance. The Elastic IP is automatically tagged with useful CloudFormation metadata, including its logical ID, stack ID and stack name. The old instance is then removed because it has been replaced.
+[CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) also creates the Elastic IP and associates it with the new instance. The Elastic IP is automatically tagged with useful [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) metadata, including its logical ID, stack ID and stack name. The old instance is then removed because it has been replaced.
 
-The instance now has two security groups. The SSH security group contains an inbound rule for port 22. The server security group contains the SSH and HTTP rules defined in the template. Its description is the value supplied through the `SecurityGroupDescription` parameter:
+The instance now has two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). The SSH security group contains an inbound rule for port 22. The server security group contains the SSH and HTTP rules defined in the template. Its description is the value supplied through the `SecurityGroupDescription` parameter:
 
 ```text
 This is a cool security group
@@ -60,23 +60,23 @@ This is the practical value of parameters: a value entered during the stack oper
 
 ## How to Delete a Stack
 
-When the update is complete, the stack's **Resources** tab shows the four resources managed by CloudFormation: the EC2 instance, the Elastic IP and the two security groups. No manual resource-by-resource cleanup is needed.
+When the update is complete, the stack's **Resources** tab shows the four resources managed by [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/): the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/), the Elastic IP and the two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). No manual resource-by-resource cleanup is needed.
 
-To remove the demonstration environment, open the stack's actions menu and choose **Delete**. Deleting the EC2 instance directly would leave the security groups and Elastic IP behind. Deleting the stack is the correct cleanup operation because it removes all resources created by CloudFormation.
+To remove the demonstration environment, open the stack's actions menu and choose **Delete**. Deleting the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) directly would leave the [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/) and Elastic IP behind. Deleting the stack is the correct cleanup operation because it removes all resources created by [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/).
 
-The stack enters **DELETE_IN_PROGRESS**. In the **Events** tab, the Elastic IP is deleted, followed by the EC2 instance and then the security groups. CloudFormation determines the deletion order automatically, which is important because resources can depend on one another.
+The stack enters **DELETE_IN_PROGRESS**. In the **Events** tab, the Elastic IP is deleted, followed by the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) and then the [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/). [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) determines the deletion order automatically, which is important because resources can depend on one another.
 
-Wait until the stack reaches **DELETE_COMPLETE** and confirm that the resources no longer exist in their respective AWS consoles.
+Wait until the stack reaches **DELETE_COMPLETE** and confirm that the resources no longer exist in their respective [AWS console](https://magicishaqblog.netlify.app/2023-01-27-aws-3-UI-guide-and-walkthrough/)s.
 
 ![screenshot of deleting a stack](/blog/src/images/151/151-3.png)
 
 ## Conclusion
 
-CloudFormation updates are driven by template changes. Replace the current template, supply any required parameters, review the change set, and submit the update. CloudFormation calculates whether resources can be modified in place or whether they must be replaced. In this example, the EC2 instance was replaced, while the Elastic IP and two security groups were created and associated automatically.
+[CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) updates are driven by template changes. Replace the current template, supply any required parameters, review the change set, and submit the update. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) calculates whether resources can be modified in place or whether they must be replaced. In this example, the [EC2 instance](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/) was replaced, while the Elastic IP and two [security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups/) were created and associated automatically.
 
 Parameters make templates reusable. The `SecurityGroupDescription` value entered during the update became the description of the server security group without any manual editing in the console.
 
-For cleanup, delete the CloudFormation stack instead of terminating individual resources. CloudFormation removes the resources it owns and chooses a safe dependency order. The whole workflow is therefore template-driven: update the template, let CloudFormation reach the new final state, and delete the stack when the demonstration is finished.
+For cleanup, delete the [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) stack instead of terminating individual resources. [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) removes the resources it owns and chooses a safe dependency order. The whole workflow is therefore template-driven: update the template, let [CloudFormation](https://magicishaqblog.netlify.app/2026-05-29-aws-132-15-min-lightning/) reach the new final state, and delete the stack when the demonstration is finished.
 
 ## Recap
 
@@ -94,7 +94,7 @@ More in the AWS series
 - [AWS 9: AWS roles](https://magicishaqblog.netlify.app/2023-02-17-aws-9-roles)
 - [AWS 10: EC2 Introduction](https://magicishaqblog.netlify.app/2023-02-24-aws-10-EC2/)
 - [AWS 11: EC2 View and Instance Types](https://magicishaqblog.netlify.app/2023-03-03-aws-11-EC2-View-and-instance-types)
-- [AWS 12: Security Groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups)
+- [AWS 12: security groups](https://magicishaqblog.netlify.app/2023-03-10-aws-12-security-groups)
 - [AWS 13: EC2 SSH-ing into an instance](https://magicishaqblog.netlify.app/2023-03-17-aws-13-ssh)
 - [AWS 14: Instance Connect](https://magicishaqblog.netlify.app/2023-03-24-aws-14-instance-connect)
 - [AWS 15: EC2 Purchasing Options](https://magicishaqblog.netlify.app/2023-03-31-aws-15-EC2-purchasing-options)
